@@ -1,0 +1,1631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Exam_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chapter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+          <Property Name="SubId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataEntry_QuestionBank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Questions" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option2" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option3" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option4" Type="varchar(max)" Nullable="false" />
+          <Property Name="CorrectAns" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mark" Type="varchar(max)" Nullable="false" />
+          <Property Name="PrevQnYear" Type="varchar(max)" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="ChapterId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="SubPgmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataEntry_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="FirmName" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="WhatsApp" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Place" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="SubPgmId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group_StudentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group_Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programmes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Student_AcademicPerformance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Class" Type="varchar" MaxLength="50" />
+          <Property Name="PassYear" Type="varchar" MaxLength="50" />
+          <Property Name="SchoolAddress" Type="varchar(max)" />
+          <Property Name="RegNo" Type="varchar" MaxLength="50" />
+          <Property Name="Board" Type="varchar" MaxLength="200" />
+          <Property Name="PhyMark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ChemMark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="BiologyMark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MathsMark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PercOfMark" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Student_HomeCountryDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="100" />
+          <Property Name="Address2" Type="varchar" MaxLength="100" />
+          <Property Name="AreaHome" Type="varchar" MaxLength="100" />
+          <Property Name="PincodeHome" Type="varchar" MaxLength="50" />
+          <Property Name="QuickContact" Type="varchar" MaxLength="50" />
+          <Property Name="LocationHome" Type="varchar" MaxLength="100" />
+          <Property Name="StateHome" Type="varchar" MaxLength="50" />
+          <Property Name="EmaiId" Type="varchar" MaxLength="50" />
+          <Property Name="QuickHomeWhatsapp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student_Parent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="FrName" Type="varchar" MaxLength="200" />
+          <Property Name="FrOcc" Type="varchar" MaxLength="100" />
+          <Property Name="FrMobNo" Type="varchar" MaxLength="100" />
+          <Property Name="FrMailid" Type="varchar" MaxLength="200" />
+          <Property Name="FrDistrict" Type="varchar" MaxLength="50" />
+          <Property Name="FrSign" Type="varchar(max)" />
+          <Property Name="FrState" Type="varchar" MaxLength="50" />
+          <Property Name="FrWhatsapp" Type="varchar" MaxLength="50" />
+          <Property Name="MrName" Type="varchar" MaxLength="200" />
+          <Property Name="MrOcc" Type="varchar" MaxLength="100" />
+          <Property Name="MrMobNo" Type="varchar" MaxLength="100" />
+          <Property Name="MrMailid" Type="varchar" MaxLength="200" />
+          <Property Name="MrDistrict" Type="varchar" MaxLength="50" />
+          <Property Name="MrSign" Type="varchar(max)" />
+          <Property Name="MrState" Type="varchar" MaxLength="50" />
+          <Property Name="MrWhatsapp" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student_PreviousEntrance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PrevEntranceExamName" Type="varchar" MaxLength="100" />
+          <Property Name="RollNo" Type="varchar" MaxLength="50" />
+          <Property Name="AttemptedYear" Type="varchar" MaxLength="50" />
+          <Property Name="Mark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Rank" Type="int" />
+          <Property Name="NoOfAttempts" Type="int" />
+        </EntityType>
+        <EntityType Name="Student_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="ExamAttendingYear" Type="varchar" MaxLength="50" />
+          <Property Name="PreferredDay" Type="varchar" MaxLength="100" />
+          <Property Name="ApplnDate" Type="datetime" Nullable="false" />
+          <Property Name="AcademicYear" Type="varchar" MaxLength="100" />
+          <Property Name="AdmissionTestDate" Type="datetime" Nullable="false" />
+          <Property Name="PreferredTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="WhatsappNo" Type="varchar" MaxLength="100" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Religion" Type="varchar" MaxLength="100" />
+          <Property Name="Caste" Type="varchar" MaxLength="100" />
+          <Property Name="Community" Type="varchar" MaxLength="100" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+          <Property Name="Nationalty" Type="varchar" MaxLength="50" />
+          <Property Name="PresentAddress" Type="varchar(max)" />
+          <Property Name="Area" Type="varchar" MaxLength="200" />
+          <Property Name="Location" Type="varchar" MaxLength="200" />
+          <Property Name="State" Type="varchar" MaxLength="100" />
+          <Property Name="District" Type="varchar" MaxLength="100" />
+          <Property Name="Pincode" Type="varchar" MaxLength="50" />
+          <Property Name="QuickContNo" Type="varchar" MaxLength="100" />
+          <Property Name="Photo" Type="varchar(max)" />
+          <Property Name="QuickWhatsApp" Type="varchar" MaxLength="100" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="SubPgmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubPrograms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teachers_QuestionBank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Questions" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option2" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option3" Type="varchar(max)" Nullable="false" />
+          <Property Name="Option4" Type="varchar(max)" Nullable="false" />
+          <Property Name="CorrectAns" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mark" Type="varchar(max)" Nullable="false" />
+          <Property Name="PrevQnYear" Type="varchar(max)" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="ChapterId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="SubPgmId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teachers_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+          <Property Name="WhatsApp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrimarySubject" Type="int" Nullable="false" />
+          <Property Name="SecondarySubject" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar(max)" Nullable="false" />
+          <Property Name="Street" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="PO" Type="varchar(max)" Nullable="false" />
+          <Property Name="District" Type="varchar(max)" Nullable="false" />
+          <Property Name="State" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Group_Tea__Teach__42E1EEFE">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Group_Teacher" Type="Self.Group_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group_Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_A__UserI__3A4CA8FD">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Student_AcademicPerformance" Type="Self.Student_AcademicPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_AcademicPerformance">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_H__UserI__395884C4">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Student_HomeCountryDetails" Type="Self.Student_HomeCountryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_HomeCountryDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_P__UserI__37703C52">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Student_PreviousEntrance" Type="Self.Student_PreviousEntrance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_PreviousEntrance">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_P__useri__3864608B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Student_Parent" Type="Self.Student_Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Parent">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_R__UserI__367C1819">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Registration">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubProgra__PgmId__30C33EC3">
+          <End Role="Programmes" Type="Self.Programmes" Multiplicity="1" />
+          <End Role="SubPrograms" Type="Self.SubPrograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programmes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubPrograms">
+              <PropertyRef Name="PgmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teachers___Teach__43D61337">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers_QuestionBank">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__46E78A0C">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Group1" Type="Self.Group" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GETCHAPTERBYSUB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GETCOURSEBYCLASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GETPRGRMBYSUBPRGM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GETUSERROLEBYID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Exam_DBModelStoreContainer">
+          <EntitySet Name="Chapter" EntityType="Self.Chapter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programmes" EntityType="Self.Programmes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_PreviousEntrance" EntityType="Self.Student_PreviousEntrance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Registration" EntityType="Self.Student_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubPrograms" EntityType="Self.SubPrograms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers_QuestionBank" EntityType="Self.Teachers_QuestionBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Group_Tea__Teach__42E1EEFE" Association="Self.FK__Group_Tea__Teach__42E1EEFE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_A__UserI__3A4CA8FD" Association="Self.FK__Student_A__UserI__3A4CA8FD">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_H__UserI__395884C4" Association="Self.FK__Student_H__UserI__395884C4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_P__UserI__37703C52" Association="Self.FK__Student_P__UserI__37703C52">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_P__useri__3864608B" Association="Self.FK__Student_P__useri__3864608B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student_Parent" EntitySet="Student_Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_R__UserI__367C1819" Association="Self.FK__Student_R__UserI__367C1819">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
+            <End Role="Programmes" EntitySet="Programmes" />
+            <End Role="SubPrograms" EntitySet="SubPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teachers___Teach__43D61337" Association="Self.FK__Teachers___Teach__43D61337">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__46E78A0C" Association="Self.FK__Users__RoleId__46E78A0C">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Group1" EntitySet="Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Exam_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chapter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataEntry_QuestionBank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Questions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrevQnYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="ChapterId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataEntry_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirmName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WhatsApp" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group1" Relationship="Self.FK_Group_Group" FromRole="Group" ToRole="Group1" />
+          <NavigationProperty Name="Group2" Relationship="Self.FK_Group_Group" FromRole="Group1" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Group_StudentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group_Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE" FromRole="Group_Teacher" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Programme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubPrograms" Relationship="Self.FK__SubProgra__PgmId__30C33EC3" FromRole="Programmes" ToRole="SubPrograms" />
+        </EntityType>
+        <EntityType Name="Student_AcademicPerformance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Board" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PhyMark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ChemMark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="BiologyMark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MathsMark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PercOfMark" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD" FromRole="Student_AcademicPerformance" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Student_HomeCountryDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AreaHome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PincodeHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuickContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationHome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmaiId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuickHomeWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_H__UserI__395884C4" FromRole="Student_HomeCountryDetails" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Student_Parent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="FrName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FrOcc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FrMobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FrMailid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FrDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FrSign" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FrState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FrWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MrName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MrOcc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MrMobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MrMailid" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MrDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MrSign" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MrState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MrWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_P__useri__3864608B" FromRole="Student_Parent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Student_PreviousEntrance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PrevEntranceExamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AttemptedYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Rank" Type="Int32" />
+          <Property Name="NoOfAttempts" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_P__UserI__37703C52" FromRole="Student_PreviousEntrance" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Student_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="ExamAttendingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PreferredDay" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApplnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AcademicYear" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdmissionTestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PreferredTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="WhatsappNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Religion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Caste" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Community" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuickContNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="QuickWhatsApp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_R__UserI__367C1819" FromRole="Student_Registration" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SubProgram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Programme" Relationship="Self.FK__SubProgra__PgmId__30C33EC3" FromRole="SubPrograms" ToRole="Programmes" />
+        </EntityType>
+        <EntityType Name="Teachers_QuestionBank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Questions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorrectAns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrevQnYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="ChapterId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SubPgmId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Teachers___Teach__43D61337" FromRole="Teachers_QuestionBank" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__46E78A0C" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UniqueID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__RoleId__46E78A0C" FromRole="Users" ToRole="UserRoles" />
+          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Student_AcademicPerformance" Relationship="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD" FromRole="User" ToRole="Student_AcademicPerformance" />
+          <NavigationProperty Name="Student_HomeCountryDetails" Relationship="Exam_DBModel.FK__Student_H__UserI__395884C4" FromRole="User" ToRole="Student_HomeCountryDetails" />
+          <NavigationProperty Name="Student_Parent" Relationship="Exam_DBModel.FK__Student_P__useri__3864608B" FromRole="User" ToRole="Student_Parent" />
+          <NavigationProperty Name="Student_PreviousEntrance" Relationship="Exam_DBModel.FK__Student_P__UserI__37703C52" FromRole="User" ToRole="Student_PreviousEntrance" />
+          <NavigationProperty Name="Student_Registration" Relationship="Exam_DBModel.FK__Student_R__UserI__367C1819" FromRole="User" ToRole="Student_Registration" />
+          <NavigationProperty Name="Group_Teacher" Relationship="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE" FromRole="User" ToRole="Group_Teacher" />
+          <NavigationProperty Name="Teachers_QuestionBank" Relationship="Exam_DBModel.FK__Teachers___Teach__43D61337" FromRole="User" ToRole="Teachers_QuestionBank" />
+        </EntityType>
+        <Association Name="FK_Group_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Group1" Type="Self.Group" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubProgra__PgmId__30C33EC3">
+          <End Role="Programmes" Type="Self.Programme" Multiplicity="1" />
+          <End Role="SubPrograms" Type="Self.SubProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programmes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubPrograms">
+              <PropertyRef Name="PgmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__46E78A0C">
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Exam_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" />
+          <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" />
+          <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" />
+          <EntitySet Name="Programmes" EntityType="Self.Programme" />
+          <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" />
+          <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" />
+          <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" />
+          <EntitySet Name="Student_PreviousEntrance" EntityType="Self.Student_PreviousEntrance" />
+          <EntitySet Name="Student_Registration" EntityType="Self.Student_Registration" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="SubPrograms" EntityType="Self.SubProgram" />
+          <EntitySet Name="Teachers_QuestionBank" EntityType="Self.Teachers_QuestionBank" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Group1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
+            <End Role="Programmes" EntitySet="Programmes" />
+            <End Role="SubPrograms" EntitySet="SubPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__46E78A0C" Association="Self.FK__Users__RoleId__46E78A0C">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="GETCHAPTERBYSUB" ReturnType="Collection(Exam_DBModel.GETCHAPTERBYSUB_Result)" />
+          <FunctionImport Name="GETCOURSEBYCLASS" />
+          <FunctionImport Name="GETPRGRMBYSUBPRGM" ReturnType="Collection(Exam_DBModel.GETPRGRMBYSUBPRGM_Result)" />
+          <FunctionImport Name="GETUSERROLEBYID" ReturnType="Collection(Exam_DBModel.GETUSERROLEBYID_Result)" />
+          <AssociationSet Name="FK__Student_A__UserI__3A4CA8FD" Association="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_H__UserI__395884C4" Association="Exam_DBModel.FK__Student_H__UserI__395884C4">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_P__useri__3864608B" Association="Exam_DBModel.FK__Student_P__useri__3864608B">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student_Parent" EntitySet="Student_Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_P__UserI__37703C52" Association="Exam_DBModel.FK__Student_P__UserI__37703C52">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student_R__UserI__367C1819" Association="Exam_DBModel.FK__Student_R__UserI__367C1819">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Group_Tea__Teach__42E1EEFE" Association="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teachers___Teach__43D61337" Association="Exam_DBModel.FK__Teachers___Teach__43D61337">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
+          </AssociationSet>
+          <EntitySet Name="Teachers_Registration" EntityType="Exam_DBModel.Teachers_Registration" />
+        </EntityContainer>
+        <ComplexType Name="GETCHAPTERBYSUB_Result">
+          <Property Type="Int32" Name="Cid" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="SubId" Nullable="false" />
+          <Property Type="Int32" Name="Id1" Nullable="false" />
+          <Property Type="String" Name="Name1" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CreatedBy1" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate1" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted1" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDate1" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy1" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedTime1" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GETPRGRMBYSUBPRGM_Result">
+          <Property Type="Int32" Name="Subid" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="Id1" Nullable="false" />
+          <Property Type="String" Name="Name1" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CreatedBy1" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted1" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDate1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy1" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedTime1" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GETUSERROLEBYID_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UniqueID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="RolId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <Association Name="FK__Student_A__UserI__3A4CA8FD">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Student_AcademicPerformance" Role="Student_AcademicPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_AcademicPerformance">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_H__UserI__395884C4">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Student_HomeCountryDetails" Role="Student_HomeCountryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_HomeCountryDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_P__useri__3864608B">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Student_Parent" Role="Student_Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Parent">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_P__UserI__37703C52">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Student_PreviousEntrance" Role="Student_PreviousEntrance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_PreviousEntrance">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student_R__UserI__367C1819">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Student_Registration" Role="Student_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Registration">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Group_Tea__Teach__42E1EEFE">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Group_Teacher" Role="Group_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group_Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teachers___Teach__43D61337">
+          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
+          <End Type="Exam_DBModel.Teachers_QuestionBank" Role="Teachers_QuestionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers_QuestionBank">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Teachers_Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WhatsApp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrimarySubject" Type="Int32" Nullable="false" />
+          <Property Name="SecondarySubject" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Exam_DBModelStoreContainer" CdmEntityContainer="Exam_DBEntities">
+          <EntitySetMapping Name="Chapters">
+            <EntityTypeMapping TypeName="Exam_DBModel.Chapter">
+              <MappingFragment StoreEntitySet="Chapter">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="SubId" ColumnName="SubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="Exam_DBModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Exam_DBModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataEntry_QuestionBank">
+            <EntityTypeMapping TypeName="Exam_DBModel.DataEntry_QuestionBank">
+              <MappingFragment StoreEntitySet="DataEntry_QuestionBank">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="PrevQnYear" ColumnName="PrevQnYear" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataEntry_Registration">
+            <EntityTypeMapping TypeName="Exam_DBModel.DataEntry_Registration">
+              <MappingFragment StoreEntitySet="DataEntry_Registration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="WhatsApp" ColumnName="WhatsApp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="Exam_DBModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group_StudentTable">
+            <EntityTypeMapping TypeName="Exam_DBModel.Group_StudentTable">
+              <MappingFragment StoreEntitySet="Group_StudentTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group_Teacher">
+            <EntityTypeMapping TypeName="Exam_DBModel.Group_Teacher">
+              <MappingFragment StoreEntitySet="Group_Teacher">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programmes">
+            <EntityTypeMapping TypeName="Exam_DBModel.Programme">
+              <MappingFragment StoreEntitySet="Programmes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_AcademicPerformance">
+            <EntityTypeMapping TypeName="Exam_DBModel.Student_AcademicPerformance">
+              <MappingFragment StoreEntitySet="Student_AcademicPerformance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="PassYear" ColumnName="PassYear" />
+                <ScalarProperty Name="SchoolAddress" ColumnName="SchoolAddress" />
+                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+                <ScalarProperty Name="Board" ColumnName="Board" />
+                <ScalarProperty Name="PhyMark" ColumnName="PhyMark" />
+                <ScalarProperty Name="ChemMark" ColumnName="ChemMark" />
+                <ScalarProperty Name="BiologyMark" ColumnName="BiologyMark" />
+                <ScalarProperty Name="MathsMark" ColumnName="MathsMark" />
+                <ScalarProperty Name="PercOfMark" ColumnName="PercOfMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_HomeCountryDetails">
+            <EntityTypeMapping TypeName="Exam_DBModel.Student_HomeCountryDetails">
+              <MappingFragment StoreEntitySet="Student_HomeCountryDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="AreaHome" ColumnName="AreaHome" />
+                <ScalarProperty Name="PincodeHome" ColumnName="PincodeHome" />
+                <ScalarProperty Name="QuickContact" ColumnName="QuickContact" />
+                <ScalarProperty Name="LocationHome" ColumnName="LocationHome" />
+                <ScalarProperty Name="StateHome" ColumnName="StateHome" />
+                <ScalarProperty Name="EmaiId" ColumnName="EmaiId" />
+                <ScalarProperty Name="QuickHomeWhatsapp" ColumnName="QuickHomeWhatsapp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Parent">
+            <EntityTypeMapping TypeName="Exam_DBModel.Student_Parent">
+              <MappingFragment StoreEntitySet="Student_Parent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="FrName" ColumnName="FrName" />
+                <ScalarProperty Name="FrOcc" ColumnName="FrOcc" />
+                <ScalarProperty Name="FrMobNo" ColumnName="FrMobNo" />
+                <ScalarProperty Name="FrMailid" ColumnName="FrMailid" />
+                <ScalarProperty Name="FrDistrict" ColumnName="FrDistrict" />
+                <ScalarProperty Name="FrSign" ColumnName="FrSign" />
+                <ScalarProperty Name="FrState" ColumnName="FrState" />
+                <ScalarProperty Name="FrWhatsapp" ColumnName="FrWhatsapp" />
+                <ScalarProperty Name="MrName" ColumnName="MrName" />
+                <ScalarProperty Name="MrOcc" ColumnName="MrOcc" />
+                <ScalarProperty Name="MrMobNo" ColumnName="MrMobNo" />
+                <ScalarProperty Name="MrMailid" ColumnName="MrMailid" />
+                <ScalarProperty Name="MrDistrict" ColumnName="MrDistrict" />
+                <ScalarProperty Name="MrSign" ColumnName="MrSign" />
+                <ScalarProperty Name="MrState" ColumnName="MrState" />
+                <ScalarProperty Name="MrWhatsapp" ColumnName="MrWhatsapp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_PreviousEntrance">
+            <EntityTypeMapping TypeName="Exam_DBModel.Student_PreviousEntrance">
+              <MappingFragment StoreEntitySet="Student_PreviousEntrance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PrevEntranceExamName" ColumnName="PrevEntranceExamName" />
+                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+                <ScalarProperty Name="AttemptedYear" ColumnName="AttemptedYear" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="NoOfAttempts" ColumnName="NoOfAttempts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Registration">
+            <EntityTypeMapping TypeName="Exam_DBModel.Student_Registration">
+              <MappingFragment StoreEntitySet="Student_Registration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="ExamAttendingYear" ColumnName="ExamAttendingYear" />
+                <ScalarProperty Name="PreferredDay" ColumnName="PreferredDay" />
+                <ScalarProperty Name="ApplnDate" ColumnName="ApplnDate" />
+                <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+                <ScalarProperty Name="AdmissionTestDate" ColumnName="AdmissionTestDate" />
+                <ScalarProperty Name="PreferredTime" ColumnName="PreferredTime" />
+                <ScalarProperty Name="WhatsappNo" ColumnName="WhatsappNo" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Caste" ColumnName="Caste" />
+                <ScalarProperty Name="Community" ColumnName="Community" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Nationalty" ColumnName="Nationalty" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="QuickContNo" ColumnName="QuickContNo" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="QuickWhatsApp" ColumnName="QuickWhatsApp" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Exam_DBModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubPrograms">
+            <EntityTypeMapping TypeName="Exam_DBModel.SubProgram">
+              <MappingFragment StoreEntitySet="SubPrograms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers_QuestionBank">
+            <EntityTypeMapping TypeName="Exam_DBModel.Teachers_QuestionBank">
+              <MappingFragment StoreEntitySet="Teachers_QuestionBank">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="PrevQnYear" ColumnName="PrevQnYear" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="Exam_DBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Exam_DBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GETCHAPTERBYSUB" FunctionName="Exam_DBModel.Store.GETCHAPTERBYSUB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GETCHAPTERBYSUB_Result">
+                <ScalarProperty Name="Cid" ColumnName="Cid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="SubId" ColumnName="SubId" />
+                <ScalarProperty Name="Id1" ColumnName="Id1" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="CreatedBy1" ColumnName="CreatedBy1" />
+                <ScalarProperty Name="CreatedDate1" ColumnName="CreatedDate1" />
+                <ScalarProperty Name="IsDeleted1" ColumnName="IsDeleted1" />
+                <ScalarProperty Name="DeletedDate1" ColumnName="DeletedDate1" />
+                <ScalarProperty Name="ModifiedBy1" ColumnName="ModifiedBy1" />
+                <ScalarProperty Name="ModifiedTime1" ColumnName="ModifiedTime1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GETCOURSEBYCLASS" FunctionName="Exam_DBModel.Store.GETCOURSEBYCLASS" />
+          <FunctionImportMapping FunctionImportName="GETPRGRMBYSUBPRGM" FunctionName="Exam_DBModel.Store.GETPRGRMBYSUBPRGM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GETPRGRMBYSUBPRGM_Result">
+                <ScalarProperty Name="Subid" ColumnName="Subid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="Id1" ColumnName="Id1" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="CreatedBy1" ColumnName="CreatedBy1" />
+                <ScalarProperty Name="CreatedDate1" ColumnName="CreatedDate1" />
+                <ScalarProperty Name="IsDeleted1" ColumnName="IsDeleted1" />
+                <ScalarProperty Name="DeletedDate1" ColumnName="DeletedDate1" />
+                <ScalarProperty Name="ModifiedBy1" ColumnName="ModifiedBy1" />
+                <ScalarProperty Name="ModifiedTime1" ColumnName="ModifiedTime1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GETUSERROLEBYID" FunctionName="Exam_DBModel.Store.GETUSERROLEBYID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GETUSERROLEBYID_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Teachers_Registration">
+            <EntityTypeMapping TypeName="Exam_DBModel.Teachers_Registration">
+              <MappingFragment StoreEntitySet="Teachers_Registration">
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="SecondarySubject" ColumnName="SecondarySubject" />
+                <ScalarProperty Name="PrimarySubject" ColumnName="PrimarySubject" />
+                <ScalarProperty Name="WhatsApp" ColumnName="WhatsApp" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
