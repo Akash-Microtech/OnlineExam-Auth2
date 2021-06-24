@@ -1,18 +1,60 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@keyframes hidePreloader {
+    0% {
+        width: 100%;
+        height: 100%;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+    }
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+body > div.preloader {
+    position: fixed;
+    background: white;
+    width: 100%;
+    height: 100%;
+    z-index: 1071;
+    opacity: 0;
+    transition: opacity .5s ease;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+body:not(.loaded) > div.preloader {
+    opacity: 1;
 }
 
+body:not(.loaded) {
+    overflow: hidden;
+}
+
+body.loaded > div.preloader {
+    animation: hidePreloader .5s linear .5s forwards;
+}
+
+
+.error {
+    color: #f25767;
+    font-size: small;
+}
+
+.bord {
+    border-color: #f25767;
+}
+
+.colum-hed {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 991.98px){
+    .colum-hed {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -32,12 +32,13 @@ namespace OnlineExam
 
                 var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
 
-                CustomPrincipal principal = new CustomPrincipal(authTicket.Name);
-
-                principal.UserId = serializeModel.UserId;
-                principal.FirstName = serializeModel.FirstName;
-                principal.LastName = serializeModel.LastName;
-                principal.Role = serializeModel.RoleName;
+                CustomPrincipal principal = new CustomPrincipal(authTicket.Name)
+                {
+                    UserId = serializeModel.UserId,
+                    FirstName = serializeModel.FirstName,
+                    LastName = serializeModel.LastName,
+                    Role = serializeModel.RoleName
+                };
 
                 HttpContext.Current.User = principal;
             }

@@ -1,65 +1,62 @@
-﻿@using OnlineExam.Authentication
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entrancecaoch.com is an online entrance coaching platform for Medical NEET (UG), Engineering IIT JEE Main, JEE Advanced, Class 6 to 12, NTSE, KVPY Olympiad & Other Competitive Exams.">
+    <meta name="author" content="entrancecoach.com">
+    <title>@ViewBag.Title - entrancecoach.com</title>
+    <!-- Preloader -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @* <script>
+            window.addEventListener("load", function () {
+                setTimeout(function () {
+                    document.querySelector('body').classList.add('loaded');
+                }, 300);
+            });
+        </script>*@
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Theme/favicon.png" type="image/png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/assets/libs/fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Quick CSS -->
+    <link rel="stylesheet" href="~/Theme/assets/quick-website.css" id="stylesheet">
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Preloader -->
+    @*<div class="preloader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+        </div>*@
 
-    <div id="header_container">
-        <div id="header">
-            <i>=(^.^)= @ViewBag.Title</i>
-            <span style="float:right; font-size:small">
-                @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    var identity = ((CustomPrincipal)HttpContext.Current.User);
-                    @Html.Label(string.Format("Welcome {0} {1}", identity.FirstName, identity.LastName))
-                    @Html.ActionLink("Log out", "LogOut", "Account")
+    <!-- Navbar -->
+
+    @Html.Partial("_LoginPartial")
+
+    <!-- Main content -->
+    @RenderBody()
 
 
-                    if (User.IsInRole("Admin"))
-                    {
-                        @Html.Label(string.Format("Your Role is ", identity.Role))
-                    }
-                }
-                else
-                {
-                    <a href="account/login">Login</a>
-                }
-            </span>
-        </div>
-    </div>
+    @Html.Partial("_LoginPartial2")
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Core JS  -->
+    <script src="~/Theme/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/Theme/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Theme/assets/libs/feather-icons/dist/feather.min.js"></script>
+    <!-- Quick JS -->
+    <script src="~/Theme/assets/quick-website.js"></script>
+    <!-- Feather Icons -->
+    <script>
+        feather.replace({
+            'width': '1em',
+            'height': '1em'
+        })
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
+
 </html>

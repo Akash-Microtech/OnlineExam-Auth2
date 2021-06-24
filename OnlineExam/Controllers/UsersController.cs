@@ -12,7 +12,7 @@ namespace OnlineExam.Controllers
 {
     public class UsersController : Controller
     {
-        private Exam_DBEntities db = new Exam_DBEntities();
+        private readonly Exam_DBEntities db = new Exam_DBEntities();
 
         // GET: Users
         public ActionResult Index()

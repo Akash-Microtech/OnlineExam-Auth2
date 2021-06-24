@@ -1,0 +1,176 @@
+﻿@using OnlineExam.Authentication
+@if (Request.IsAuthenticated)
+{
+    <nav class="navbar navbar-main navbar-expand-lg shadow navbar-light bg-white" id="navbar-main">
+        <div class="container">
+            <button class="navbar-toggler order-lg-2 ml-n3 ml-lg-0" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand order-lg-1" href="~/">
+                @*<img alt="Image placeholder" src="../../assets/img/brand/dark.svg" id="navbar-logo">*@
+                <h3 class="display-5 text-center text-md-left">
+                    <strong class="text-primary">entrance</strong>coach.com
+                </h3>
+            </a>
+            <div class="collapse navbar-collapse navbar-collapse-overlay order-lg-3" id="navbar-main-collapse">
+                <div class="position-relative">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <ul class="navbar-nav ml-lg-auto mr-3">
+                    <li class="nav-item nav-item-spaced d-none d-lg-block"><a class="nav-link" href="~/Admin/">Dashboard</a></li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">User Account</h6><p class="mb-0">Menu option for User Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/UserAccounts" class="dropdown-item">Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/UserAccount" class="dropdown-item">Create Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Role" class="dropdown-item">Roles</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Course</h6><p class="mb-0">Menu option for Course Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Admin/Programmes" class="dropdown-item">Programmes</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/SubProgramme" class="dropdown-item">Sub Programmes</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/StdClass" class="dropdown-item">Class</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Admin/Course" class="dropdown-item">Course</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+                <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
+                    <li class="nav-item dropdown dropdown-animate">
+                        <a class="nav-link nav-link-icon px-2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow p-3">
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+
+                            var identity = ((CustomPrincipal)HttpContext.Current.User);
+                            <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
+                            <a href="~/Home/Profile" class="dropdown-item">
+                                <i data-feather="user"></i>
+                                <span>My profile</span>
+                            </a>
+                            }
+                            <div class="dropdown-divider"></div>
+                            @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
+                                    <i data-feather="log-out" class="text-danger"></i>
+                                    <span>Logout</span>
+                                </a>
+                            }
+                        </div>
+                    </li>
+                </ul>
+                <div class="d-lg-none px-4 text-center">
+                    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-block btn-sm btn-danger">Logout</a>
+                    }
+                </div>
+            </div>
+            <div class="order-lg-4 ml-lg-3">
+                <a class="" href="~/Home/Profile">
+                    <div class="icon bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360">
+                        <i data-feather="user"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+}
+else
+{
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="~/">
+                <h3 class="display-5 text-center text-md-left">
+                    <strong class="text-primary">entrance</strong>coach.com
+                </h3>
+            </a>
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/">Overview</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Home/About">About us</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Home/Contact">Contact</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-block btn-sm btn-soft-success" href="~/Home/Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Account/Login" class="btn btn-sm btn-primary btn-icon ml-3">
+                            <span class="btn-inner--text">Sign In</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--  Mobile button -->
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Home/Register" class="btn btn-block btn-sm btn-soft-success">Register</a>
+                </div>
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Account/Login" class="btn btn-block btn-sm btn-primary">Login</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+}

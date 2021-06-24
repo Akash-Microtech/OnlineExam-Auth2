@@ -14,6 +14,7 @@ namespace OnlineExam.Authentication
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int IsActive { get; set; }
         public UserRole Role { get; set; }
 
         #endregion
@@ -24,6 +25,7 @@ namespace OnlineExam.Authentication
             FirstName = user.FirstName;
             LastName = user.LastName;
             Role = user.UserRole;
+            IsActive = user.IsActive;
         }
     }
 }
