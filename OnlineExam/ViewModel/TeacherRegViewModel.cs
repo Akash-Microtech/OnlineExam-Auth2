@@ -15,8 +15,8 @@ namespace OnlineExam.ViewModel
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
-        [Display(Name = "Second Name")]
-        public string SecondName { get; set; }
+        [Display(Name = "MiddleName")]
+        public string MiddleName { get; set; }
         [Required]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
@@ -28,10 +28,10 @@ namespace OnlineExam.ViewModel
         public string WhatsApp { get; set; }
         [Required]
         [Display(Name = "PrimarySubject")]
-        public int PrimarySubject { get; set; }
+        public string PrimarySubject { get; set; }
         [Required]
         [Display(Name = "SecondarySubject")]
-        public int SecondarySubject { get; set; }
+        public string SecondarySubject { get; set; }
         [Required]
         [Display(Name = "Location")]
         public string Location { get; set; }
@@ -50,6 +50,22 @@ namespace OnlineExam.ViewModel
         [Required]
         [Display(Name = "State")]
         public string State { get; set; }
+        [Required]
+        [Display(Name = "Class")]
+        public string[] StudentGrade { get; set; }
+        [Required]
+        [Display(Name = "Weekdays")]
+        public string Weekdays { get; set; }
+        [Required]
+        [Display(Name = "Weekends")]
+        public string Weekends { get; set; }
+        [Required]
+        [Display(Name = "Timing")]
+        public string[] Time { get; set; }
+        [Required]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
         public ICollection<Subject> Subjects { get; set; }
     }
 }

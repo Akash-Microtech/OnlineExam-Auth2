@@ -14,6 +14,12 @@ namespace OnlineExam.DbContext
     
     public partial class Exam
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Exam()
+        {
+            this.Exam_QnTable = new HashSet<Exam_QnTable>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public int PgmId { get; set; }
@@ -32,5 +38,8 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public byte[] ExamTime { get; set; }
         public int TotalMark { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exam_QnTable> Exam_QnTable { get; set; }
     }
 }

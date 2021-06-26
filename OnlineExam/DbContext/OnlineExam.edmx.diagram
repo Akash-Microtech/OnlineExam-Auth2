@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="610056635bad41d89a9b6c6230cf2901" Name="Diagram1">
+      <Diagram DiagramId="f5b958c275454bdb96f5f225d96dd55f" Name="Diagram1">
         <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="15" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_QuestionBank" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_Registration" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Exam" Width="1.5" PointX="5.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Exam_QnTable" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="5.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_QuestionBank" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_Registration" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam" Width="1.5" PointX="12.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam_QnTable" Width="1.5" PointX="15" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Group" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Group_Teacher" Width="1.5" PointX="10.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Programme" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
@@ -25,9 +25,10 @@
         <EntityTypeShape EntityType="Exam_DBModel.Subject" Width="1.5" PointX="12.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.SubProgram" Width="1.5" PointX="10" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Teachers_QuestionBank" Width="1.5" PointX="10.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Teachers_Registration" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Teachers_Registration" Width="1.5" PointX="11.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.User" Width="1.5" PointX="8" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="Exam_DBModel.FK_Chapter_ChapterSujectid" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK__Exam_QnTa__ExamI__04AFB25B" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Group_Group" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Group_Teacher_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK__SubProgra__PgmId__30C33EC3" ManuallyRouted="false" />

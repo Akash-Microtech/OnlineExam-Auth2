@@ -18,8 +18,8 @@ namespace OnlineExam.DbContext
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string WhatsApp { get; set; }
-        public int PrimarySubject { get; set; }
-        public int SecondarySubject { get; set; }
+        public string PrimarySubject { get; set; }
+        public string SecondarySubject { get; set; }
         public string Location { get; set; }
         public string Street { get; set; }
         public string Address { get; set; }

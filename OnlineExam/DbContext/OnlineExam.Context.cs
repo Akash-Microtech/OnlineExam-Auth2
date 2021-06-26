@@ -14,8 +14,7 @@ namespace OnlineExam.DbContext
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    using OnlineExam.Models;
-
+    
     public partial class Exam_DBEntities : DbContext
     {
         public Exam_DBEntities()
@@ -50,7 +49,7 @@ namespace OnlineExam.DbContext
         public virtual DbSet<Teachers_QuestionBank> Teachers_QuestionBank { get; set; }
         public virtual DbSet<Teachers_Registration> Teachers_Registration { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
+    
         public virtual ObjectResult<GETCHAPTERBYSUB_Result> GETCHAPTERBYSUB()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GETCHAPTERBYSUB_Result>("GETCHAPTERBYSUB");

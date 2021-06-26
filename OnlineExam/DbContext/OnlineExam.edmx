@@ -347,8 +347,8 @@
           <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
           <Property Name="LastName" Type="varchar(max)" Nullable="false" />
           <Property Name="WhatsApp" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PrimarySubject" Type="int" Nullable="false" />
-          <Property Name="SecondarySubject" Type="int" Nullable="false" />
+          <Property Name="PrimarySubject" Type="varchar(max)" Nullable="false" />
+          <Property Name="SecondarySubject" Type="varchar(max)" Nullable="false" />
           <Property Name="Location" Type="varchar(max)" Nullable="false" />
           <Property Name="Street" Type="varchar(max)" Nullable="false" />
           <Property Name="Address" Type="varchar(max)" Nullable="false" />
@@ -396,6 +396,18 @@
           <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
           <Property Name="EmailVerify" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Exam_QnTa__ExamI__04AFB25B">
+          <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+          <End Role="Exam_QnTable" Type="Self.Exam_QnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exam_QnTable">
+              <PropertyRef Name="ExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SubProgra__PgmId__30C33EC3">
           <End Role="Programmes" Type="Self.Programmes" Multiplicity="1" />
           <End Role="SubPrograms" Type="Self.SubPrograms" Multiplicity="*" />
@@ -560,6 +572,10 @@
           <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Exam_QnTa__ExamI__04AFB25B" Association="Self.FK__Exam_QnTa__ExamI__04AFB25B">
+            <End Role="Exam" EntitySet="Exam" />
+            <End Role="Exam_QnTable" EntitySet="Exam_QnTable" />
+          </AssociationSet>
           <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
@@ -721,6 +737,7 @@
           <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExamTime" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="TotalMark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Exam_QnTable" Relationship="Self.FK__Exam_QnTa__ExamI__04AFB25B" FromRole="Exam" ToRole="Exam_QnTable" />
         </EntityType>
         <EntityType Name="Exam_QnTable">
           <Key>
@@ -729,6 +746,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ExamId" Type="Int32" Nullable="false" />
           <Property Name="QnId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK__Exam_QnTa__ExamI__04AFB25B" FromRole="Exam_QnTable" ToRole="Exam" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -969,8 +987,8 @@
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="WhatsApp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PrimarySubject" Type="Int32" Nullable="false" />
-          <Property Name="SecondarySubject" Type="Int32" Nullable="false" />
+          <Property Name="PrimarySubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecondarySubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1022,6 +1040,18 @@
             </Principal>
             <Dependent Role="Chapter">
               <PropertyRef Name="SubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Exam_QnTa__ExamI__04AFB25B">
+          <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+          <End Role="Exam_QnTable" Type="Self.Exam_QnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exam_QnTable">
+              <PropertyRef Name="ExamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1151,6 +1181,10 @@
           <AssociationSet Name="FK_Chapter_ChapterSujectid" Association="Self.FK_Chapter_ChapterSujectid">
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="Chapter" EntitySet="Chapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exam_QnTa__ExamI__04AFB25B" Association="Self.FK__Exam_QnTa__ExamI__04AFB25B">
+            <End Role="Exam" EntitySet="Exams" />
+            <End Role="Exam_QnTable" EntitySet="Exam_QnTable" />
           </AssociationSet>
           <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
             <End Role="Group" EntitySet="Groups" />

@@ -663,7 +663,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DTPController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\Student_AcademicPerformanceController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DbContext\Chapter.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
@@ -778,28 +780,30 @@
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
+    <Compile Include="ViewModel\ListViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />
     <Compile Include="ViewModel\StdClassViewModel.cs" />
+    <Compile Include="ViewModel\StudentRegistrationViewModel.cs" />
     <Compile Include="ViewModel\SubjectViewModel.cs" />
     <Compile Include="ViewModel\SubProgramViewModel.cs" />
     <Compile Include="ViewModel\TeacherRegViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="DbContext\OnlineExam.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineExam.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DbContext\OnlineExam.edmx.diagram">
-      <DependentUpon>OnlineExam.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="DbContext\role.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>role.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="DbContext\role.edmx.diagram">
       <DependentUpon>role.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="DbContext\OnlineExam.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OnlineExam.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DbContext\OnlineExam.edmx.diagram">
+      <DependentUpon>OnlineExam.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -835,15 +839,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
-    <Content Include="Views\Home\StudentRegister.cshtml" />
     <Content Include="Theme\assets\libs\sticky-kit\dist\Tupfile" />
     <Content Include="Views\Admin\Subjects.cshtml" />
     <Content Include="Views\Admin\Chapters.cshtml" />
     <Content Include="Views\DTP\Dashboard.cshtml" />
     <Content Include="Views\Student\Dashboard.cshtml" />
     <Content Include="Views\Teacher\Dashboard.cshtml" />
-    <Content Include="Views\Home\TeacherRegister.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
+    <Content Include="Views\Registration\Teacher.cshtml" />
+    <Content Include="Views\Registration\Student.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -854,6 +858,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Theme\assets\libs\fortawesome\fontawesome-free\svgs\" />
+    <Folder Include="Uploads\StudentRegistration\Image\" />
+    <Folder Include="Uploads\StudentRegistration\Sign\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
