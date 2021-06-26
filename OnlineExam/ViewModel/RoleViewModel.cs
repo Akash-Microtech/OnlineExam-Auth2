@@ -23,6 +23,6 @@ namespace OnlineExam.ViewModel
 
         public int CuserId { get; set; }
 
-        public List<UserRole> Roles { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }

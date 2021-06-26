@@ -14,7 +14,7 @@ namespace OnlineExam.Authentication
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
+        public string[] Roles { get; set; }
         #endregion
 
         public IIdentity Identity
@@ -24,7 +24,7 @@ namespace OnlineExam.Authentication
 
         public bool IsInRole(string role)
         {
-            if (Role.Any(r => role.Contains(r)))
+            if (Roles.Any(r => role.Contains(r)))
             {
                 return true;
             }

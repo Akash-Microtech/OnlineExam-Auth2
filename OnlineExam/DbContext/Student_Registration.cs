@@ -14,8 +14,17 @@ namespace OnlineExam.DbContext
     
     public partial class Student_Registration
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student_Registration()
+        {
+            this.Student_AcademicPerformance = new HashSet<Student_AcademicPerformance>();
+            this.Student_HomeCountryDetails = new HashSet<Student_HomeCountryDetails>();
+            this.Student_Parent = new HashSet<Student_Parent>();
+            this.Student_PreviousEntrance = new HashSet<Student_PreviousEntrance>();
+        }
+    
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public int GroupId { get; set; }
         public int BatchId { get; set; }
         public string ExamAttendingYear { get; set; }
@@ -46,6 +55,13 @@ namespace OnlineExam.DbContext
         public int CourseId { get; set; }
         public int SubPgmId { get; set; }
     
-        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student_AcademicPerformance> Student_AcademicPerformance { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student_HomeCountryDetails> Student_HomeCountryDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student_Parent> Student_Parent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student_PreviousEntrance> Student_PreviousEntrance { get; set; }
     }
 }

@@ -23,5 +23,7 @@ namespace OnlineExam.DbContext
         public int ModifiedBy { get; set; }
         public System.DateTime ModifiedTime { get; set; }
         public int SubId { get; set; }
+    
+        public virtual Subject Subject { get; set; }
     }
 }

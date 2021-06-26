@@ -1,5 +1,6 @@
 ﻿using OnlineExam.Authentication;
 using OnlineExam.DbContext;
+using OnlineExam.Models;
 using OnlineExam.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,11 @@ using System.Web.Mvc;
 
 namespace OnlineExam.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly Exam_DBEntities db = new Exam_DBEntities();
+        private readonly Exam_DBrole DbRole = new Exam_DBrole();
 
         // GET: Admin
         public ActionResult Index()
@@ -27,24 +29,23 @@ namespace OnlineExam.Controllers
             return View();
         }
 
+        public new ActionResult Profile()
+        {
+            return View();
+        }
+
         public async Task<ActionResult> Role(int? id)
         {
-            var allRoleData = await db.UserRoles.ToListAsync();
+            var allRoleData = await db.Roles.ToListAsync();
 
             if (id != null)
             {
-                var oneRoleData = await db.UserRoles.Where(r => r.RoleId == id).FirstOrDefaultAsync();
+                var oneRoleData = await db.Roles.Where(r => r.RoleId == id).FirstOrDefaultAsync();
                 RoleViewModel roleView = new RoleViewModel()
                 {
                     RoleName = oneRoleData.RoleName,
                     RoleId = oneRoleData.RoleId,
-                    Roles = allRoleData,
-                    CreatedBy = oneRoleData.CreatedBy,
-                    CreatedDate = oneRoleData.CreatedDate,
-                    IsActive = oneRoleData.IsActive,
-                    IsDeleted = oneRoleData.IsDeleted,
-                    DeletedBy = oneRoleData.DeletedBy,
-                    DeletedDate = oneRoleData.DeletedDate
+                    Roles = allRoleData
                 };
 
                 return View(roleView);
@@ -68,7 +69,7 @@ namespace OnlineExam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Role(RoleViewModel role)
         {
-            var allRoleData = await db.UserRoles.ToListAsync();
+            var allRoleData = await db.Roles.ToListAsync();
 
             if (role.RoleId != null)
             {
@@ -80,7 +81,7 @@ namespace OnlineExam.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var exists = await db.UserRoles.Where(r => r.RoleName == role.RoleName).FirstOrDefaultAsync();
+                    var exists = await db.Roles.Where(r => r.RoleName == role.RoleName).FirstOrDefaultAsync();
                     if (exists != null)
                     {
                         role.Roles = allRoleData;
@@ -89,15 +90,12 @@ namespace OnlineExam.Controllers
                     }
                     else
                     {
-                        UserRole userRole = new UserRole()
+                        Role userRole = new Role()
                         {
-                            RoleName = role.RoleName,
-                            CreatedBy = role.CuserId,
-                            CreatedDate = DateTime.Now,
-                            DeletedDate = DateTime.Now,
+                            RoleName = role.RoleName
                         };
 
-                        db.UserRoles.Add(userRole);
+                        db.Roles.Add(userRole);
                         await db.SaveChangesAsync();
                         TempData["StatusMessage"] = "Role Created Succesfully";
                         return RedirectToAction("Role");
@@ -123,7 +121,7 @@ namespace OnlineExam.Controllers
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
             }
 
-            var users = db.Users.Include(u => u.UserRole);
+            var users = db.Users.Include(u => u.Roles);
             return View(await users.Where(u => u.IsDeleted == 0).ToListAsync());
         }
 
@@ -131,7 +129,7 @@ namespace OnlineExam.Controllers
         {
             if(id != null)
             {
-                User data = db.Users.Where(d => d.Id == id).FirstOrDefault();
+                User data = await db.Users.Where(d => d.Id == id).FirstOrDefaultAsync();
                 if (data != null)
                 {
                     AccountViewModel user = new AccountViewModel
@@ -144,7 +142,7 @@ namespace OnlineExam.Controllers
                         RoleId = data.RoleId,
                         Password = data.Password,
                         ConfirmPassword = data.Password,
-                        Roles = await db.UserRoles.ToListAsync()
+                        Roles = await db.Roles.ToListAsync()
                     };
                     return View(user);
                 }                
@@ -152,7 +150,7 @@ namespace OnlineExam.Controllers
 
             AccountViewModel model = new AccountViewModel
             {
-                Roles = await db.UserRoles.ToListAsync()
+                Roles = await db.Roles.ToListAsync()
             };
             return View(model);
         }
@@ -166,14 +164,26 @@ namespace OnlineExam.Controllers
                 User data = db.Users.Where(d => d.Id == model.Id).FirstOrDefault();
                 if(data != null)
                 {
-                    if(data.UserName != model.UserName || data.Email != model.Email)
+                    if(data.Email != model.Email)
                     {
-                        var check = db.Users.Where(d => d.Email == model.Email || d.UserName == model.UserName).FirstOrDefault();
+                        var check = db.Users.Where(d => d.Email == model.Email).FirstOrDefault();
 
                         if (check != null)
                         {
-                            ViewBag.ErrorMessage = "Email or Username already exists";
-                            model.Roles = await db.UserRoles.ToListAsync();
+                            ViewBag.ErrorMessage = "Email already exists";
+                            model.Roles = await db.Roles.ToListAsync();
+                            return View(model);
+                        }
+                    }
+
+                    if (data.UserName != model.UserName)
+                    {
+                        var check = db.Users.Where(d => d.UserName == model.UserName).FirstOrDefault();
+
+                        if (check != null)
+                        {
+                            ViewBag.ErrorMessage = "Username already exists";
+                            model.Roles = await db.Roles.ToListAsync();
                             return View(model);
                         }
                     }
@@ -185,9 +195,12 @@ namespace OnlineExam.Controllers
                         data.Email = model.Email;
                         data.UserName = model.UserName;
                         data.Password = model.Password;
+                        data.RoleId = model.RoleId;
 
                         db.Entry(data).State = EntityState.Modified;
                         await db.SaveChangesAsync();
+
+                        AddRole(model);
 
                         TempData["StatusMessage"] = "Account Edited Succesfully.";
                         return RedirectToAction("UserAccounts");
@@ -196,7 +209,7 @@ namespace OnlineExam.Controllers
 
                 }
 
-                model.Roles = await db.UserRoles.ToListAsync();
+                model.Roles = await db.Roles.ToListAsync();
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
                 return View(model);
             }
@@ -209,7 +222,7 @@ namespace OnlineExam.Controllers
                     if (data != null)
                     {
                         ViewBag.ErrorMessage = "Email or Username already exists";
-                        model.Roles = await db.UserRoles.ToListAsync();
+                        model.Roles = await db.Roles.ToListAsync();
                         return View(model);
                     }
 
@@ -253,13 +266,17 @@ namespace OnlineExam.Controllers
                         UniqueID = uniqueID,
                         CreatedDate = DateTime.Now,
                         DeletedDate = DateTime.Now,
-                        CreatedBy = model.CuserId
-                    };                    
+                        CreatedBy = model.CuserId,
+                        ActivationCode = Guid.NewGuid().ToString()
+                };                    
 
                     if (ModelState.IsValid)
                     {
                         db.Users.Add(user);
                         await db.SaveChangesAsync();
+
+                        AddRole(model);
+
                         TempData["StatusMessage"] = "Account Created Succesfully";
                         return RedirectToAction("UserAccounts");
                     }
@@ -267,10 +284,42 @@ namespace OnlineExam.Controllers
                     return View(model); ;
                 }
 
-                model.Roles = await db.UserRoles.ToListAsync();
+                model.Roles = await db.Roles.ToListAsync();
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
                 return View(model);
             }
+        }
+
+        public ViewResult AddRole(AccountViewModel model)
+        {
+
+            if (model.Id != null)
+            {
+                UserRole userR = (UserRole)DbRole.UserRoles.Where(u => u.UserId == model.Id).FirstOrDefault();
+                DbRole.UserRoles.Remove(userR);
+                DbRole.SaveChanges();
+
+                UserRole userRole = new UserRole()
+                {
+                    RoleId = model.RoleId,
+                    UserId = (int)model.Id
+                };
+                DbRole.UserRoles.Add(userRole);
+                DbRole.SaveChangesAsync();
+            }
+            else
+            {
+                var user = db.Users.Where(u => u.UserName == model.UserName).FirstOrDefault();
+                UserRole userRole = new UserRole()
+                {
+                    RoleId = model.RoleId,
+                    UserId = user.Id
+                };
+
+                DbRole.UserRoles.Add(userRole);
+                DbRole.SaveChangesAsync();
+            }
+            return View();
         }
 
         [HttpPost]
@@ -864,6 +913,271 @@ namespace OnlineExam.Controllers
 
                 TempData["ErrorMessage"] = "Course Not Deleted";
                 return RedirectToAction("Course");
+            }
+        }
+
+        public async Task<ActionResult> Subjects(int? id)
+        {
+
+            if (id == null)
+            {
+                SubjectViewModel viewModel = new SubjectViewModel()
+                {
+                    Subjects = await db.Subjects.Where(p => p.IsDeleted == 0).ToListAsync()
+                };
+
+                if (TempData["StatusMessage"] != null)
+                {
+                    ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+                }
+
+                if (TempData["ErrorMessage"] != null)
+                {
+                    ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+                }
+
+                return View(viewModel);
+            }
+            else
+            {
+                var data = await db.Subjects.Where(d => d.Id == id).FirstOrDefaultAsync();
+                SubjectViewModel viewModel = new SubjectViewModel()
+                {
+                    Id = data.Id,
+                    Name = data.Name,
+                    CreatedBy = data.CreatedBy,
+                    CreatedDate = data.CreatedDate,
+                    IsDeleted = data.IsDeleted,
+                    ModifiedBy = data.ModifiedBy,
+                    ModifiedTime = data.ModifiedTime,
+                    DeletedDate = data.DeletedDate,
+                    Subjects = await db.Subjects.Where(p => p.IsDeleted == 0).ToListAsync()
+                };
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Subjects(SubjectViewModel subjectView)
+        {
+            var userId = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault().Id;
+
+            if (subjectView.Id != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    Subject model = await db.Subjects.Where(c => c.Id == subjectView.Id).FirstOrDefaultAsync();
+                    model.Name = subjectView.Name;
+                    model.ModifiedTime = DateTime.Now;
+                    model.ModifiedBy = userId;
+
+                    db.Entry(model).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+
+                    TempData["StatusMessage"] = "Subject Edited Succesfully.";
+                    return RedirectToAction("SubjectEdit");
+                }
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                subjectView.Subjects = await db.Subjects.Where(p => p.IsDeleted == 0).ToListAsync();
+                return View(subjectView);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    Subject model = new Subject()
+                    {
+                        Name = subjectView.Name,
+                        CreatedBy = userId,
+                        CreatedDate = DateTime.Now,
+                        ModifiedTime = DateTime.Now,
+                        DeletedDate = DateTime.Now
+                    };
+
+                    db.Subjects.Add(model);
+                    await db.SaveChangesAsync();
+
+                    TempData["StatusMessage"] = "Subject Created Succesfully.";
+                    return RedirectToAction("Subjects");
+                }
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                subjectView.Subjects = await db.Subjects.Where(p => p.IsDeleted == 0).ToListAsync();
+                return View(subjectView);
+            }
+        }
+
+        public ActionResult SubjectEdit()
+        {
+            return RedirectToAction("Subjects");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SubjectDelete(int? subjectId)
+        {
+            if (subjectId == null)
+            {
+                TempData["ErrorMessage"] = "Subject Not Deleted";
+                return RedirectToAction("Subjects");
+            }
+            else
+            {
+                Subject subject = await db.Subjects.Where(c => c.Id == subjectId).FirstOrDefaultAsync();
+
+                if (subjectId != null)
+                {
+                    subject.IsDeleted = 1;
+                    subject.DeletedDate = DateTime.Now;
+                    db.Entry(subject).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "Subject Deleted Succesfully.";
+                    return RedirectToAction("Subjects");
+                }
+
+                TempData["ErrorMessage"] = "Subject Not Deleted";
+                return RedirectToAction("Subjects");
+            }
+        }
+
+        public async Task<ActionResult> Chapters(int? id)
+        {
+            var Subjects =  db.Subjects.Where(p => p.IsDeleted == 0);
+            var chapter = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
+            /*foreach (var item in chapter)
+            {
+                item.subject = await Subjects.Where(s => s.Id == item.SubId).FirstOrDefaultAsync();
+            }*/
+
+            if (id == null)
+            {
+
+                ChapterViewModel viewModel = new ChapterViewModel()
+                {
+                    Subjects = await Subjects.ToListAsync(),
+                    Chapters = chapter
+                };
+
+                if (TempData["StatusMessage"] != null)
+                {
+                    ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+                }
+
+                if (TempData["ErrorMessage"] != null)
+                {
+                    ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+                }
+
+                return View(viewModel);
+            }
+            else
+            {
+                var data = await db.Chapters.Where(d => d.Id == id).FirstOrDefaultAsync();
+                ChapterViewModel viewModel = new ChapterViewModel()
+                {
+                    Id = data.Id,
+                    Name = data.Name,
+                    CreatedBy = data.CreatedBy,
+                    CreatedDate = data.CreatedDate,
+                    IsDeleted = data.IsDeleted,
+                    ModifiedBy = data.ModifiedBy,
+                    ModifiedTime = data.ModifiedTime,
+                    DeletedDate = data.DeletedDate,
+                    SubId = data.SubId,
+                    Subjects = await Subjects.ToListAsync(),
+                    Chapters = chapter
+                };
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Chapters(ChapterViewModel chapter)
+        {
+            var userId = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault().Id;
+
+            if (chapter.Id != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    Chapter model = await db.Chapters.Where(c => c.Id == chapter.Id).FirstOrDefaultAsync();
+                    model.Name = chapter.Name;
+                    model.ModifiedTime = DateTime.Now;
+                    model.ModifiedBy = userId;
+                    model.SubId = chapter.SubId;
+
+                    db.Entry(model).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+
+                    TempData["StatusMessage"] = "Chapter Edited Succesfully.";
+                    return RedirectToAction("EditCourse");
+                }
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                chapter.Chapters = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
+                return View(chapter);
+            }
+            else
+            {
+                Chapter model = new Chapter()
+                {
+                    Name = chapter.Name,
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.Now,
+                    ModifiedTime = DateTime.Now,
+                    DeletedDate = DateTime.Now,
+                    SubId = chapter.SubId
+                };
+
+                if (ModelState.IsValid)
+                {
+                    db.Chapters.Add(model);
+                    await db.SaveChangesAsync();
+
+                    TempData["StatusMessage"] = "Chapter Created Succesfully.";
+                    return RedirectToAction("Chapters");
+                }
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                chapter.Chapters = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
+                return View(chapter);
+            }
+        }
+
+        public ActionResult EditChapter()
+        {
+            return RedirectToAction("Chapters");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChapterDelete(int? chapterId)
+        {
+            if (chapterId == null)
+            {
+                TempData["ErrorMessage"] = "Chapter Not Deleted";
+                return RedirectToAction("Chapters");
+            }
+            else
+            {
+                Chapter chapter = await db.Chapters.Where(c => c.Id == chapterId).FirstOrDefaultAsync();
+
+                if (chapterId != null)
+                {
+                    chapter.IsDeleted = 1;
+                    db.Entry(chapter).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "Chapter Deleted Succesfully.";
+                    return RedirectToAction("Chapters");
+                }
+
+                TempData["ErrorMessage"] = "Chapter Not Deleted";
+                return RedirectToAction("Chapters");
             }
         }
     }

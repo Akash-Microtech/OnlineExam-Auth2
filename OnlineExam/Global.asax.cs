@@ -37,7 +37,7 @@ namespace OnlineExam
                     UserId = serializeModel.UserId,
                     FirstName = serializeModel.FirstName,
                     LastName = serializeModel.LastName,
-                    Role = serializeModel.RoleName
+                    Roles = serializeModel.RoleName.ToArray<string>()
                 };
 
                 HttpContext.Current.User = principal;

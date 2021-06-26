@@ -29,5 +29,12 @@ namespace OnlineExam.DbContext
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public System.DateTime DeletedDateTime { get; set; }
+        public string MiddleName { get; set; }
+        public string StudentGrade { get; set; }
+        public string Weekdays { get; set; }
+        public string Weekends { get; set; }
+        public string Time { get; set; }
+        public string Email { get; set; }
+        public string Country { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace OnlineExam.Authentication
 
             using (Exam_DBEntities dbContext = new Exam_DBEntities())
             {
-                var selectedUser = (from us in dbContext.Users.Include("UserRole")
+                var selectedUser = (from us in dbContext.Users.Include("Roles")
                                     where string.Compare(us.UserName, username, StringComparison.OrdinalIgnoreCase) == 0
                                     select us).FirstOrDefault();
 

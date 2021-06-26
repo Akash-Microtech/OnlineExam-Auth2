@@ -88,7 +88,6 @@ namespace OnlineExam.Authentication
                 var user = (from us in dbContext.Users
                             where string.Compare(username, us.UserName, StringComparison.OrdinalIgnoreCase) == 0
                             select us).FirstOrDefault();
-                user.UserRole = dbContext.UserRoles.Where(r=> r.RoleId == user.RoleId).FirstOrDefault();
 
                 if (user == null)
                 {

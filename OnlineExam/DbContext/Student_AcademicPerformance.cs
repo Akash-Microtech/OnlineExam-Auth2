@@ -15,7 +15,7 @@ namespace OnlineExam.DbContext
     public partial class Student_AcademicPerformance
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int StudRegId { get; set; }
         public string Class { get; set; }
         public string PassYear { get; set; }
         public string SchoolAddress { get; set; }
@@ -27,6 +27,6 @@ namespace OnlineExam.DbContext
         public Nullable<decimal> MathsMark { get; set; }
         public Nullable<decimal> PercOfMark { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual Student_Registration Student_Registration { get; set; }
     }
 }

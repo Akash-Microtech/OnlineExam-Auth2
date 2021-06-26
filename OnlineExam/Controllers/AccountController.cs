@@ -57,19 +57,16 @@ namespace OnlineExam.Controllers
                                 UserId = user.UserId,
                                 FirstName = user.FirstName,
                                 LastName = user.LastName,
-                                RoleName = user.Role.RoleName
+                                RoleName = user.Roles.Select(r => r.RoleName).ToList()
                             };
 
                             string userData = JsonConvert.SerializeObject(userModel);
-                            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
-                                (
-                                1, loginView.UserName, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData
-                                );
+                            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, loginView.UserName, DateTime.Now, DateTime.Now.AddDays(1), false, userData);
 
                             string enTicket = FormsAuthentication.Encrypt(authTicket);
                             HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
                             Response.Cookies.Add(faCookie);
-                            ReturnUrl = "~/" + user.Role.RoleName + "/Dashboard";
+                            ReturnUrl = "~/" + user.Roles.FirstOrDefault().RoleName + "/Dashboard";
                         }
 
                         if (Url.IsLocalUrl(ReturnUrl))
@@ -88,7 +85,7 @@ namespace OnlineExam.Controllers
             return View(loginView);
         }
 
-        [HttpGet]
+       /* [HttpGet]
         public ActionResult Registration()
         {
             return View();
@@ -110,12 +107,12 @@ namespace OnlineExam.Controllers
                 }
 
 
-                /*var userName = dbContext.Users.Where(x => x.UserName == registrationView.UserName).FirstOrDefault();
+                *//*var userName = dbContext.Users.Where(x => x.UserName == registrationView.UserName).FirstOrDefault();
                 if (userName.UserName != null)
                 {
                     ModelState.AddModelError("Warning Username", "Sorry: Username already Exists");
                     return View(registrationView);
-                }*/
+                }*//*
 
 
                 string alpha;
@@ -184,7 +181,7 @@ namespace OnlineExam.Controllers
             ViewBag.Status = statusRegistration;
 
             return View(registrationView);
-        }
+        }*/
 
         [HttpGet]
         public ActionResult ActivationAccount(string id)

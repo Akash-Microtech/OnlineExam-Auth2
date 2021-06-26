@@ -48,7 +48,7 @@ namespace OnlineExam.ViewModel
         [Display(Name = "Role")]
         public int RoleId { get; set; }
 
-        public IEnumerable<UserRole> Roles { get; set; }
+        public IEnumerable<Role> Roles { get; set; }
 
         public int CuserId { get; set; }
     }

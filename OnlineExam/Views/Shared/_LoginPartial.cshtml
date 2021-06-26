@@ -1,4 +1,6 @@
 ﻿@using OnlineExam.Authentication
+
+
 @if (Request.IsAuthenticated)
 {
     <nav class="navbar navbar-main navbar-expand-lg shadow navbar-light bg-white" id="navbar-main">
@@ -19,7 +21,12 @@
                     </button>
                 </div>
                 <ul class="navbar-nav ml-lg-auto mr-3">
-                    <li class="nav-item nav-item-spaced d-none d-lg-block"><a class="nav-link" href="~/Admin/">Dashboard</a></li>
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                        <li class="nav-item nav-item-spaced d-none d-lg-block"><a class="nav-link" href="~/@string.Format("{0}", identity.Roles)/Dashboard">Dashboard</a></li>
+                    }
 
                     @if (User.IsInRole("Admin"))
                     {
@@ -68,12 +75,72 @@
                                             <li>
                                                 <a href="~/Admin/Course" class="dropdown-item">Course</a>
                                             </li>
+                                            <li>
+                                                <a href="~/Admin/Subjects" class="dropdown-item">Subject</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                     }
+
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Exams</h6><p class="mb-0">Menu option for Exam Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Teacher/Exams" class="dropdown-item">Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Teacher/Exam" class="dropdown-item">Create Exam</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("DTP"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">QaAs</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Questions Answers </h6><p class="mb-0">Menu option for QaAs Management.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Teacher/Exams" class="dropdown-item">QaAs List</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Teacher/Exam" class="dropdown-item">Create QaAs</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
 
                 </ul>
                 <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
@@ -82,16 +149,17 @@
                             <i data-feather="settings"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow p-3">
+
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-
-                            var identity = ((CustomPrincipal)HttpContext.Current.User);
-                            <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
-                            <a href="~/Home/Profile" class="dropdown-item">
-                                <i data-feather="user"></i>
-                                <span>My profile</span>
-                            </a>
+                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
+                                <a href="~/@string.Format("{0}", identity.Roles)/Profile" class="dropdown-item">
+                                    <i data-feather="user"></i>
+                                    <span>My profile</span>
+                                </a>
                             }
+
                             <div class="dropdown-divider"></div>
                             @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                             {
@@ -114,11 +182,15 @@
                 </div>
             </div>
             <div class="order-lg-4 ml-lg-3">
-                <a class="" href="~/Home/Profile">
-                    <div class="icon bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360">
-                        <i data-feather="user"></i>
-                    </div>
-                </a>
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    var identity = ((CustomPrincipal)HttpContext.Current.User);
+                    <a class="" href="~/@string.Format("{0}", identity.Roles)/Profile">
+                        <div class="icon bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360">
+                            <i data-feather="user"></i>
+                        </div>
+                    </a>
+                }
             </div>
         </div>
     </nav>
@@ -154,8 +226,15 @@ else
 
                 <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">
                     <li class="nav-item">
-                        <a class="btn btn-block btn-sm btn-soft-success" href="~/Home/Register">Register</a>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register</button>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-dark bg-dark dropdown-menu-right">
+                                <a class="dropdown-item text-secondary" href="~/Home/StudentRegister">Student</a>
+                                <a class="dropdown-item text-secondary" href="~/Home/TeacherRegister">Teacher</a>
+                            </div>
+                        </div>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="~/Account/Login" class="btn btn-sm btn-primary btn-icon ml-3">
                             <span class="btn-inner--text">Sign In</span>

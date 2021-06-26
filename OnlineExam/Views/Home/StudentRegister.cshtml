@@ -1,0 +1,480 @@
+﻿
+@{
+    ViewBag.Title = "Student Register";
+}
+
+
+<section>
+    <div class="container d-flex align-items-center text-center text-lg-left py-5 py-lg-4 border-bottom">
+        <div class="col px-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="h2 mb-2">Student Registrantion</h3>
+                    <h6 class="font-weight-light text-muted">entrancecoach.com registrantion form</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slice">
+    <div class="container">
+        <div class="row row-grid justify-content-between">
+            <div class="col-lg-3">
+                <div data-toggle="sticky" data-sticky-offset="50" class="" style="">
+                    <div class="card">
+                        <div class="list-group list-group-flush">
+                            <a href="#item-1" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>About the program</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-2" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>About the student</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-3" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>About the Parent’s</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-4" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>
+                                        Home country details
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-5" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>Academic performance</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-6" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>Examination attempted</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#item-7" data-scroll-to="" data-scroll-to-offset="50" class="list-group-item list-group-item-action d-flex justify-content-between">
+                                <div>
+                                    <span>Declaration</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <form id="studentRgistration" method="post">
+                    <div class="mb-5">
+                        <h5 id="item-1">About the entrance coaching program</h5>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Class </label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Programme</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Sub Programme </label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Choose the Course</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Application date</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Academic year</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Focus to attend entrance exam</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred date to attend admission test</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred day’s to attend classes</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Preferred time slot to attend classes</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h5 id="item-2">About the student</h5>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Name of the student</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mobile Number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Whatsapp Number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email Id</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Date of birth</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Gender</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Religion </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Caste</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Community </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Blood Group</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="AB+">AB+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Nationality </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="form-control-label">Present address</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Area </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Location / Post Office</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">PO Box / Pin code</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact Whatsapp</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <h5 id="item-3">About the student</h5>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Name of the student</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Mobile Number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Whatsapp Number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email Id</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Date of birth</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Gender</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select option</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Male</option>
+                                        <option value="2">Rather not say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Religion </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Caste</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Community </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Blood Group</label>
+                                    <select class="custom-select">
+                                        <option disabled="disabled" selected="selected">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="AB+">AB+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Nationality </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="form-control-label">Present address</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Area </label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Location / Post Office</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">District</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">State</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">PO Box / Pin code</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact number</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quick contact Whatsapp</label>
+                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+
+    
+} 

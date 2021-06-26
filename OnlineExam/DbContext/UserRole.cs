@@ -14,22 +14,7 @@ namespace OnlineExam.DbContext
     
     public partial class UserRole
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRole()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
+        public int UserId { get; set; }
         public int RoleId { get; set; }
-        public string RoleName { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public int CreatedBy { get; set; }
-        public int IsActive { get; set; }
-        public int IsDeleted { get; set; }
-        public int DeletedBy { get; set; }
-        public System.DateTime DeletedDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

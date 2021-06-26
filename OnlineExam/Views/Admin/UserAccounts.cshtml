@@ -121,7 +121,16 @@
                                                     </div>
                                                 </th>
                                                 <td>@item.UniqueID</td>
-                                                <td>@item.UserRole.RoleName</td>
+                                                
+                                                <td>
+                                                    @{
+                                                        foreach (var rol in item.Roles)
+                                                        {
+                                                            @rol.RoleName
+                                                        }
+
+                                                    }
+                                                </td>
                                                 <td>
                                                     @if (item.IsActive == 1)
                                                     {

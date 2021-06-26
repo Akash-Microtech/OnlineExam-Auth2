@@ -24,7 +24,7 @@ namespace OnlineExam.Models
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string RoleName { get; set; }
+        public List<string> RoleName { get; set; }
 
     }
 
@@ -69,7 +69,7 @@ namespace OnlineExam.Models
 
         public string ActivationCode { get; set; }
 
-        public IEnumerable<UserRole> Roles { get; set; }
+        public IEnumerable<Role> Roles { get; set; }
 
         public RegistrationViewModel()
         {

@@ -15,7 +15,7 @@ namespace OnlineExam.DbContext
     public partial class Student_HomeCountryDetails
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int StudRegId { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string AreaHome { get; set; }
@@ -26,6 +26,6 @@ namespace OnlineExam.DbContext
         public string EmaiId { get; set; }
         public string QuickHomeWhatsapp { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual Student_Registration Student_Registration { get; set; }
     }
 }

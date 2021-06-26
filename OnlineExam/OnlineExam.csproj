@@ -112,13 +112,23 @@
     <Content Include="Content\Site.css" />
     <Content Include="DbContext\OnlineExam.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OnlineExam.Context.cs</LastGenOutput>
       <DependentUpon>OnlineExam.edmx</DependentUpon>
+      <LastGenOutput>OnlineExam.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DbContext\OnlineExam.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OnlineExam.edmx</DependentUpon>
       <LastGenOutput>OnlineExam.cs</LastGenOutput>
+    </Content>
+    <Content Include="DbContext\role.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>role.edmx</DependentUpon>
+      <LastGenOutput>role.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DbContext\role.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>role.edmx</DependentUpon>
+      <LastGenOutput>role1.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Theme\assets\css\quick-website.css" />
@@ -130,6 +140,7 @@
     <Content Include="Theme\assets\img\svg\icons\leadership.png" />
     <Content Include="Theme\assets\img\svg\icons\online-course.png" />
     <Content Include="Theme\assets\img\svg\icons\sub-programme.png" />
+    <Content Include="Theme\assets\img\svg\illustrations\illustration-13.svg" />
     <Content Include="Theme\assets\img\svg\illustrations\illustration-3.svg" />
     <Content Include="Theme\assets\jquery.validate.min.js" />
     <Content Include="Theme\assets\libs\bootstrap\dist\css\bootstrap-grid.css" />
@@ -440,6 +451,89 @@
     <Content Include="Theme\assets\libs\feather-icons\dist\icons\zap.svg" />
     <Content Include="Theme\assets\libs\feather-icons\dist\icons\zoom-in.svg" />
     <Content Include="Theme\assets\libs\feather-icons\dist\icons\zoom-out.svg" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\flatpickr.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\flatpickr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\flatpickr.min.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\flatpickr.min.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\ie.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ar.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\at.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\az.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\be.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\bg.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\bn.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\bs.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\cat.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\cs.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\cy.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\da.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\de.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\default.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\eo.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\es.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\et.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\fa.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\fi.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\fo.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\fr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ga.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\gr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\he.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\hi.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\hr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\hu.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\id.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\index.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\is.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\it.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ja.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ka.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\km.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ko.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\kz.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\lt.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\lv.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\mk.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\mn.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ms.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\my.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\nl.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\no.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\pa.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\pl.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\pt.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ro.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\ru.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\si.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sk.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sl.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sq.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sr-cyr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\sv.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\th.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\tr.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\uk.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\vn.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\zh-tw.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\l10n\zh.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\confirmDate\confirmDate.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\confirmDate\confirmDate.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\labelPlugin\labelPlugin.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\minMaxTimePlugin.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\monthSelect\index.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\monthSelect\style.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\rangePlugin.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\scrollPlugin.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\plugins\weekSelect\weekSelect.js" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\airbnb.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\confetti.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\dark.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\light.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\material_blue.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\material_green.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\material_orange.css" />
+    <Content Include="Theme\assets\libs\flatpickr\dist\themes\material_red.css" />
     <Content Include="Theme\assets\libs\fortawesome\fontawesome-free\css\all.css" />
     <Content Include="Theme\assets\libs\fortawesome\fontawesome-free\css\all.min.css" />
     <Content Include="Theme\assets\libs\fortawesome\fontawesome-free\css\brands.css" />
@@ -479,6 +573,79 @@
     <Content Include="Theme\assets\libs\jquery\dist\jquery.min.js" />
     <Content Include="Theme\assets\libs\jquery\dist\jquery.slim.js" />
     <Content Include="Theme\assets\libs\jquery\dist\jquery.slim.min.js" />
+    <Content Include="Theme\assets\libs\select2\dist\css\select2.css" />
+    <Content Include="Theme\assets\libs\select2\dist\css\select2.min.css" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\af.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ar.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\az.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\bg.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\bn.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\bs.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ca.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\cs.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\da.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\de.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\dsb.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\el.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\en.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\es.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\et.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\eu.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\fa.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\fi.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\fr.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\gl.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\he.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\hi.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\hr.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\hsb.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\hu.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\hy.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\id.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\is.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\it.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ja.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ka.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\km.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ko.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\lt.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\lv.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\mk.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ms.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\nb.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ne.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\nl.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\pl.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ps.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\pt-BR.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\pt.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ro.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\ru.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sk.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sl.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sq.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sr-Cyrl.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sr.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\sv.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\th.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\tk.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\tr.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\uk.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\vi.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\zh-CN.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\i18n\zh-TW.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\select2.full.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\select2.full.min.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\select2.js" />
+    <Content Include="Theme\assets\libs\select2\dist\js\select2.min.js" />
+    <Content Include="Theme\assets\libs\sticky-kit\dist\sticky-kit.js" />
+    <Content Include="Theme\assets\libs\sticky-kit\dist\sticky-kit.min.js" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.all.js" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.all.min.js" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.css" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.js" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.min.css" />
+    <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.min.js" />
     <Content Include="Theme\assets\quick-website.css" />
     <Content Include="Theme\assets\quick-website.js" />
     <Content Include="Theme\favicon.png" />
@@ -487,14 +654,17 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\CustomAuthorizeAttribute.cs" />
     <Compile Include="Authentication\CustomMembership.cs" />
     <Compile Include="Authentication\CustomMembershipUser.cs" />
     <Compile Include="Authentication\CustomPrincipal.cs" />
     <Compile Include="Authentication\CustomRole.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DTPController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DbContext\Chapter.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -510,13 +680,16 @@
     <Compile Include="DbContext\DataEntry_Registration.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Exam.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Exam_QnTable.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GETCHAPTERBYSUB_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GETPRGRMBYSUBPRGM_Result.cs">
-      <DependentUpon>OnlineExam.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\GETUSERROLEBYID_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Group.cs">
@@ -545,6 +718,24 @@
     </Compile>
     <Compile Include="DbContext\Programme.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\role.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>role.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Role.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\role.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>role.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\role1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>role.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Student_AcademicPerformance.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
@@ -577,7 +768,7 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\UserRole.cs">
-      <DependentUpon>OnlineExam.tt</DependentUpon>
+      <DependentUpon>role.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -585,11 +776,14 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />
     <Compile Include="ViewModel\StdClassViewModel.cs" />
+    <Compile Include="ViewModel\SubjectViewModel.cs" />
     <Compile Include="ViewModel\SubProgramViewModel.cs" />
+    <Compile Include="ViewModel\TeacherRegViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -600,6 +794,13 @@
     <Content Include="DbContext\OnlineExam.edmx.diagram">
       <DependentUpon>OnlineExam.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="DbContext\role.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>role.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DbContext\role.edmx.diagram">
+      <DependentUpon>role.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -607,11 +808,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\ActivationAccount.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial2.cshtml" />
     <Content Include="Theme\assets\css\quick-website.css.map" />
@@ -636,6 +832,18 @@
     <Content Include="Views\Admin\SubProgramme.cshtml" />
     <Content Include="Views\Admin\StdClass.cshtml" />
     <Content Include="Views\Admin\Course.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Home\StudentRegister.cshtml" />
+    <Content Include="Theme\assets\libs\sticky-kit\dist\Tupfile" />
+    <Content Include="Views\Admin\Subjects.cshtml" />
+    <Content Include="Views\Admin\Chapters.cshtml" />
+    <Content Include="Views\DTP\Dashboard.cshtml" />
+    <Content Include="Views\Student\Dashboard.cshtml" />
+    <Content Include="Views\Teacher\Dashboard.cshtml" />
+    <Content Include="Views\Home\TeacherRegister.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

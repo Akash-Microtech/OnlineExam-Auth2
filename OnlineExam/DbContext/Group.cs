@@ -27,6 +27,7 @@ namespace OnlineExam.DbContext
         public int DeletedBy { get; set; }
         public System.DateTime DeletedDateTime { get; set; }
         public int IsDeleted { get; set; }
+        public int ClassId { get; set; }
     
         public virtual Group Group1 { get; set; }
         public virtual Group Group2 { get; set; }

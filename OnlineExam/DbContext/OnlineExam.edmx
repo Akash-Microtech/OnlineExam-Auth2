@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Exam_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Exam_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Chapter">
           <Key>
             <PropertyRef Name="Id" />
@@ -93,6 +93,37 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="PgmId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="DeletedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" Nullable="false" />
+          <Property Name="ToDate" Type="datetime" Nullable="false" />
+          <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ExamTime" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TotalMark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exam_QnTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamId" Type="int" Nullable="false" />
+          <Property Name="QnId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -110,6 +141,7 @@
           <Property Name="DeletedBy" Type="int" Nullable="false" />
           <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
           <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Group_StudentTable">
           <Key>
@@ -140,12 +172,19 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Student_AcademicPerformance">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StudRegId" Type="int" Nullable="false" />
           <Property Name="Class" Type="varchar" MaxLength="50" />
           <Property Name="PassYear" Type="varchar" MaxLength="50" />
           <Property Name="SchoolAddress" Type="varchar(max)" />
@@ -162,7 +201,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StudRegId" Type="int" Nullable="false" />
           <Property Name="Address1" Type="varchar" MaxLength="100" />
           <Property Name="Address2" Type="varchar" MaxLength="100" />
           <Property Name="AreaHome" Type="varchar" MaxLength="100" />
@@ -178,7 +217,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="StudRegId" Type="int" Nullable="false" />
           <Property Name="FrName" Type="varchar" MaxLength="200" />
           <Property Name="FrOcc" Type="varchar" MaxLength="100" />
           <Property Name="FrMobNo" Type="varchar" MaxLength="100" />
@@ -201,7 +240,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StudRegId" Type="int" Nullable="false" />
           <Property Name="PrevEntranceExamName" Type="varchar" MaxLength="100" />
           <Property Name="RollNo" Type="varchar" MaxLength="50" />
           <Property Name="AttemptedYear" Type="varchar" MaxLength="50" />
@@ -214,7 +253,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
           <Property Name="GroupId" Type="int" Nullable="false" />
           <Property Name="BatchId" Type="int" Nullable="false" />
           <Property Name="ExamAttendingYear" Type="varchar" MaxLength="50" />
@@ -319,19 +358,21 @@
           <Property Name="IsActive" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="int" Nullable="false" />
           <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar(max)" />
+          <Property Name="StudentGrade" Type="varchar" MaxLength="100" />
+          <Property Name="Weekdays" Type="varchar" MaxLength="50" />
+          <Property Name="Weekends" Type="varchar" MaxLength="50" />
+          <Property Name="Time" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
+            <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="IsActive" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="int" Nullable="false" />
-          <Property Name="DeletedBy" Type="int" Nullable="false" />
-          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -353,79 +394,8 @@
           <Property Name="UniqueID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+          <Property Name="EmailVerify" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Group_Tea__Teach__42E1EEFE">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Group_Teacher" Type="Self.Group_Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group_Teacher">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_A__UserI__3A4CA8FD">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Student_AcademicPerformance" Type="Self.Student_AcademicPerformance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_AcademicPerformance">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_H__UserI__395884C4">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Student_HomeCountryDetails" Type="Self.Student_HomeCountryDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_HomeCountryDetails">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_P__UserI__37703C52">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Student_PreviousEntrance" Type="Self.Student_PreviousEntrance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_PreviousEntrance">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_P__useri__3864608B">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Student_Parent" Type="Self.Student_Parent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Parent">
-              <PropertyRef Name="userid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_R__UserI__367C1819">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Registration">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SubProgra__PgmId__30C33EC3">
           <End Role="Programmes" Type="Self.Programmes" Multiplicity="1" />
           <End Role="SubPrograms" Type="Self.SubPrograms" Multiplicity="*" />
@@ -438,27 +408,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Teachers___Teach__43D61337">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
+        <Association Name="FK_Chapter_ChapterSujectid">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chapter">
+              <PropertyRef Name="SubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Teachers_QuestionBank">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Users__RoleId__46E78A0C">
-          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRoles">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="RoleId" />
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -474,6 +460,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Group_Teacher_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Group_Teacher" Type="Self.Group_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group_Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_AcademicPerformance_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_AcademicPerformance" Type="Self.Student_AcademicPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_AcademicPerformance">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_HomeCountryDetails_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_HomeCountryDetails" Type="Self.Student_HomeCountryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_HomeCountryDetails">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Parent_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_Parent" Type="Self.Student_Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Parent">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_PreviousEntrance_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_PreviousEntrance" Type="Self.Student_PreviousEntrance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_PreviousEntrance">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_QuestionBank_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers_QuestionBank">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GETCHAPTERBYSUB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GETCOURSEBYCLASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GETPRGRMBYSUBPRGM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -484,10 +542,13 @@
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam_QnTable" EntityType="Self.Exam_QnTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Programmes" EntityType="Self.Programmes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" Schema="dbo" store:Type="Tables" />
@@ -499,48 +560,53 @@
           <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Group_Tea__Teach__42E1EEFE" Association="Self.FK__Group_Tea__Teach__42E1EEFE">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_A__UserI__3A4CA8FD" Association="Self.FK__Student_A__UserI__3A4CA8FD">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_H__UserI__395884C4" Association="Self.FK__Student_H__UserI__395884C4">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_P__UserI__37703C52" Association="Self.FK__Student_P__UserI__37703C52">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_P__useri__3864608B" Association="Self.FK__Student_P__useri__3864608B">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Student_Parent" EntitySet="Student_Parent" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_R__UserI__367C1819" Association="Self.FK__Student_R__UserI__367C1819">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Student_Registration" EntitySet="Student_Registration" />
-          </AssociationSet>
           <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Teachers___Teach__43D61337" Association="Self.FK__Teachers___Teach__43D61337">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
+          <AssociationSet Name="FK_Chapter_ChapterSujectid" Association="Self.FK_Chapter_ChapterSujectid">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Chapter" EntitySet="Chapter" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__RoleId__46E78A0C" Association="Self.FK__Users__RoleId__46E78A0C">
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
             <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
             <End Role="Group" EntitySet="Group" />
             <End Role="Group1" EntitySet="Group" />
           </AssociationSet>
+          <AssociationSet Name="FK_Group_Teacher_Users" Association="Self.FK_Group_Teacher_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_AcademicPerformance_Student_Registration" Association="Self.FK_Student_AcademicPerformance_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_HomeCountryDetails_Student_Registration" Association="Self.FK_Student_HomeCountryDetails_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Parent_Student_Registration" Association="Self.FK_Student_Parent_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_Parent" EntitySet="Student_Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_PreviousEntrance_Student_Registration" Association="Self.FK_Student_PreviousEntrance_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_QuestionBank_Users" Association="Self.FK_Teachers_QuestionBank_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Exam_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -557,6 +623,7 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SubId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Chapter_ChapterSujectid" FromRole="Chapter" ToRole="Subject" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -632,6 +699,37 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PgmId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExamTime" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TotalMark" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exam_QnTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamId" Type="Int32" Nullable="false" />
+          <Property Name="QnId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -649,6 +747,7 @@
           <Property Name="DeletedBy" Type="Int32" Nullable="false" />
           <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Group1" Relationship="Self.FK_Group_Group" FromRole="Group" ToRole="Group1" />
           <NavigationProperty Name="Group2" Relationship="Self.FK_Group_Group" FromRole="Group1" ToRole="Group" />
         </EntityType>
@@ -667,7 +766,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE" FromRole="Group_Teacher" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Group_Teacher_Users" FromRole="Group_Teacher" ToRole="Users" />
         </EntityType>
         <EntityType Name="Programme">
           <Key>
@@ -683,12 +782,20 @@
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubPrograms" Relationship="Self.FK__SubProgra__PgmId__30C33EC3" FromRole="Programmes" ToRole="SubPrograms" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Student_AcademicPerformance">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StudRegId" Type="Int32" Nullable="false" />
           <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PassYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SchoolAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -699,14 +806,14 @@
           <Property Name="BiologyMark" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MathsMark" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PercOfMark" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD" FromRole="Student_AcademicPerformance" ToRole="User" />
+          <NavigationProperty Name="Student_Registration" Relationship="Self.FK_Student_AcademicPerformance_Student_Registration" FromRole="Student_AcademicPerformance" ToRole="Student_Registration" />
         </EntityType>
         <EntityType Name="Student_HomeCountryDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StudRegId" Type="Int32" Nullable="false" />
           <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AreaHome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -716,14 +823,14 @@
           <Property Name="StateHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmaiId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="QuickHomeWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_H__UserI__395884C4" FromRole="Student_HomeCountryDetails" ToRole="User" />
+          <NavigationProperty Name="Student_Registration" Relationship="Self.FK_Student_HomeCountryDetails_Student_Registration" FromRole="Student_HomeCountryDetails" ToRole="Student_Registration" />
         </EntityType>
         <EntityType Name="Student_Parent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="StudRegId" Type="Int32" Nullable="false" />
           <Property Name="FrName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FrOcc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FrMobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -740,28 +847,28 @@
           <Property Name="MrSign" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MrState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MrWhatsapp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_P__useri__3864608B" FromRole="Student_Parent" ToRole="User" />
+          <NavigationProperty Name="Student_Registration" Relationship="Self.FK_Student_Parent_Student_Registration" FromRole="Student_Parent" ToRole="Student_Registration" />
         </EntityType>
         <EntityType Name="Student_PreviousEntrance">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StudRegId" Type="Int32" Nullable="false" />
           <Property Name="PrevEntranceExamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="RollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AttemptedYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Rank" Type="Int32" />
           <Property Name="NoOfAttempts" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_P__UserI__37703C52" FromRole="Student_PreviousEntrance" ToRole="User" />
+          <NavigationProperty Name="Student_Registration" Relationship="Self.FK_Student_PreviousEntrance_Student_Registration" FromRole="Student_PreviousEntrance" ToRole="Student_Registration" />
         </EntityType>
         <EntityType Name="Student_Registration">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="BatchId" Type="Int32" Nullable="false" />
           <Property Name="ExamAttendingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -791,7 +898,10 @@
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="SubPgmId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Student_R__UserI__367C1819" FromRole="Student_Registration" ToRole="User" />
+          <NavigationProperty Name="Student_AcademicPerformance" Relationship="Self.FK_Student_AcademicPerformance_Student_Registration" FromRole="Student_Registration" ToRole="Student_AcademicPerformance" />
+          <NavigationProperty Name="Student_HomeCountryDetails" Relationship="Self.FK_Student_HomeCountryDetails_Student_Registration" FromRole="Student_Registration" ToRole="Student_HomeCountryDetails" />
+          <NavigationProperty Name="Student_Parent" Relationship="Self.FK_Student_Parent_Student_Registration" FromRole="Student_Registration" ToRole="Student_Parent" />
+          <NavigationProperty Name="Student_PreviousEntrance" Relationship="Self.FK_Student_PreviousEntrance_Student_Registration" FromRole="Student_Registration" ToRole="Student_PreviousEntrance" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -805,6 +915,7 @@
           <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapter_ChapterSujectid" FromRole="Subject" ToRole="Chapter" />
         </EntityType>
         <EntityType Name="SubProgram">
           <Key>
@@ -848,21 +959,34 @@
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="SubPgmId" Type="Int32" Nullable="false" />
           <Property Name="TeacherId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Exam_DBModel.FK__Teachers___Teach__43D61337" FromRole="Teachers_QuestionBank" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Teachers_QuestionBank_Users" FromRole="Teachers_QuestionBank" ToRole="Users" />
         </EntityType>
-        <EntityType Name="UserRole">
+        <EntityType Name="Teachers_Registration">
           <Key>
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WhatsApp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimarySubject" Type="Int32" Nullable="false" />
+          <Property Name="SecondarySubject" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Int32" Nullable="false" />
-          <Property Name="DeletedBy" Type="Int32" Nullable="false" />
-          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__46E78A0C" FromRole="UserRoles" ToRole="Users" />
+          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StudentGrade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Weekdays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weekends" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -883,16 +1007,24 @@
           <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UniqueID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__RoleId__46E78A0C" FromRole="Users" ToRole="UserRoles" />
           <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Student_AcademicPerformance" Relationship="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD" FromRole="User" ToRole="Student_AcademicPerformance" />
-          <NavigationProperty Name="Student_HomeCountryDetails" Relationship="Exam_DBModel.FK__Student_H__UserI__395884C4" FromRole="User" ToRole="Student_HomeCountryDetails" />
-          <NavigationProperty Name="Student_Parent" Relationship="Exam_DBModel.FK__Student_P__useri__3864608B" FromRole="User" ToRole="Student_Parent" />
-          <NavigationProperty Name="Student_PreviousEntrance" Relationship="Exam_DBModel.FK__Student_P__UserI__37703C52" FromRole="User" ToRole="Student_PreviousEntrance" />
-          <NavigationProperty Name="Student_Registration" Relationship="Exam_DBModel.FK__Student_R__UserI__367C1819" FromRole="User" ToRole="Student_Registration" />
-          <NavigationProperty Name="Group_Teacher" Relationship="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE" FromRole="User" ToRole="Group_Teacher" />
-          <NavigationProperty Name="Teachers_QuestionBank" Relationship="Exam_DBModel.FK__Teachers___Teach__43D61337" FromRole="User" ToRole="Teachers_QuestionBank" />
+          <Property Name="EmailVerify" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group_Teacher" Relationship="Self.FK_Group_Teacher_Users" FromRole="Users" ToRole="Group_Teacher" />
+          <NavigationProperty Name="Teachers_QuestionBank" Relationship="Self.FK_Teachers_QuestionBank_Users" FromRole="Users" ToRole="Teachers_QuestionBank" />
+          <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
         </EntityType>
+        <Association Name="FK_Chapter_ChapterSujectid">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Chapter" Type="Self.Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chapter">
+              <PropertyRef Name="SubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Group_Group">
           <End Role="Group" Type="Self.Group" Multiplicity="1" />
           <End Role="Group1" Type="Self.Group" Multiplicity="0..1" />
@@ -902,6 +1034,18 @@
             </Principal>
             <Dependent Role="Group1">
               <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Teacher_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Group_Teacher" Type="Self.Group_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group_Teacher">
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -917,17 +1061,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__RoleId__46E78A0C">
-          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Student_AcademicPerformance_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_AcademicPerformance" Type="Self.Student_AcademicPerformance" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserRoles">
-              <PropertyRef Name="RoleId" />
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="RoleId" />
+            <Dependent Role="Student_AcademicPerformance">
+              <PropertyRef Name="StudRegId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_HomeCountryDetails_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_HomeCountryDetails" Type="Self.Student_HomeCountryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_HomeCountryDetails">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Parent_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_Parent" Type="Self.Student_Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_Parent">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_PreviousEntrance_Student_Registration">
+          <End Role="Student_Registration" Type="Self.Student_Registration" Multiplicity="1" />
+          <End Role="Student_PreviousEntrance" Type="Self.Student_PreviousEntrance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student_PreviousEntrance">
+              <PropertyRef Name="StudRegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_QuestionBank_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers_QuestionBank">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRoles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Exam_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Chapters" EntityType="Self.Chapter" />
@@ -935,10 +1131,13 @@
           <EntitySet Name="Courses" EntityType="Self.Cours" />
           <EntitySet Name="DataEntry_QuestionBank" EntityType="Self.DataEntry_QuestionBank" />
           <EntitySet Name="DataEntry_Registration" EntityType="Self.DataEntry_Registration" />
+          <EntitySet Name="Exams" EntityType="Self.Exam" />
+          <EntitySet Name="Exam_QnTable" EntityType="Self.Exam_QnTable" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Group_StudentTable" EntityType="Self.Group_StudentTable" />
           <EntitySet Name="Group_Teacher" EntityType="Self.Group_Teacher" />
           <EntitySet Name="Programmes" EntityType="Self.Programme" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Student_AcademicPerformance" EntityType="Self.Student_AcademicPerformance" />
           <EntitySet Name="Student_HomeCountryDetails" EntityType="Self.Student_HomeCountryDetails" />
           <EntitySet Name="Student_Parent" EntityType="Self.Student_Parent" />
@@ -947,53 +1146,52 @@
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
           <EntitySet Name="SubPrograms" EntityType="Self.SubProgram" />
           <EntitySet Name="Teachers_QuestionBank" EntityType="Self.Teachers_QuestionBank" />
-          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Chapter_ChapterSujectid" Association="Self.FK_Chapter_ChapterSujectid">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Chapter" EntitySet="Chapters" />
+          </AssociationSet>
           <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
             <End Role="Group" EntitySet="Groups" />
             <End Role="Group1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Teacher_Users" Association="Self.FK_Group_Teacher_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
           </AssociationSet>
           <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__RoleId__46E78A0C" Association="Self.FK__Users__RoleId__46E78A0C">
-            <End Role="UserRoles" EntitySet="UserRoles" />
+          <AssociationSet Name="FK_Student_AcademicPerformance_Student_Registration" Association="Self.FK_Student_AcademicPerformance_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_HomeCountryDetails_Student_Registration" Association="Self.FK_Student_HomeCountryDetails_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Parent_Student_Registration" Association="Self.FK_Student_Parent_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_Parent" EntitySet="Student_Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_PreviousEntrance_Student_Registration" Association="Self.FK_Student_PreviousEntrance_Student_Registration">
+            <End Role="Student_Registration" EntitySet="Student_Registration" />
+            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_QuestionBank_Users" Association="Self.FK_Teachers_QuestionBank_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
+          </AssociationSet>
+          <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+            <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <FunctionImport Name="GETCHAPTERBYSUB" ReturnType="Collection(Exam_DBModel.GETCHAPTERBYSUB_Result)" />
           <FunctionImport Name="GETCOURSEBYCLASS" />
           <FunctionImport Name="GETPRGRMBYSUBPRGM" ReturnType="Collection(Exam_DBModel.GETPRGRMBYSUBPRGM_Result)" />
-          <FunctionImport Name="GETUSERROLEBYID" ReturnType="Collection(Exam_DBModel.GETUSERROLEBYID_Result)" />
-          <AssociationSet Name="FK__Student_A__UserI__3A4CA8FD" Association="Exam_DBModel.FK__Student_A__UserI__3A4CA8FD">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student_AcademicPerformance" EntitySet="Student_AcademicPerformance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_H__UserI__395884C4" Association="Exam_DBModel.FK__Student_H__UserI__395884C4">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student_HomeCountryDetails" EntitySet="Student_HomeCountryDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_P__useri__3864608B" Association="Exam_DBModel.FK__Student_P__useri__3864608B">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student_Parent" EntitySet="Student_Parent" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_P__UserI__37703C52" Association="Exam_DBModel.FK__Student_P__UserI__37703C52">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student_PreviousEntrance" EntitySet="Student_PreviousEntrance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student_R__UserI__367C1819" Association="Exam_DBModel.FK__Student_R__UserI__367C1819">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student_Registration" EntitySet="Student_Registration" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Group_Tea__Teach__42E1EEFE" Association="Exam_DBModel.FK__Group_Tea__Teach__42E1EEFE">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Group_Teacher" EntitySet="Group_Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Teachers___Teach__43D61337" Association="Exam_DBModel.FK__Teachers___Teach__43D61337">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
-          </AssociationSet>
-          <EntitySet Name="Teachers_Registration" EntityType="Exam_DBModel.Teachers_Registration" />
+          <FunctionImport Name="GETUSERROLEBYID" />
         </EntityContainer>
         <ComplexType Name="GETCHAPTERBYSUB_Result">
           <Property Type="Int32" Name="Cid" Nullable="false" />
@@ -1035,129 +1233,6 @@
           <Property Type="Int32" Name="ModifiedBy1" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedTime1" Nullable="true" Precision="23" />
         </ComplexType>
-        <ComplexType Name="GETUSERROLEBYID_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="RoleId" Nullable="false" />
-          <Property Type="Int32" Name="IsActive" Nullable="false" />
-          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
-          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="DeletedDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="UniqueID" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="RolId" Nullable="false" />
-          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="255" />
-        </ComplexType>
-        <Association Name="FK__Student_A__UserI__3A4CA8FD">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Student_AcademicPerformance" Role="Student_AcademicPerformance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_AcademicPerformance">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_H__UserI__395884C4">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Student_HomeCountryDetails" Role="Student_HomeCountryDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_HomeCountryDetails">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_P__useri__3864608B">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Student_Parent" Role="Student_Parent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Parent">
-              <PropertyRef Name="userid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_P__UserI__37703C52">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Student_PreviousEntrance" Role="Student_PreviousEntrance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_PreviousEntrance">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student_R__UserI__367C1819">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Student_Registration" Role="Student_Registration" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student_Registration">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Group_Tea__Teach__42E1EEFE">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Group_Teacher" Role="Group_Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group_Teacher">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Teachers___Teach__43D61337">
-          <End Type="Exam_DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="Exam_DBModel.Teachers_QuestionBank" Role="Teachers_QuestionBank" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teachers_QuestionBank">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Teachers_Registration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="WhatsApp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PrimarySubject" Type="Int32" Nullable="false" />
-          <Property Name="SecondarySubject" Type="Int32" Nullable="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Street" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="District" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
-          <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1257,6 +1332,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="Exam_DBModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
+                <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exam_QnTable">
+            <EntityTypeMapping TypeName="Exam_DBModel.Exam_QnTable">
+              <MappingFragment StoreEntitySet="Exam_QnTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+                <ScalarProperty Name="QnId" ColumnName="QnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Groups">
             <EntityTypeMapping TypeName="Exam_DBModel.Group">
               <MappingFragment StoreEntitySet="Group">
@@ -1273,6 +1381,7 @@
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1308,11 +1417,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Exam_DBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Student_AcademicPerformance">
             <EntityTypeMapping TypeName="Exam_DBModel.Student_AcademicPerformance">
               <MappingFragment StoreEntitySet="Student_AcademicPerformance">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StudRegId" ColumnName="StudRegId" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="PassYear" ColumnName="PassYear" />
                 <ScalarProperty Name="SchoolAddress" ColumnName="SchoolAddress" />
@@ -1330,7 +1447,7 @@
             <EntityTypeMapping TypeName="Exam_DBModel.Student_HomeCountryDetails">
               <MappingFragment StoreEntitySet="Student_HomeCountryDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StudRegId" ColumnName="StudRegId" />
                 <ScalarProperty Name="Address1" ColumnName="Address1" />
                 <ScalarProperty Name="Address2" ColumnName="Address2" />
                 <ScalarProperty Name="AreaHome" ColumnName="AreaHome" />
@@ -1347,7 +1464,7 @@
             <EntityTypeMapping TypeName="Exam_DBModel.Student_Parent">
               <MappingFragment StoreEntitySet="Student_Parent">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="StudRegId" ColumnName="StudRegId" />
                 <ScalarProperty Name="FrName" ColumnName="FrName" />
                 <ScalarProperty Name="FrOcc" ColumnName="FrOcc" />
                 <ScalarProperty Name="FrMobNo" ColumnName="FrMobNo" />
@@ -1371,7 +1488,7 @@
             <EntityTypeMapping TypeName="Exam_DBModel.Student_PreviousEntrance">
               <MappingFragment StoreEntitySet="Student_PreviousEntrance">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StudRegId" ColumnName="StudRegId" />
                 <ScalarProperty Name="PrevEntranceExamName" ColumnName="PrevEntranceExamName" />
                 <ScalarProperty Name="RollNo" ColumnName="RollNo" />
                 <ScalarProperty Name="AttemptedYear" ColumnName="AttemptedYear" />
@@ -1450,7 +1567,6 @@
           <EntitySetMapping Name="Teachers_QuestionBank">
             <EntityTypeMapping TypeName="Exam_DBModel.Teachers_QuestionBank">
               <MappingFragment StoreEntitySet="Teachers_QuestionBank">
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Questions" ColumnName="Questions" />
                 <ScalarProperty Name="Option1" ColumnName="Option1" />
@@ -1473,27 +1589,41 @@
                 <ScalarProperty Name="PgmId" ColumnName="PgmId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="Exam_DBModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRoles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <EntitySetMapping Name="Teachers_Registration">
+            <EntityTypeMapping TypeName="Exam_DBModel.Teachers_Registration">
+              <MappingFragment StoreEntitySet="Teachers_Registration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="WhatsApp" ColumnName="WhatsApp" />
+                <ScalarProperty Name="PrimarySubject" ColumnName="PrimarySubject" />
+                <ScalarProperty Name="SecondarySubject" ColumnName="SecondarySubject" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="StudentGrade" ColumnName="StudentGrade" />
+                <ScalarProperty Name="Weekdays" ColumnName="Weekdays" />
+                <ScalarProperty Name="Weekends" ColumnName="Weekends" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Exam_DBModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1509,9 +1639,19 @@
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
                 <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
                 <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="EmailVerify" ColumnName="EmailVerify" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="UserRoles" TypeName="Exam_DBModel.UserRoles" StoreEntitySet="UserRoles">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="GETCHAPTERBYSUB" FunctionName="Exam_DBModel.Store.GETCHAPTERBYSUB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Exam_DBModel.GETCHAPTERBYSUB_Result">
@@ -1561,50 +1701,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GETUSERROLEBYID" FunctionName="Exam_DBModel.Store.GETUSERROLEBYID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Exam_DBModel.GETUSERROLEBYID_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="RolId" ColumnName="RolId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="Teachers_Registration">
-            <EntityTypeMapping TypeName="Exam_DBModel.Teachers_Registration">
-              <MappingFragment StoreEntitySet="Teachers_Registration">
-                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="District" ColumnName="District" />
-                <ScalarProperty Name="PO" ColumnName="PO" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="SecondarySubject" ColumnName="SecondarySubject" />
-                <ScalarProperty Name="PrimarySubject" ColumnName="PrimarySubject" />
-                <ScalarProperty Name="WhatsApp" ColumnName="WhatsApp" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GETUSERROLEBYID" FunctionName="Exam_DBModel.Store.GETUSERROLEBYID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

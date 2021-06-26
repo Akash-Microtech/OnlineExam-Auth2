@@ -1,0 +1,282 @@
+﻿@model OnlineExam.ViewModel.TeacherRegViewModel
+@{
+    ViewBag.Title = "Teacher Register";
+}
+
+<section>
+    <div class="container d-flex align-items-center text-center text-lg-left py-5 py-lg-4 border-bottom">
+        <div class="col px-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="h2 mb-2">Student Registrantion</h3>
+                    <h6 class="font-weight-light text-muted">entrancecoach.com registrantion form</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slice">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="teacherRegistration" method="post">
+
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    <div>
+                                        <h5 class="mb-3">General information</h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">First name</label>
+                                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your first name" } })
+                                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Second name</label>
+                                                    @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your Second name" } })
+                                                    @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Last name</label>
+                                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your last name" } })
+                                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Email</label>
+                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "name@exmaple.com" } })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    <small class="form-text text-muted mt-2">This is the main email address that we'll send notifications.</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Whatsapp Number</label>
+                                                    @Html.EditorFor(model => model.WhatsApp, new { htmlAttributes = new { @class = "form-control", @placeholder = "+91 123 456 7890" } })
+                                                    @Html.ValidationMessageFor(model => model.WhatsApp, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h5 class="mb-3">Contact information</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Location</label>
+                                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Location" } })
+                                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Street</label>
+                                                    @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street" } })
+                                                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Address</label>
+                                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your home address" } })
+                                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Post Office</label>
+                                                    @Html.EditorFor(model => model.PO, new { htmlAttributes = new { @class = "form-control", @placeholder = "Post Office" } })
+                                                    @Html.ValidationMessageFor(model => model.PO, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">District</label>
+                                                    @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", @placeholder = "District" } })
+                                                    @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">State</label>
+                                                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Country</label>
+                                                    <select class="form-control country" id="Country" name="Country">
+                                                        <option value="India">India</option>
+                                                        <option value="UAE ">UAE</option>
+                                                        <option value="Kuwait">Kuwait</option>
+                                                        <option value="Oman">Oman</option>
+                                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                                        <option value="Bahrain">Bahrain</option>
+                                                        <option value="Qatar">Qatar</option>
+                                                        <option value="Singapore">Singapore</option>
+                                                        <option value="India">India</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h5 class="mb-3">Teaching information</h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Primary Subject</label>
+                                                    @Html.DropDownList("PrimarySubject", null, "Select Subject", htmlAttributes: new { @class = "form-control selectPrimary" })
+                                                    @Html.ValidationMessageFor(model => model.PrimarySubject, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">SecondarySubject</label>
+                                                    @Html.DropDownList("SecondarySubject", null, "Select Subject", htmlAttributes: new { @class = "form-control selectSecond" })
+                                                    @Html.ValidationMessageFor(model => model.SecondarySubject, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Please mark which grad students you would love teach</label>
+                                                    <select class="form-control selectClass">
+                                                        <option value="Class 5">Class 5</option>
+                                                        <option value="Class 5">Class 6</option>
+                                                        <option value="Class 5">Class 7</option>
+                                                        <option value="Class 5">Class 8</option>
+                                                        <option value="Class 5">Class 9</option>
+                                                        <option value="Class 5">Class 10</option>
+                                                        <option value="Class 5">Class 11</option>
+                                                        <option value="Class 5">Class 12</option>
+                                                    </select>
+                                                    <small class="form-text text-muted mt-2">You can select multiple class from the list.</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <a class="d-inline-block text-sm text-muted mb-3 text-underline--dashed">Hours you will be available per day for teaching with entrancecaoch.com</a>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                        <label class="form-control-label">Monday to Friday</label>
+                                                        <select class="form-control selectMtoF">
+                                                            <option value="1">1 Hours Per Day</option>
+                                                            <option value="2">2 Hours Per Day</option>
+                                                            <option value="3">3 Hours Per Day</option>
+                                                            <option value="4">4 Hours Per Day</option>
+                                                            <option value="5">5 Hours Per Day</option>
+                                                            <option value="6">6 Hours Per Day</option>
+                                                            <option value="7">7 Hours Per Day</option>
+                                                            <option value="8">8 Hours Per Day</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="form-control-label">Saturday & Sunday</label>
+                                                        <select class="form-control selectStoS">
+                                                            <option value="1">1 Hours Per Day</option>
+                                                            <option value="2">2 Hours Per Day</option>
+                                                            <option value="3">3 Hours Per Day</option>
+                                                            <option value="4">4 Hours Per Day</option>
+                                                            <option value="5">5 Hours Per Day</option>
+                                                            <option value="6">6 Hours Per Day</option>
+                                                            <option value="7">7 Hours Per Day</option>
+                                                            <option value="8">8 Hours Per Day</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Available Timings</label>
+                                                    <select class="form-control selectClass">
+                                                        <option value="1">Select a Timings</option>
+                                                        <option value="5-6 am">5-6 am</option>
+                                                        <option value="6-7 am">6-7 am</option>
+                                                        <option value="7-8 am">7-8 am</option>
+                                                        <option value="8-9 am">8-9 am</option>
+                                                        <option value="9-10 am">9-10 am</option>
+                                                        <option value="10-11 am">10-11 am</option>
+                                                        <option value="11-12 pm">11-12 pm</option>
+                                                        <option value="1-2 pm">1-2 pm</option>
+                                                        <option value="2-3 pm">2-3 pm</option>
+                                                        <option value="3-4 pm">3-4 pm</option>
+                                                        <option value="4-5 pm">4-5 pm</option>
+                                                        <option value="5-6 pm">5-6 pm</option>
+                                                        <option value="6-7 pm">6-7 pm</option>
+                                                        <option value="7-8 pm">7-8 pm</option>
+                                                        <option value="8-9 pm">8-9 pm</option>
+                                                        <option value="9-10 pm">9-10 pm</option>
+                                                    </select>
+                                                    <small class="form-text text-muted mt-2">You can select multiple Timings from the list.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-right"><button type="submit" class="btn btn-sm btn-primary">Register</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('.country').select2({
+                placeholder: "Select a Country"
+            });
+           
+            $('.selectPrimary').select2({
+                placeholder: "Select a Subject"
+            });
+
+            $('.selectSecond').select2({
+                placeholder: "Select Subject"
+            });
+
+            $('.selectClass').select2({
+                placeholder: "Please Select a Class",
+                multiple: true
+            });
+
+            $('.selectMtoF').select2({
+                placeholder: "Please Select a Timings"
+            });
+
+            $('.selectStoS').select2({
+                placeholder: "Please Select a Timings"
+            });
+
+           
+        });
+    </script>
+
+}
