@@ -15,17 +15,18 @@ namespace OnlineExam.DbContext
     public partial class Student_HomeCountryDetails
     {
         public int Id { get; set; }
-        public int StudRegId { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
+        public string RegId { get; set; }
+        public string AddressHome1 { get; set; }
+        public string AddressHome2 { get; set; }
         public string AreaHome { get; set; }
         public string PincodeHome { get; set; }
-        public string QuickContact { get; set; }
+        public string QuickHomeContact { get; set; }
         public string LocationHome { get; set; }
         public string StateHome { get; set; }
-        public string EmaiId { get; set; }
+        public string EmaiIdHome { get; set; }
         public string QuickHomeWhatsapp { get; set; }
-    
-        public virtual Student_Registration Student_Registration { get; set; }
+        public string DistrictHome { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int IsDeleted { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using OnlineExam.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +36,19 @@ namespace OnlineExam.Controllers
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
             }
 
-            return View();
+            string alpha = "ECT";
+            Random random = new Random();
+            int unique = random.Next(10000, 99999);
+            int y = DateTime.Now.Year;
+            int m = DateTime.Now.Month;
+            var uniqueID = alpha + y + m + unique;
+
+            TeacherRegViewModel model = new TeacherRegViewModel()
+            {
+                TeachRegId = uniqueID
+            };
+
+            return View(model);
 
         }
 
@@ -45,8 +58,11 @@ namespace OnlineExam.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+
                 Teachers_Registration teachers_Registration = new Teachers_Registration
                 {
+                    TeachRegId = teacherRegView.TeachRegId,
                     FirstName = teacherRegView.FirstName,
                     MiddleName = teacherRegView.MiddleName,
                     LastName = teacherRegView.LastName,
@@ -83,80 +99,129 @@ namespace OnlineExam.Controllers
 
         public ActionResult TeacherRegisterSuccess()
         {
-            return RedirectToAction("TeacherRegister");
+            return RedirectToAction("Teacher");
         }
 
         public ActionResult Student()
         {
-            ViewBag.ClassID = new SelectList(db.Classes, "Id", "Name");
-            ViewBag.ProgramID = new SelectList(db.Programmes, "Id", "Name");
-            return View();
+            if (TempData["StatusMessage"] != null)
+            {
+                ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+                ViewBag.ApplicationName = TempData["ApplicationName"].ToString();
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+            string alpha = "ECS";
+            Random random = new Random();
+            int unique = random.Next(10000, 99999);
+            int y = DateTime.Now.Year;
+            int m = DateTime.Now.Month;
+            var uniqueID = alpha + y + m + unique;
+
+            StudentRegistrationViewModel model = new StudentRegistrationViewModel()
+            {
+                RegId = uniqueID
+            };
+
+            ViewBag.ClassID = new SelectList(db.Classes.Where(r => r.IsDeleted == 0), "Id", "Name");
+            ViewBag.ProgramID = new SelectList(db.Programmes.Where(r => r.IsDeleted == 0), "Id", "Name");
+            ViewBag.SubProgramID = new SelectList(db.SubPrograms.Where(r => r.IsDeleted == 0), "Id", "Name");
+            ViewBag.CourseID = new SelectList(db.Courses.Where(r => r.IsDeleted == 0), "Id", "Name");
+            return View(model);
+
+        }
+
+        public ActionResult GetCourseWiseClass(int id)
+        {
+            var result = new SelectList(db.Courses.Where(r => r.ClassId == id && r.IsDeleted == 0), "Id", "Name");
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetSubPgmWisePgm(int id)
+        {
+            var result = new SelectList(db.SubPrograms.Where(r => r.PgmId == id && r.IsDeleted == 0), "Id", "Name");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Student(StudentRegistrationViewModel model, HttpPostedFileBase file, HttpPostedFileBase filefr, HttpPostedFileBase filemr)
+        public async Task<ActionResult> Student(StudentRegistrationViewModel model, HttpPostedFileBase file_Photo, HttpPostedFileBase file_FrSign, HttpPostedFileBase file_MrSign)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ClassID = new SelectList(db.Classes.Where(r => r.IsDeleted == 0), "Id", "Name");
+                ViewBag.ProgramID = new SelectList(db.Programmes.Where(r => r.IsDeleted == 0), "Id", "Name");
+                ViewBag.SubProgramID = new SelectList(db.SubPrograms.Where(r => r.IsDeleted == 0), "Id", "Name");
+                ViewBag.CourseID = new SelectList(db.Courses.Where(r => r.IsDeleted == 0), "Id", "Name");
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields.";
+
+                return View(model);
+            }
+
+
 
             ////IMAGE OF STUDENT
             var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg" };
 
-            var pathphoto = "";
-            var pathfrsign = "";
-            var pathmrsign = "";
-
-
-
-            var fileName = Path.GetFileName(file.FileName);
-            var filefrsign = Path.GetFileName(filefr.FileName);
-            var filemrsign = Path.GetFileName(filemr.FileName);
-
-
-            var ext = Path.GetExtension(file.FileName);
-            var extfr = Path.GetExtension(filefr.FileName);
-            var extmr = Path.GetExtension(filemr.FileName);
-
+            var ext = Path.GetExtension(file_Photo.FileName);
             if (allowedExtensions.Contains(ext))
             {
-                string name = Path.GetFileNameWithoutExtension(fileName);
-                string myfile = name + "_" + ext;
+                var fileName = model.RegId + "_Student";
+                var extension = System.IO.Path.GetExtension(file_Photo.FileName).ToLower();
 
-                pathphoto = Path.Combine(Server.MapPath("~/Uploads/StudentRegistration/Image/"), myfile);
+                using (var img = System.Drawing.Image.FromStream(file_Photo.InputStream))
+                {
+                    model.Photo = String.Format("~/Uploads/StudentRegistration/Image/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.Photo);
+                }
             }
 
+            var extfr = Path.GetExtension(file_FrSign.FileName);
             if (allowedExtensions.Contains(extfr))
             {
-                string name = Path.GetFileNameWithoutExtension(filefrsign);
-                string myfile = name + "_" + extfr;
 
-                pathfrsign = Path.Combine(Server.MapPath("~/Uploads/StudentRegistration/Sign/"), myfile);
+                var fileName = model.RegId + "_F_Sign";
+                var extension = System.IO.Path.GetExtension(file_FrSign.FileName).ToLower();
+
+                using (var img = System.Drawing.Image.FromStream(file_FrSign.InputStream))
+                {
+                    model.FrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.FrSign);
+                }
             }
 
+
+            var extmr = Path.GetExtension(file_MrSign.FileName);
             if (allowedExtensions.Contains(extmr))
             {
-                string name = Path.GetFileNameWithoutExtension(filemrsign);
-                string myfile = name + "_" + extmr;
+                var fileName = model.RegId + "_M_Sign";
+                var extension = System.IO.Path.GetExtension(file_MrSign.FileName).ToLower();
 
-                pathmrsign = Path.Combine(Server.MapPath("~/Uploads/StudentRegistration/Sign/"), myfile);
+                using (var img = System.Drawing.Image.FromStream(file_MrSign.InputStream))
+                {
+                    model.MrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.MrSign);
+                }
             }
-
-
-
 
             //BASIC REGISTRATION//
 
-            var StudentRegistration = new Student_Registration()
+            Student_Registration StudentRegistration = new Student_Registration()
             {
 
-                UserId = 0,  // model.UserId,
-                GroupId = 0,
-                BatchId = 0,
+                RegId = model.RegId,
                 ExamAttendingYear = model.ExamAttendingYear,
                 PreferredDay = model.PreferredDay,
                 ApplnDate = model.ApplnDate,
                 AcademicYear = model.AcademicYear,
                 AdmissionTestDate = model.AdmissionTestDate,
+                StudentName = model.StudentName,
                 PreferredTime = model.PreferredTime,
                 WhatsappNo = model.WhatsappNo,
                 DOB = model.DOB,
@@ -173,104 +238,109 @@ namespace OnlineExam.Controllers
                 District = model.District,
                 Pincode = model.Pincode,
                 QuickContNo = model.QuickContNo,
-                Photo = pathphoto.ToString(),
+                Photo = model.Photo,
                 QuickWhatsApp = model.QuickWhatsApp,
                 PgmId = model.PgmId,
                 ClassId = model.ClassId,
                 CourseId = model.CourseId,
-                SubPgmId = model.SubPgmId
+                SubPgmId = model.SubPgmId,
+                CreatedDate = DateTime.Now,
+                IsDeleted = 0
             };
 
 
             //PARENT REGISTRATION//
 
-            var StudentParent = new Student_Parent()
+            Student_Parent StudentParent = new Student_Parent()
             {
-                StudRegId = 3,
+                RegId = model.RegId,
                 FrName = model.FrName,
                 FrOcc = model.FrOcc,
                 FrMobNo = model.FrMobNo,
-                FrMailid = model.FrMailId,
+                FrMailid = model.MailidFr,
                 FrDistrict = model.FrDistrict,
-                FrSign = pathfrsign.ToString(),
+                FrSign = model.FrSign,
                 FrState = model.FrState,
-                FrWhatsapp = model.FrWhatsApp,
+                FrWhatsapp = model.WhatsappFr,
                 MrName = model.MrName,
                 MrOcc = model.MrOcc,
                 MrMobNo = model.MrMobNo,
-                MrMailid = model.MrMailId,
+                MrMailid = model.MailidMr,
                 MrDistrict = model.MrDistrict,
-                MrSign = pathmrsign.ToString(),
+                MrSign = model.MrSign,
                 MrState = model.MrState,
-                MrWhatsapp = model.MrWhatsApp,
+                MrWhatsapp = model.WhatsappMr,
+                CreatedDate = DateTime.Now,
+                IsDeleted = 0
             };
 
             //HOME DETAILS//
 
-            var StudentHomeCountryDetails = new Student_HomeCountryDetails()
+            Student_HomeCountryDetails StudentHomeCountryDetails = new Student_HomeCountryDetails()
             {
-                StudRegId = 3,
-                Address1 = model.Address1,
-                Address2 = model.Address2,
+                RegId = model.RegId,
+                AddressHome1 = model.homeAddress,
+                AddressHome2 = model.Address2,
                 AreaHome = model.AreaHome,
                 PincodeHome = model.PincodeHome,
-                QuickContact = model.QuickContact,
+                QuickHomeContact = model.homeContact,
                 LocationHome = model.LocationHome,
                 StateHome = model.StateHome,
-                EmaiId = model.EmaiId,
+                EmaiIdHome = model.emailHome,
                 QuickHomeWhatsapp = model.QuickHomeWhatsapp,
+                DistrictHome = model.DistHome,
+                CreatedDate = DateTime.Now,
+                IsDeleted = 0
 
             };
 
 
-            //ACADEMIC//
-            var StudentAcademicPerformance = new Student_AcademicPerformance()
+            db.Student_Registration.Add(StudentRegistration);
+            db.Student_Parent.Add(StudentParent);
+            db.Student_HomeCountryDetails.Add(StudentHomeCountryDetails);
+            await db.SaveChangesAsync();
+
+
+            
+            TempData["ApplicationName"] = model.StudentName;
+            TempData["StatusMessage"] = "Thank You for your registration we will reach you soon.";
+            return RedirectToAction("StudentRegisterSuccess");
+        }
+
+
+        public ActionResult StudentRegisterSuccess()
+        {
+            return RedirectToAction("Student");
+        }
+
+
+        public Size NewImageSize(Size imageSize, Size newSize)
+        {
+            Size finalSize;
+            double tempval;
+            if (imageSize.Height > newSize.Height || imageSize.Width > newSize.Width)
             {
-                StudRegId = 3,
-                Class = model.Class,
-                PassYear = model.PassYear,
-                SchoolAddress = model.SchoolAddress,
-                RegNo = model.RegNo,
-                Board = model.Board,
-                PhyMark = model.PhyMark,
-                ChemMark = model.ChemMark,
-                BiologyMark = model.BiologyMark,
-                MathsMark = model.MathsMark,
-                PercOfMark = model.PercOfMark,
+                if (imageSize.Height > imageSize.Width)
+                    tempval = newSize.Height / (imageSize.Height * 1.0);
+                else
+                    tempval = newSize.Width / (imageSize.Width * 1.0);
 
-            };
-
-            //PREV ENTRANCE//
-            var StudentPreviousEntrance = new Student_PreviousEntrance()
-            {
-                StudRegId = 3,
-                PrevEntranceExamName = model.PrevEntranceExamName,
-                RollNo = model.RollNo,
-                AttemptedYear = model.AttemptedYear,
-                Mark = model.Mark,
-                Rank = model.Rank,
-                NoOfAttempts = model.NoOfAttempts,
-
-
-            };
-
-            //---------------------//
-            if (ModelState.IsValid)
-            {
-                db.Student_Registration.Add(StudentRegistration);
-                db.Student_Parent.Add(StudentParent);
-                db.Student_HomeCountryDetails.Add(StudentHomeCountryDetails);
-                db.Student_PreviousEntrance.Add(StudentPreviousEntrance);
-                db.Student_AcademicPerformance.Add(StudentAcademicPerformance);
-
-                db.SaveChangesAsync();
-                file.SaveAs(pathphoto);
-                filefr.SaveAs(pathfrsign);
-                filefr.SaveAs(pathmrsign);
-                ViewBag.StatusMessage = "Registration Succesfully Completed";
+                finalSize = new Size((int)(tempval * imageSize.Width), (int)(tempval * imageSize.Height));
             }
+            else
+                finalSize = imageSize; // image is already small size
 
-            return View(model);
+            return finalSize;
+        }
+
+        private void SaveToFolder(Image img, string fileName, string extension, Size newSize, string pathToSave)
+        {
+            // Get new resolution
+            Size imgSize = NewImageSize(img.Size, newSize);
+            using (System.Drawing.Image newImg = new Bitmap(img, imgSize.Width, imgSize.Height))
+            {
+                newImg.Save(Server.MapPath(pathToSave), img.RawFormat);
+            }
         }
     }
 }

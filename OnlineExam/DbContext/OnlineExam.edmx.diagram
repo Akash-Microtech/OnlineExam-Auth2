@@ -4,38 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f5b958c275454bdb96f5f225d96dd55f" Name="Diagram1">
-        <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="15" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="5.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_QuestionBank" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_Registration" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Exam" Width="1.5" PointX="12.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Exam_QnTable" Width="1.5" PointX="15" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Group" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Group_Teacher" Width="1.5" PointX="10.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Programme" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Student_AcademicPerformance" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Student_HomeCountryDetails" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Student_Parent" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Student_PreviousEntrance" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Student_Registration" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Subject" Width="1.5" PointX="12.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.SubProgram" Width="1.5" PointX="10" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Teachers_QuestionBank" Width="1.5" PointX="10.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Teachers_Registration" Width="1.5" PointX="11.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.User" Width="1.5" PointX="8" PointY="2.875" IsExpanded="true" />
+      <Diagram DiagramId="305e4229477d4f61a51599c05784a57b" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_QuestionBank" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.DataEntry_Registration" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam" Width="1.5" PointX="5.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Exam_QnTable" Width="1.5" PointX="8" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Group_Teacher" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Programme" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_AcademicPerformance" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_HomeCountryDetails" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_Parent" Width="1.5" PointX="10.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_PreviousEntrance" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Student_Registration" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Subject" Width="1.5" PointX="7.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.SubProgram" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Teachers_QuestionBank" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Teachers_Registration" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.User" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="Exam_DBModel.FK_Chapter_ChapterSujectid" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK__Exam_QnTa__ExamI__04AFB25B" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Group_Group" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK_Group_Teacher_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK__SubProgra__PgmId__30C33EC3" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK_Student_AcademicPerformance_Student_Registration" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK_Student_HomeCountryDetails_Student_Registration" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK_Student_Parent_Student_Registration" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK_Student_PreviousEntrance_Student_Registration" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Teachers_QuestionBank_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.UserRoles" ManuallyRouted="false" />
       </Diagram>

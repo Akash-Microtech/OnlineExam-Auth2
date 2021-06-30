@@ -69,5 +69,10 @@ namespace OnlineExam.DbContext
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GETUSERROLEBYID");
         }
+    
+        public virtual ObjectResult<StudentAllDetailsByRegId_Result> StudentAllDetailsByRegId()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StudentAllDetailsByRegId_Result>("StudentAllDetailsByRegId");
+        }
     }
 }

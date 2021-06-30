@@ -55,7 +55,7 @@
                                 <form id="teacherRegistration" method="post">
 
                                     @Html.AntiForgeryToken()
-                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.TeachRegId)
 
                                     <div>
                                         <h5 class="mb-3">General information</h5>
@@ -154,7 +154,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Country</label>
-                                                    <select class="form-control country" id="Country" name="Country">
+                                                    <select class="custom-select" id="Country" name="Country">
                                                         <option value="">Select Country</option>
                                                         <option value="India">India</option>
                                                         <option value="UAE ">UAE</option>
@@ -177,7 +177,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Primary Subject</label>
-                                                    <select class="form-control subject1" id="PrimarySubject" name="PrimarySubject">
+                                                    <select class="custom-select" id="PrimarySubject" name="PrimarySubject">
                                                         <option value="">Select Subject</option>
                                                         <option value="Mathematics">Mathematics</option>
                                                         <option value="Physics">Physics</option>
@@ -190,7 +190,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">SecondarySubject</label>
-                                                    <select class="form-control subject2" id="SecondarySubject" name="SecondarySubject">
+                                                    <select class="custom-select" id="SecondarySubject" name="SecondarySubject">
                                                         <option value="">Select Subject</option>
                                                         <option value="Mathematics">Mathematics</option>
                                                         <option value="Physics">Physics</option>
@@ -222,7 +222,8 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-6">
                                                         <label class="form-control-label">Monday to Friday</label>
-                                                        <select class="form-control selectMtoF" id="Weekdays" name="Weekdays">
+                                                        <select class="custom-select" id="Weekdays" name="Weekdays">
+                                                            <option value="">Select Weekdays Timing</option>
                                                             <option value="1">1 Hours Per Day</option>
                                                             <option value="2">2 Hours Per Day</option>
                                                             <option value="3">3 Hours Per Day</option>
@@ -236,7 +237,8 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label class="form-control-label">Saturday & Sunday</label>
-                                                        <select class="form-control selectStoS" id="Weekends" name="Weekends">
+                                                        <select class="custom-select" id="Weekends" name="Weekends">
+                                                            <option value="">Select Weekends Timing</option>
                                                             <option value="1">1 Hours Per Day</option>
                                                             <option value="2">2 Hours Per Day</option>
                                                             <option value="3">3 Hours Per Day</option>
@@ -346,7 +348,8 @@
                 WhatsApp: {
                     required: true,
                     minlength: 10,
-                    maxlength: 14
+                    maxlength: 14,
+                    digits: true
                 },
                 PrimarySubject: {
                     required: true
@@ -402,7 +405,7 @@
                     required: 'Please enter Valied Email'
                 },
                 WhatsApp: {
-                    required: 'Please enter WhatsApp No'
+                    required: 'Please enter Valied Number'
                 },
                 PrimarySubject: {
                     required: 'Select Your Primary Subject'

@@ -12,6 +12,9 @@ namespace OnlineExam.ViewModel
         public int? Id { get; set; }
 
         [Required]
+        public string TeachRegId { get; set; }
+
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]

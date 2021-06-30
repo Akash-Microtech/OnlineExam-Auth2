@@ -15,6 +15,7 @@ namespace OnlineExam.DbContext
     public partial class Teachers_Registration
     {
         public int Id { get; set; }
+        public string TeachRegId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string WhatsApp { get; set; }

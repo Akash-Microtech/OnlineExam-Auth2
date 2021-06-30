@@ -15,14 +15,15 @@ namespace OnlineExam.DbContext
     public partial class Student_PreviousEntrance
     {
         public int Id { get; set; }
-        public int StudRegId { get; set; }
+        public string RegId { get; set; }
         public string PrevEntranceExamName { get; set; }
         public string RollNo { get; set; }
         public string AttemptedYear { get; set; }
-        public Nullable<decimal> Mark { get; set; }
-        public Nullable<int> Rank { get; set; }
-        public Nullable<int> NoOfAttempts { get; set; }
-    
-        public virtual Student_Registration Student_Registration { get; set; }
+        public string Mark { get; set; }
+        public string Rank { get; set; }
+        public string NoOfAttempts { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int IsDeleted { get; set; }
+        public int IsRegistered { get; set; }
     }
 }

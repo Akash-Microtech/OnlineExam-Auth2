@@ -78,6 +78,9 @@
                                             <li>
                                                 <a href="~/Admin/Subjects" class="dropdown-item">Subject</a>
                                             </li>
+                                            <li>
+                                                <a href="~/Admin/Chapters" class="dropdown-item">Chapter</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -229,12 +232,12 @@ else
                         <div class="dropdown">
                             <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register</button>
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-dark bg-dark dropdown-menu-right">
-                                <a class="dropdown-item text-secondary" href="~/Home/StudentRegister">Student</a>
-                                <a class="dropdown-item text-secondary" href="~/Home/TeacherRegister">Teacher</a>
+                                <a class="dropdown-item text-secondary" href="~/Registration/Student">Student</a>
+                                <a class="dropdown-item text-secondary" href="~/Registration/Teacher">Teacher</a>
                             </div>
                         </div>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a href="~/Account/Login" class="btn btn-sm btn-primary btn-icon ml-3">
                             <span class="btn-inner--text">Sign In</span>
@@ -243,7 +246,10 @@ else
                 </ul>
                 <!--  Mobile button -->
                 <div class="d-lg-none text-center" style="margin-top: 18px;">
-                    <a href="~/Home/Register" class="btn btn-block btn-sm btn-soft-success">Register</a>
+                    <a href="~/Registration/Student" class="btn btn-block btn-sm btn-soft-success">Student Register</a>
+                </div>
+                <div class="d-lg-none text-center" style="margin-top: 18px;">
+                    <a href="~/Registration/Teacher" class="btn btn-block btn-sm btn-soft-warning">Teacher Register</a>
                 </div>
                 <div class="d-lg-none text-center" style="margin-top: 18px;">
                     <a href="~/Account/Login" class="btn btn-block btn-sm btn-primary">Login</a>

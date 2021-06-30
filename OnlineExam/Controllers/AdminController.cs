@@ -526,7 +526,8 @@ namespace OnlineExam.Controllers
 
         public async Task<ActionResult> SubProgramme(int? id)
         {
-            var subProg = await db.SubPrograms.Where(p => p.IsDeleted == 0).ToListAsync();
+            var data1 = db.SubPrograms.Include(d => d.Programme);
+            var subProg = await data1.Where(p => p.IsDeleted == 0).ToListAsync();
 
             if (id == null)
             {
@@ -594,7 +595,9 @@ namespace OnlineExam.Controllers
                 }
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
-                subProgram.SubPrograms = await db.SubPrograms.Where(p => p.IsDeleted == 0).ToListAsync();
+
+                var data = db.SubPrograms.Include(d => d.Programme);
+                subProgram.SubPrograms = await data.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(subProgram);
             }
             else
@@ -618,8 +621,9 @@ namespace OnlineExam.Controllers
                     return RedirectToAction("SubProgramme");
                 }
 
-                ViewBag.ErrorMessage = "Please fill in all the required fields";
-                subProgram.SubPrograms = await db.SubPrograms.Where(p => p.IsDeleted == 0).ToListAsync();
+                ViewBag.ErrorMessage = "Please fill in all the required fields"; 
+                var data = db.SubPrograms.Include(d => d.Programme);
+                subProgram.SubPrograms = await data.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(subProgram);
             }
         }
@@ -787,6 +791,7 @@ namespace OnlineExam.Controllers
         public async Task<ActionResult> Course(int? id)
         {
             var subProg = await db.Courses.Where(p => p.IsDeleted == 0).ToListAsync();
+
 
             if (id == null)
             {
@@ -1046,11 +1051,7 @@ namespace OnlineExam.Controllers
         public async Task<ActionResult> Chapters(int? id)
         {
             var Subjects =  db.Subjects.Where(p => p.IsDeleted == 0);
-            var chapter = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
-            /*foreach (var item in chapter)
-            {
-                item.subject = await Subjects.Where(s => s.Id == item.SubId).FirstOrDefaultAsync();
-            }*/
+            var chapter = db.Chapters.Include(c=>c.Subject);
 
             if (id == null)
             {
@@ -1058,7 +1059,7 @@ namespace OnlineExam.Controllers
                 ChapterViewModel viewModel = new ChapterViewModel()
                 {
                     Subjects = await Subjects.ToListAsync(),
-                    Chapters = chapter
+                    Chapters = await chapter.Where(p => p.IsDeleted == 0).ToListAsync()
                 };
 
                 if (TempData["StatusMessage"] != null)
@@ -1088,7 +1089,7 @@ namespace OnlineExam.Controllers
                     DeletedDate = data.DeletedDate,
                     SubId = data.SubId,
                     Subjects = await Subjects.ToListAsync(),
-                    Chapters = chapter
+                    Chapters = await chapter.Where(p => p.IsDeleted == 0).ToListAsync()
                 };
 
                 return View(viewModel);
@@ -1100,6 +1101,7 @@ namespace OnlineExam.Controllers
         public async Task<ActionResult> Chapters(ChapterViewModel chapter)
         {
             var userId = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault().Id;
+            var chapterList = db.Chapters.Include(c => c.Subject);
 
             if (chapter.Id != null)
             {
@@ -1119,7 +1121,7 @@ namespace OnlineExam.Controllers
                 }
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
-                chapter.Chapters = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
+                chapter.Chapters = await chapterList.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(chapter);
             }
             else
@@ -1144,7 +1146,7 @@ namespace OnlineExam.Controllers
                 }
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
-                chapter.Chapters = await db.Chapters.Where(p => p.IsDeleted == 0).ToListAsync();
+                chapter.Chapters = await chapterList.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(chapter);
             }
         }
@@ -1179,6 +1181,12 @@ namespace OnlineExam.Controllers
                 TempData["ErrorMessage"] = "Chapter Not Deleted";
                 return RedirectToAction("Chapters");
             }
+        }
+
+
+        public ActionResult StudentRegistration()
+        {
+            return View();
         }
     }
 }

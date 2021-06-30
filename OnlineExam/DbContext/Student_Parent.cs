@@ -15,7 +15,7 @@ namespace OnlineExam.DbContext
     public partial class Student_Parent
     {
         public int Id { get; set; }
-        public int StudRegId { get; set; }
+        public string RegId { get; set; }
         public string FrName { get; set; }
         public string FrOcc { get; set; }
         public string FrMobNo { get; set; }
@@ -32,7 +32,7 @@ namespace OnlineExam.DbContext
         public string MrSign { get; set; }
         public string MrState { get; set; }
         public string MrWhatsapp { get; set; }
-    
-        public virtual Student_Registration Student_Registration { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int IsDeleted { get; set; }
     }
 }

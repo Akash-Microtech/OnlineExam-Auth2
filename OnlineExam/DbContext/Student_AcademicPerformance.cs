@@ -15,18 +15,19 @@ namespace OnlineExam.DbContext
     public partial class Student_AcademicPerformance
     {
         public int Id { get; set; }
-        public int StudRegId { get; set; }
+        public string RegId { get; set; }
         public string Class { get; set; }
         public string PassYear { get; set; }
         public string SchoolAddress { get; set; }
         public string RegNo { get; set; }
         public string Board { get; set; }
-        public Nullable<decimal> PhyMark { get; set; }
-        public Nullable<decimal> ChemMark { get; set; }
-        public Nullable<decimal> BiologyMark { get; set; }
-        public Nullable<decimal> MathsMark { get; set; }
-        public Nullable<decimal> PercOfMark { get; set; }
-    
-        public virtual Student_Registration Student_Registration { get; set; }
+        public string PhyMark { get; set; }
+        public string ChemMark { get; set; }
+        public string BiologyMark { get; set; }
+        public string MathsMark { get; set; }
+        public string PercOfMark { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int IsDeleted { get; set; }
+        public int IsRegistered { get; set; }
     }
 }

@@ -58,3 +58,26 @@ body.loaded > div.preloader {
         flex-direction: column;
     }
 }
+
+.up-img {
+    margin-left: 78px;
+    margin-top: 20px;
+    display:none;
+}
+
+.remove-class {
+    margin-left: 10px;
+}
+
+.size-er {
+    display: none;
+}
+
+.img-remove {
+    cursor: pointer;
+}
+
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+}

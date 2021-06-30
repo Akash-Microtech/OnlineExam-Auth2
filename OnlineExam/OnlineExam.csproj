@@ -143,6 +143,90 @@
     <Content Include="Theme\assets\img\svg\illustrations\illustration-13.svg" />
     <Content Include="Theme\assets\img\svg\illustrations\illustration-3.svg" />
     <Content Include="Theme\assets\jquery.validate.min.js" />
+    <Content Include="Theme\assets\libs\animate.css\animate.css" />
+    <Content Include="Theme\assets\libs\animate.css\animate.min.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\bounce.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\flash.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\headShake.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\heartBeat.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\jello.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\pulse.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\rubberBand.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\shake.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\swing.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\tada.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\attention_seekers\wobble.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_entrances\bounceIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_entrances\bounceInDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_entrances\bounceInLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_entrances\bounceInRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_entrances\bounceInUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_exits\bounceOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_exits\bounceOutDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_exits\bounceOutLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_exits\bounceOutRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\bouncing_exits\bounceOutUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInDownBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInLeftBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInRightBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_entrances\fadeInUpBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutDownBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutLeftBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutRightBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\fading_exits\fadeOutUpBig.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\flippers\flip.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\flippers\flipInX.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\flippers\flipInY.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\flippers\flipOutX.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\flippers\flipOutY.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\lightspeed\lightSpeedIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\lightspeed\lightSpeedOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_entrances\rotateIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_entrances\rotateInDownLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_entrances\rotateInDownRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_entrances\rotateInUpLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_entrances\rotateInUpRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_exits\rotateOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_exits\rotateOutDownLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_exits\rotateOutDownRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_exits\rotateOutUpLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\rotating_exits\rotateOutUpRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_entrances\slideInDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_entrances\slideInLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_entrances\slideInRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_entrances\slideInUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_exits\slideOutDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_exits\slideOutLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_exits\slideOutRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\sliding_exits\slideOutUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\specials\hinge.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\specials\jackInTheBox.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\specials\rollIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\specials\rollOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_entrances\zoomIn.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_entrances\zoomInDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_entrances\zoomInLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_entrances\zoomInRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_entrances\zoomInUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOut.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOutDown.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOutLeft.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOutRight.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOutUp.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\_base.css" />
+    <Content Include="Theme\assets\libs\animate.css\source\_vars.css" />
+    <Content Include="Theme\assets\libs\bootstrap-notify\bootstrap-notify.js" />
+    <Content Include="Theme\assets\libs\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Include="Theme\assets\libs\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Include="Theme\assets\libs\bootstrap\dist\css\bootstrap-grid.min.css" />
     <Content Include="Theme\assets\libs\bootstrap\dist\css\bootstrap-reboot.css" />
@@ -652,6 +736,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\RegisterController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authentication\CustomAuthorizeAttribute.cs" />
@@ -739,6 +824,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>role.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\StudentAllDetailsByRegId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\Student_AcademicPerformance.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -782,8 +870,11 @@
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
+    <Compile Include="ViewModel\ReportStudentRegistrionViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />
     <Compile Include="ViewModel\StdClassViewModel.cs" />
+    <Compile Include="ViewModel\StudentAcademicPerformanceViewModel.cs" />
+    <Compile Include="ViewModel\StudentPreviousEntranceViewModel.cs" />
     <Compile Include="ViewModel\StudentRegistrationViewModel.cs" />
     <Compile Include="ViewModel\SubjectViewModel.cs" />
     <Compile Include="ViewModel\SubProgramViewModel.cs" />
@@ -848,6 +939,7 @@
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Views\Registration\Teacher.cshtml" />
     <Content Include="Views\Registration\Student.cshtml" />
+    <Content Include="Theme\assets\libs\animate.css\animate-config.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -858,6 +950,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Theme\assets\libs\fortawesome\fontawesome-free\svgs\" />
+    <Folder Include="Theme\Js\" />
     <Folder Include="Uploads\StudentRegistration\Image\" />
     <Folder Include="Uploads\StudentRegistration\Sign\" />
   </ItemGroup>
