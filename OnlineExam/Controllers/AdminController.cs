@@ -790,14 +790,15 @@ namespace OnlineExam.Controllers
 
         public async Task<ActionResult> Course(int? id)
         {
-            var subProg = await db.Courses.Where(p => p.IsDeleted == 0).ToListAsync();
+            var classes = db.Courses.Include(c => c.Class);
+            var courses = await classes.Where(p => p.IsDeleted == 0).ToListAsync();
 
 
             if (id == null)
             {
                 CourseViewModel viewModel = new CourseViewModel()
                 {
-                    Courses = subProg,
+                    Courses = courses,
                     Classes = await db.Classes.Where(p => p.IsDeleted == 0).ToListAsync()
                 };
 
@@ -827,7 +828,7 @@ namespace OnlineExam.Controllers
                     ModifiedTime = data.ModifiedTime,
                     DeletedDate = data.DeletedDate,
                     ClassId = data.ClassId,
-                    Courses = subProg,
+                    Courses = courses,
                     Classes = await db.Classes.Where(p => p.IsDeleted == 0).ToListAsync()
                 };
 
@@ -859,7 +860,8 @@ namespace OnlineExam.Controllers
                 }
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
-                courseView.Courses = await db.Courses.Where(p => p.IsDeleted == 0).ToListAsync();
+                var classes = db.Courses.Include(c => c.Class);
+                courseView.Courses = await classes.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(courseView);
             }
             else
@@ -884,7 +886,8 @@ namespace OnlineExam.Controllers
                 }
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
-                courseView.Courses = await db.Courses.Where(p => p.IsDeleted == 0).ToListAsync();
+                var classes = db.Courses.Include(c => c.Class);
+                courseView.Courses = await classes.Where(p => p.IsDeleted == 0).ToListAsync();
                 return View(courseView);
             }
         }
@@ -1184,9 +1187,16 @@ namespace OnlineExam.Controllers
         }
 
 
-        public ActionResult StudentRegistration()
+        public ActionResult StudentRegistrations()
         {
-            return View();
+            var studreg = db.AllStudentRegistrationDetails();
+            return View(studreg);
+        }
+
+        public ActionResult TeacherRegistrations()
+        {
+            var teacher = db.Teachers_Registration.Where(s => s.IsDeleted == 0).ToList();
+            return View(teacher);
         }
     }
 }

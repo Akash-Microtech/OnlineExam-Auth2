@@ -752,6 +752,9 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\Student_AcademicPerformanceController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="DbContext\AllStudentRegistrationDetails_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\Chapter.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -773,10 +776,10 @@
     <Compile Include="DbContext\Exam_QnTable.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\GETCHAPTERBYSUB_Result.cs">
+    <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\GETPRGRMBYSUBPRGM_Result.cs">
+    <Compile Include="DbContext\GetTeacherGroupbyGroupId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Group.cs">
@@ -940,6 +943,8 @@
     <Content Include="Views\Registration\Teacher.cshtml" />
     <Content Include="Views\Registration\Student.cshtml" />
     <Content Include="Theme\assets\libs\animate.css\animate-config.json" />
+    <Content Include="Views\Admin\TeacherRegistrations.cshtml" />
+    <Content Include="Views\Admin\StudentRegistrations.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

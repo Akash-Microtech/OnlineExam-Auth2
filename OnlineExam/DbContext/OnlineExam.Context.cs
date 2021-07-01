@@ -50,24 +50,27 @@ namespace OnlineExam.DbContext
         public virtual DbSet<Teachers_Registration> Teachers_Registration { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual ObjectResult<GETCHAPTERBYSUB_Result> GETCHAPTERBYSUB()
+        public virtual ObjectResult<AllStudentRegistrationDetails_Result> AllStudentRegistrationDetails()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GETCHAPTERBYSUB_Result>("GETCHAPTERBYSUB");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AllStudentRegistrationDetails_Result>("AllStudentRegistrationDetails");
         }
     
-        public virtual int GETCOURSEBYCLASS()
+        public virtual ObjectResult<GetStudentGroupbyGroupId_Result> GetStudentGroupbyGroupId(Nullable<int> groupid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GETCOURSEBYCLASS");
+            var groupidParameter = groupid.HasValue ?
+                new ObjectParameter("Groupid", groupid) :
+                new ObjectParameter("Groupid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentGroupbyGroupId_Result>("GetStudentGroupbyGroupId", groupidParameter);
         }
     
-        public virtual ObjectResult<GETPRGRMBYSUBPRGM_Result> GETPRGRMBYSUBPRGM()
+        public virtual ObjectResult<GetTeacherGroupbyGroupId_Result> GetTeacherGroupbyGroupId(Nullable<int> groupid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GETPRGRMBYSUBPRGM_Result>("GETPRGRMBYSUBPRGM");
-        }
+            var groupidParameter = groupid.HasValue ?
+                new ObjectParameter("Groupid", groupid) :
+                new ObjectParameter("Groupid", typeof(int));
     
-        public virtual int GETUSERROLEBYID()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GETUSERROLEBYID");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTeacherGroupbyGroupId_Result>("GetTeacherGroupbyGroupId", groupidParameter);
         }
     
         public virtual ObjectResult<StudentAllDetailsByRegId_Result> StudentAllDetailsByRegId()

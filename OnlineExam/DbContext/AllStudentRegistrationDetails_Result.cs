@@ -11,7 +11,7 @@ namespace OnlineExam.DbContext
 {
     using System;
     
-    public partial class StudentAllDetailsByRegId_Result
+    public partial class AllStudentRegistrationDetails_Result
     {
         public int Id { get; set; }
         public string RegId { get; set; }
@@ -45,40 +45,6 @@ namespace OnlineExam.DbContext
         public int SubPgmId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int IsDeleted { get; set; }
-        public int Pid { get; set; }
-        public string PRegId { get; set; }
-        public System.DateTime PCreatedDate { get; set; }
-        public int PIsDeleted { get; set; }
-        public string FrName { get; set; }
-        public string FrOcc { get; set; }
-        public string FrMobNo { get; set; }
-        public string FrMailid { get; set; }
-        public string FrDistrict { get; set; }
-        public string FrSign { get; set; }
-        public string FrState { get; set; }
-        public string FrWhatsapp { get; set; }
-        public string MrName { get; set; }
-        public string MrOcc { get; set; }
-        public string MrMobNo { get; set; }
-        public string MrMailid { get; set; }
-        public string MrDistrict { get; set; }
-        public string MrSign { get; set; }
-        public string MrState { get; set; }
-        public string MrWhatsapp { get; set; }
-        public string AddressHome1 { get; set; }
-        public string AddressHome2 { get; set; }
-        public string AreaHome { get; set; }
-        public string EmaiIdHome { get; set; }
-        public System.DateTime HCreatedDate { get; set; }
-        public int Hid { get; set; }
-        public int HIsDeleted { get; set; }
-        public string DistrictHome { get; set; }
-        public string LocationHome { get; set; }
-        public string PincodeHome { get; set; }
-        public string QuickHomeContact { get; set; }
-        public string QuickHomeWhatsapp { get; set; }
-        public string StateHome { get; set; }
-        public string HregId { get; set; }
         public string SpName { get; set; }
         public string SubpName { get; set; }
         public string ClassName { get; set; }

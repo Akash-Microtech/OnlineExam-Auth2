@@ -36,7 +36,7 @@ namespace OnlineExam.DbContext
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
         public System.DateTime DeletedDateTime { get; set; }
-        public byte[] ExamTime { get; set; }
+        public string ExamTime { get; set; }
         public int TotalMark { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

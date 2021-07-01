@@ -177,8 +177,9 @@ namespace OnlineExam.Controllers
 
                 using (var img = System.Drawing.Image.FromStream(file_Photo.InputStream))
                 {
-                    model.Photo = String.Format("~/Uploads/StudentRegistration/Image/{0}{1}", fileName, extension);
-                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.Photo);
+                    var Photo = String.Format("~/Uploads/StudentRegistration/Image/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), Photo);
+                    model.Photo = "../../Uploads/StudentRegistration/Image/" + fileName + extension;
                 }
             }
 
@@ -191,8 +192,9 @@ namespace OnlineExam.Controllers
 
                 using (var img = System.Drawing.Image.FromStream(file_FrSign.InputStream))
                 {
-                    model.FrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
-                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.FrSign);
+                    var FrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), FrSign);
+                    model.FrSign = "../../Uploads/StudentRegistration/Sign/" + fileName + extension;
                 }
             }
 
@@ -205,8 +207,9 @@ namespace OnlineExam.Controllers
 
                 using (var img = System.Drawing.Image.FromStream(file_MrSign.InputStream))
                 {
-                    model.MrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
-                    SaveToFolder(img, fileName, extension, new Size(200, 200), model.MrSign);
+                    var MrSign = String.Format("~/Uploads/StudentRegistration/Sign/{0}{1}", fileName, extension);
+                    SaveToFolder(img, fileName, extension, new Size(200, 200), MrSign);
+                    model.MrSign = "../../Uploads/StudentRegistration/Sign/" + fileName + extension;
                 }
             }
 

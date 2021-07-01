@@ -10,20 +10,12 @@
 namespace OnlineExam.DbContext
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Cours
+    public partial class GetTeacherGroupbyGroupId_Result
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public int IsDeleted { get; set; }
-        public System.DateTime DeletedDate { get; set; }
-        public int ModifiedBy { get; set; }
-        public System.DateTime ModifiedTime { get; set; }
-        public int ClassId { get; set; }
-    
-        public virtual Class Class { get; set; }
+        public int TeacherId { get; set; }
+        public int GroupId { get; set; }
+        public string Firstname { get; set; }
     }
 }

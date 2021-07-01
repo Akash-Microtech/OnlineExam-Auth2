@@ -739,10 +739,12 @@
                         </p>
 
                         <div class="my-4">
-                            <div class="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" class="custom-control-input" id="check-terms">
-                                <label class="custom-control-label" for="check-terms">I agree to the <a href="#">terms and conditions</a></label>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">I agree to the terms and conditions</label>
                             </div>
+                            <label id="customCheck1-error" class="error" for="customCheck1" style="display:none;"></label>
                         </div>
 
                         <hr>
@@ -938,6 +940,8 @@
 
 @section Scripts {
 
+    <script src="~/Theme/assets/jquery.validate.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
@@ -1003,8 +1007,6 @@
 
     </script>
 
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
     <script>
         $(function () {
             var date = $.datepicker.formatDate('dd/mm/yy', new Date());
@@ -1023,8 +1025,6 @@
             }
         }
     </script>
-
-
 
     <script>
         $("#forPhoto").on("click", function () {
@@ -1157,7 +1157,6 @@
         })
     </script>
 
-    <script src="~/Theme/assets/jquery.validate.min.js"></script>
     <script>
         $('#studentRegistration').validate({
             rules: {
@@ -1341,9 +1340,15 @@
                     digits: true
                 },
                 homeContact: {
-                    required: true
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 14
                 },
                 DistHome: {
+                    required: true
+                },
+                customCheck1: {
                     required: true
                 }
 
@@ -1480,6 +1485,9 @@
                 },
                 file_MrSign: {
                     required: 'Please Select Sign'
+                },
+                customCheck1: {
+                    required: 'Please Agree terms and conditions'
                 }
             },
             highlight: function (element, errorClass, validClass) {
@@ -1501,8 +1509,6 @@
             }
         });
     </script>
-
-
 
     <script>
         $("#academic").validate({
@@ -1696,9 +1702,6 @@
         });
     </script>
 
-
-
-
     <script>
 
         $(document).ready(function () {
@@ -1742,10 +1745,10 @@
                         "data": "Id",
                         "render": function (data) {
                             return `<div class="actions ml-3 text-right">
-                                        <a href="javascript:;" onclick=DeleteAcademic('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
-                                            <i class="fas fa-trash text-danger" ></i>
-                                        </a>
-                                   </div>`;
+                                                <a href="javascript:;" onclick=DeleteAcademic('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
+                                                    <i class="fas fa-trash text-danger" ></i>
+                                                </a>
+                                           </div>`;
                         }
                     }
                 ],
@@ -1787,10 +1790,10 @@
                         "data": "Id",
                         "render": function (data) {
                             return `<div class="class="actions ml-3  text-right">
-                                        <a href="javascript:;" onclick=DeleteEntrance('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
-                                            <i class="fas fa-trash text-danger" ></i>
-                                        </a>
-                                   </div>`;
+                                                <a href="javascript:;" onclick=DeleteEntrance('${data}') class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash">
+                                                    <i class="fas fa-trash text-danger" ></i>
+                                                </a>
+                                           </div>`;
                         }
                     }
                 ],
@@ -1806,7 +1809,7 @@
 
             $.ajax({
                 type: "Delete",
-                url: '../api/Register/DeletePerformance/'+id,
+                url: '../api/Register/DeletePerformance/' + id,
                 data: JSON.stringify({ id: id }), //use id here
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
