@@ -225,6 +225,8 @@
     <Content Include="Theme\assets\libs\animate.css\source\zooming_exits\zoomOutUp.css" />
     <Content Include="Theme\assets\libs\animate.css\source\_base.css" />
     <Content Include="Theme\assets\libs\animate.css\source\_vars.css" />
+    <Content Include="Theme\assets\libs\autosize\dist\autosize.js" />
+    <Content Include="Theme\assets\libs\autosize\dist\autosize.min.js" />
     <Content Include="Theme\assets\libs\bootstrap-notify\bootstrap-notify.js" />
     <Content Include="Theme\assets\libs\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Include="Theme\assets\libs\bootstrap\dist\css\bootstrap-grid.css" />
@@ -776,6 +778,15 @@
     <Compile Include="DbContext\Exam_QnTable.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetAllDtpQusAnsByUserId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllDtpQusAns_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllStudentRegistrationByRegId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -833,6 +844,9 @@
     <Compile Include="DbContext\Student_AcademicPerformance.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Student_AcademicPerformancebyRegid_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\Student_HomeCountryDetails.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -840,6 +854,9 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Student_PreviousEntrance.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Student_PreviousEntrancebyRegid_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Student_Registration.cs">
@@ -871,8 +888,10 @@
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
+    <Compile Include="ViewModel\DtpAccountViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
+    <Compile Include="ViewModel\QsAsViewModel.cs" />
     <Compile Include="ViewModel\ReportStudentRegistrionViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />
     <Compile Include="ViewModel\StdClassViewModel.cs" />
@@ -904,7 +923,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\ActivationAccount.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial2.cshtml" />
@@ -945,6 +963,9 @@
     <Content Include="Theme\assets\libs\animate.css\animate-config.json" />
     <Content Include="Views\Admin\TeacherRegistrations.cshtml" />
     <Content Include="Views\Admin\StudentRegistrations.cshtml" />
+    <Content Include="Views\DTP\QaAsList.cshtml" />
+    <Content Include="Views\DTP\QaAsAccount.cshtml" />
+    <Content Include="Views\DTP\QsAs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -956,6 +977,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Theme\assets\libs\fortawesome\fontawesome-free\svgs\" />
     <Folder Include="Theme\Js\" />
+    <Folder Include="Uploads\QuestionDtp\" />
     <Folder Include="Uploads\StudentRegistration\Image\" />
     <Folder Include="Uploads\StudentRegistration\Sign\" />
   </ItemGroup>

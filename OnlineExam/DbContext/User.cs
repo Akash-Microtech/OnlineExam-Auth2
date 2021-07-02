@@ -38,6 +38,7 @@ namespace OnlineExam.DbContext
         public string MobileNo { get; set; }
         public string ActivationCode { get; set; }
         public int EmailVerify { get; set; }
+        public string Picture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teachers_QuestionBank> Teachers_QuestionBank { get; set; }

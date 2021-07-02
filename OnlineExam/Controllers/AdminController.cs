@@ -1193,10 +1193,20 @@ namespace OnlineExam.Controllers
             return View(studreg);
         }
 
+        public ActionResult StudentRegSingleView()
+        {
+            return View();
+        }
+
         public ActionResult TeacherRegistrations()
         {
             var teacher = db.Teachers_Registration.Where(s => s.IsDeleted == 0).ToList();
             return View(teacher);
+        }
+
+        public ActionResult TeacherRegSingleView()
+        {
+            return View();
         }
     }
 }

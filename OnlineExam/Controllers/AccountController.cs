@@ -66,7 +66,7 @@ namespace OnlineExam.Controllers
                             string enTicket = FormsAuthentication.Encrypt(authTicket);
                             HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
                             Response.Cookies.Add(faCookie);
-                            ReturnUrl = "~/" + user.Roles.FirstOrDefault().RoleName + "/Dashboard";
+                            ReturnUrl = "~/" + user.Roles.FirstOrDefault().RoleName + "/Index";
                         }
 
                         if (Url.IsLocalUrl(ReturnUrl))

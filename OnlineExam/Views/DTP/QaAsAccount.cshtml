@@ -1,8 +1,8 @@
-﻿@model OnlineExam.ViewModel.AccountViewModel
+﻿@model OnlineExam.ViewModel.DtpAccountViewModel
 @using OnlineExam.Authentication
 
 @{
-    ViewBag.Title = "User Account";
+    ViewBag.Title = "QaAs Account";
 }
 
 <section class="pt-5 bg-section-secondary">
@@ -11,23 +11,8 @@
             <div class="col-lg-9">
                 <div class="row align-items-center">
                     <div class="col">
-                        <span class="surtitle">Admin account</span>
-                        <h1 class="h2 mb-0">User Management</h1>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-4">
-                    <div class="col">
-                        <ul class="nav nav-tabs overflow-x">
-                            <li class="nav-item">
-                                <a href="~/Admin/UserAccounts" class="nav-link">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="~/Admin/UserAccount" class="nav-link active">Create Users</a>
-                            </li>
-                           @* <li class="nav-item">
-                                <a href="~/Admin/Role" class="nav-link">Roles</a>
-                            </li>*@
-                        </ul>
+                        <span class="surtitle">DTP account</span>
+                        <h1 class="h2 mb-0">Account Details</h1>
                     </div>
                 </div>
             </div>
@@ -62,6 +47,7 @@
                                 <form id="UserAccount" method="post">
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.DtpRegId)
 
                                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                     {
@@ -75,7 +61,7 @@
                                                 <label class="form-control-label">First name</label>
                                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your first name" } })
                                                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "error" })
-                                                <label id="FirstName-error" class="error" for="FirstName" style="display:none;"></label>
+                                                <label id="Name-error" class="error" for="FirstName" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -90,54 +76,54 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Email</label>
-                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "name@exmaple.com", @type = "email" } })
-                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
-                                                <label id="Email-error" class="error" for="Email" style="display:none;"></label>
+                                                <label class="form-control-label">Mobile Number</label>
+                                                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
+                                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "error" })
+                                                <label id="Mobile-error" class="error" for="Mobile" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Mobile</label>
-                                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
-                                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "error" })
-                                                <label id="MobileNo-error" class="error" for="MobileNo" style="display:none;"></label>
+                                                <label class="form-control-label">WhatsApp Number</label>
+                                                @Html.EditorFor(model => model.WhatsApp, new { htmlAttributes = new { @class = "form-control", @placeholder = "000 000 0000", @maxlength = "14" } })
+                                                @Html.ValidationMessageFor(model => model.WhatsApp, "", new { @class = "error" })
+                                                <label id="WhatsApp-error" class="error" for="WhatsApp" style="display:none;"></label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Role</label>
-                                                @Html.DropDownListFor(model => model.RoleId, new SelectList(Model.Roles, "RoleId", "RoleName"), " Select Role ", new { @class = "custom-select" })
-                                                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "error" })
-                                                <label id="RoleId-error" class="error" for="RoleId" style="display:none;"></label>
+                                                <label class="form-control-label">Email</label>
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                                                <label id="Email-error" class="error" for="Email" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Username</label>
-                                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
-                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "error" })
-                                                <label id="UserName-error" class="error" for="UserName" style="display:none;"></label>
+                                                <label class="form-control-label">Rgistration Id</label>
+                                                <input class="form-control" value="@Model.DtpRegId" disabled />
+                                                @Html.ValidationMessageFor(model => model.DtpRegId, "", new { @class = "error" })
+                                                <label id="DtpRegId-error" class="error" for="DtpRegId" style="display:none;"></label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Password</label>
-                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
-                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
-                                                <label id="Password-error" class="error" for="Password" style="display:none;"></label>
+                                                <label class="form-control-label">Location</label>
+                                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Location" } })
+                                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "error" })
+                                                <label id="Password-Location" class="error" for="Location" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label">Confirm password</label>
-                                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirm password" } })
-                                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "error" })
-                                                <label id="ConfirmPassword-error" class="error" for="ConfirmPassword" style="display:none;"></label>
+                                                <label class="form-control-label">Place</label>
+                                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Place" } })
+                                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "error" })
+                                                <label id="Place-error" class="error" for="Place" style="display:none;"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +142,6 @@
 
 
 @section Scripts {
-    <script src="~/Theme/assets/jquery.validate.min.js"></script>
     <script>
         $('#UserAccount').validate({
             rules: {
@@ -170,24 +155,25 @@
                     required: true,
                     email: true
                 },
-                MobileNo: {
+                Mobile: {
                     required: true,
                     minlength: 10,
                     maxlength: 14
                 },
-                RoleId: {
+                WhatsApp: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 14
+                },
+                DtpRegId: {
                     required: true
                 },
-                UserName: {
+                Location: {
                     required: true
                 },
-                Password: {
+                Place: {
                     required: true,
                     minlength: 6
-                },
-                ConfirmPassword: {
-                    required: true,
-                    equalTo: "#Password"
                 }
             },
             messages: {
@@ -200,20 +186,20 @@
                 Email: {
                     required: 'Please enter valid Email'
                 },
-                MobileNo: {
+                Mobile: {
                     required: 'Please enter valid Mobile Number'
                 },
-                RoleId: {
-                    required: 'Please enter Role Name'
+                WhatsApp: {
+                    required: 'Please enter valid WhatsApp Number'
                 },
-                UserName: {
-                    required: 'Please enter UserName'
+                DtpRegId: {
+                    required: 'Please enter Registration Id'
                 },
-                Password: {
-                    required: 'Password must be at least 6 characters long'
+                Location: {
+                    required: 'Please enter Location'
                 },
-                ConfirmPassword: {
-                    required: 'The password and confirmation password do not match'
+                Place: {
+                    required: 'Please enter Place'
                 }
             },
             highlight: function (element, errorClass, validClass) {

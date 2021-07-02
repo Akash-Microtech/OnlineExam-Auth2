@@ -55,6 +55,29 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AllStudentRegistrationDetails_Result>("AllStudentRegistrationDetails");
         }
     
+        public virtual ObjectResult<GetAllDtpQusAns_Result> GetAllDtpQusAns()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDtpQusAns_Result>("GetAllDtpQusAns");
+        }
+    
+        public virtual ObjectResult<GetAllDtpQusAnsByUserId_Result> GetAllDtpQusAnsByUserId(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("Userid", userid) :
+                new ObjectParameter("Userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDtpQusAnsByUserId_Result>("GetAllDtpQusAnsByUserId", useridParameter);
+        }
+    
+        public virtual ObjectResult<GetAllStudentRegistrationByRegId_Result> GetAllStudentRegistrationByRegId(string regId)
+        {
+            var regIdParameter = regId != null ?
+                new ObjectParameter("RegId", regId) :
+                new ObjectParameter("RegId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllStudentRegistrationByRegId_Result>("GetAllStudentRegistrationByRegId", regIdParameter);
+        }
+    
         public virtual ObjectResult<GetStudentGroupbyGroupId_Result> GetStudentGroupbyGroupId(Nullable<int> groupid)
         {
             var groupidParameter = groupid.HasValue ?
@@ -71,6 +94,24 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("Groupid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTeacherGroupbyGroupId_Result>("GetTeacherGroupbyGroupId", groupidParameter);
+        }
+    
+        public virtual ObjectResult<Student_AcademicPerformancebyRegid_Result> Student_AcademicPerformancebyRegid(string regId)
+        {
+            var regIdParameter = regId != null ?
+                new ObjectParameter("RegId", regId) :
+                new ObjectParameter("RegId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Student_AcademicPerformancebyRegid_Result>("Student_AcademicPerformancebyRegid", regIdParameter);
+        }
+    
+        public virtual ObjectResult<Student_PreviousEntrancebyRegid_Result> Student_PreviousEntrancebyRegid(string regId)
+        {
+            var regIdParameter = regId != null ?
+                new ObjectParameter("RegId", regId) :
+                new ObjectParameter("RegId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Student_PreviousEntrancebyRegid_Result>("Student_PreviousEntrancebyRegid", regIdParameter);
         }
     
         public virtual ObjectResult<StudentAllDetailsByRegId_Result> StudentAllDetailsByRegId()

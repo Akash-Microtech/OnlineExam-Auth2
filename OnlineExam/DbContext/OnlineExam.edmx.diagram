@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="40f02d95626f4aba9549a54de79ff9d5" Name="Diagram1">
+      <Diagram DiagramId="42b3ac09692341eba7755bf938e60566" Name="Diagram1">
         <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Cours" Width="1.5" PointX="12" PointY="1" IsExpanded="true" />
@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="Exam_DBModel.Group_StudentTable" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Group_Teacher" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Programme" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Exam_DBModel.Role" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Student_AcademicPerformance" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Student_HomeCountryDetails" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Student_Parent" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />

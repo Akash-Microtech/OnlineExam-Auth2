@@ -103,10 +103,10 @@
                                                 </div>
                                                 <div class="col ml-n2">
                                                     <h6 class="text-sm mb-0">@item.RoleName</h6>
-                                                    <p class="card-text small text-muted">Created By @item.CreatedBy</p>
+                                                    <p class="card-text small text-muted"></p>
                                                 </div>
                                                 <div class="col-md d-none d-md-block">
-                                                    <span class="text-muted">Created On</span> @item.CreatedDate
+                                                    <span class="text-muted">Created On</span>
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="actions text-right ml-3">
@@ -133,7 +133,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/Theme/assets/jquery.validate.min.js"></script>
     <script>
         $('#role').validate({
             rules: {
