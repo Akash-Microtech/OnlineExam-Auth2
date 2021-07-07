@@ -1,7 +1,7 @@
-﻿@model IEnumerable<OnlineExam.DbContext.GetAllDtpQusAnsByUserId_Result>
+﻿@model IEnumerable<OnlineExam.DbContext.GetAllTeacherQusAnsByUserId_Result>
 
 @{
-    ViewBag.Title = "QaAsList";
+    ViewBag.Title = "QaAs List";
 }
 
 <section class="pt-5 bg-section-secondary">
@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="row align-items-center">
                     <div class="col">
-                        <span class="surtitle">DTP account</span>
+                        <span class="surtitle">Teacher account</span>
                         <h1 class="h3 mb-0">Questions Answers Management</h1>
                     </div>
                 </div>
@@ -18,10 +18,10 @@
                     <div class="col">
                         <ul class="nav nav-tabs overflow-x">
                             <li class="nav-item">
-                                <a href="~/DTP/QaAsList" class="nav-link active">QaAs List</a>
+                                <a href="~/Teacher/QaAsList" class="nav-link active">QaAs List</a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/DTP/QsAs" class="nav-link">Create QaAs</a>
+                                <a href="~/Teacher/QsAs" class="nav-link">Create QaAs</a>
                             </li>
                         </ul>
                     </div>
@@ -66,8 +66,8 @@
                                 </div>
 
                                 <div class="col-auto">
-                                    <a href="~/DTP/QsAs" class="btn btn-sm btn-warning btn-icon">
-                                        <span class="btn-inner--text">Add QsAs</span> 
+                                    <a href="~/Teacher/QsAs" class="btn btn-sm btn-warning btn-icon">
+                                        <span class="btn-inner--text">Add QsAs</span>
                                         <span class="btn-inner--icon">
                                             <i data-feather="plus"></i>
                                         </span>
@@ -97,43 +97,43 @@
                                         {
                                             int slno = i++;
                                             string result = "";
-                                        <tr>
-                                            <th>@slno</th>                                            
-                                            <th scope="row">
-                                                @{
-                                                    if (item.Questions != null)
-                                                    {
-                                                        result = item.Questions.Substring(0, 45);
+                                            <tr>
+                                                <th>@slno</th>
+                                                <th scope="row">
+                                                    @{
+                                                        if (item.Questions != null)
+                                                        {
+                                                            result = item.Questions.Substring(0, 45);
 
-                                                        <div class="media align-items-center">
-                                                            <div class="media-body">
-                                                                @*<a href="#" class="name h6 mb-0 text-sm">@item.StudentName</a>*@
-                                                                <small class="d-block font-weight-bold">@result</small>
+                                                            <div class="media align-items-center">
+                                                                <div class="media-body">
+                                                                    @*<a href="#" class="name h6 mb-0 text-sm">@item.StudentName</a>*@
+                                                                    <small class="d-block font-weight-bold">@result</small>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img alt="Image placeholder" src="@item.Photo" class="avatar  avatar-lg">
+                                                        }
                                                     }
-                                                    else
-                                                    {
-                                                        <img alt="Image placeholder" src="@item.Photo" class="avatar  avatar-lg">
-                                                    }
-                                                }
-                                            </th>
-                                            <td>@item.CorrectAns</td>
-                                            <td>@item.Mark</td>
-                                            <td>@item.PrevQnYear</td>
-                                            <td>@item.SubjectName</td>
-                                            <td>@item.ChapterName</td>
-                                            <td class="text-right">
-                                                <div class="actions ml-3">
-                                                    <a href="~/DTP/QsAs/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
-                                                        <i data-feather="edit-2"></i>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="userdelete('@item.Id', '@result');">
-                                                        <i data-feather="trash-2" class="text-danger"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </th>
+                                                <td>@item.CorrectAns</td>
+                                                <td>@item.Mark</td>
+                                                <td>@item.PrevQnYear</td>
+                                                <td>@item.SubjectName</td>
+                                                <td>@item.ChapterName</td>
+                                                <td class="text-right">
+                                                    <div class="actions ml-3">
+                                                        <a href="~/DTP/QsAs/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                            <i data-feather="edit-2"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="userdelete('@item.Id', '@result');">
+                                                            <i data-feather="trash-2" class="text-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
                                         }
                                     </tbody>
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                @using (Html.BeginForm("DeleteQsAS", "DTP", FormMethod.Post))
+                @using (Html.BeginForm("DeleteQsAS", "Teacher", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteQsAsId" name="deleteQsAsId" />
@@ -209,4 +209,3 @@
         }
     </script>
 }
-

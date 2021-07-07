@@ -17,7 +17,6 @@ namespace OnlineExam.DbContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Teachers_QuestionBank = new HashSet<Teachers_QuestionBank>();
             this.Roles = new HashSet<Role>();
         }
     
@@ -40,8 +39,6 @@ namespace OnlineExam.DbContext
         public int EmailVerify { get; set; }
         public string Picture { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teachers_QuestionBank> Teachers_QuestionBank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role> Roles { get; set; }
     }

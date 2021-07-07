@@ -69,6 +69,20 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDtpQusAnsByUserId_Result>("GetAllDtpQusAnsByUserId", useridParameter);
         }
     
+        public virtual ObjectResult<GetAllGroupLisByUserId_Result> GetAllGroupLisByUserId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllGroupLisByUserId_Result>("GetAllGroupLisByUserId", idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllGroupList_Result> GetAllGroupList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllGroupList_Result>("GetAllGroupList");
+        }
+    
         public virtual ObjectResult<GetAllStudentRegistrationByRegId_Result> GetAllStudentRegistrationByRegId(string regId)
         {
             var regIdParameter = regId != null ?
@@ -76,6 +90,20 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("RegId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllStudentRegistrationByRegId_Result>("GetAllStudentRegistrationByRegId", regIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllTeacherQusAns_Result> GetAllTeacherQusAns()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTeacherQusAns_Result>("GetAllTeacherQusAns");
+        }
+    
+        public virtual ObjectResult<GetAllTeacherQusAnsByUserId_Result> GetAllTeacherQusAnsByUserId(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("Userid", userid) :
+                new ObjectParameter("Userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTeacherQusAnsByUserId_Result>("GetAllTeacherQusAnsByUserId", useridParameter);
         }
     
         public virtual ObjectResult<GetStudentGroupbyGroupId_Result> GetStudentGroupbyGroupId(Nullable<int> groupid)

@@ -501,25 +501,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Teachers_QuestionBank_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teachers_QuestionBank">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="AllStudentRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllDtpQusAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllDtpQusAnsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Userid" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAllGroupLisByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllGroupList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllStudentRegistrationByRegId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RegId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllTeacherQusAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllTeacherQusAnsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Userid" Type="int" Mode="In" />
         </Function>
         <Function Name="GetStudentGroupbyGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Groupid" Type="int" Mode="In" />
@@ -585,10 +581,6 @@
           <AssociationSet Name="FK_Group_Group" Association="Self.FK_Group_Group">
             <End Role="Group" EntitySet="Group" />
             <End Role="Group1" EntitySet="Group" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teachers_QuestionBank_Users" Association="Self.FK_Teachers_QuestionBank_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -955,7 +947,6 @@
           <Property Name="SubPgmId" Type="Int32" Nullable="false" />
           <Property Name="TeacherId" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Teachers_QuestionBank_Users" FromRole="Teachers_QuestionBank" ToRole="Users" />
         </EntityType>
         <EntityType Name="Teachers_Registration">
           <Key>
@@ -1007,7 +998,6 @@
           <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EmailVerify" Type="Int32" Nullable="false" />
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Teachers_QuestionBank" Relationship="Self.FK_Teachers_QuestionBank_Users" FromRole="Users" ToRole="Teachers_QuestionBank" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_Chapter_ChapterSujectid">
@@ -1070,18 +1060,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Teachers_QuestionBank_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Teachers_QuestionBank" Type="Self.Teachers_QuestionBank" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teachers_QuestionBank">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="UserRoles">
           <End Role="Roles" Type="Self.Role" Multiplicity="*" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
@@ -1129,10 +1107,6 @@
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
           </AssociationSet>
-          <AssociationSet Name="FK_Teachers_QuestionBank_Users" Association="Self.FK_Teachers_QuestionBank_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Teachers_QuestionBank" EntitySet="Teachers_QuestionBank" />
-          </AssociationSet>
           <AssociationSet Name="UserRoles" Association="Self.UserRoles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
@@ -1142,8 +1116,16 @@
           <FunctionImport Name="GetAllDtpQusAnsByUserId" ReturnType="Collection(Exam_DBModel.GetAllDtpQusAnsByUserId_Result)">
             <Parameter Name="Userid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllGroupLisByUserId" ReturnType="Collection(Exam_DBModel.GetAllGroupLisByUserId_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllGroupList" ReturnType="Collection(Exam_DBModel.GetAllGroupList_Result)" />
           <FunctionImport Name="GetAllStudentRegistrationByRegId" ReturnType="Collection(Exam_DBModel.GetAllStudentRegistrationByRegId_Result)">
             <Parameter Name="RegId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllTeacherQusAns" ReturnType="Collection(Exam_DBModel.GetAllTeacherQusAns_Result)" />
+          <FunctionImport Name="GetAllTeacherQusAnsByUserId" ReturnType="Collection(Exam_DBModel.GetAllTeacherQusAnsByUserId_Result)">
+            <Parameter Name="Userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetStudentGroupbyGroupId" ReturnType="Collection(Exam_DBModel.GetStudentGroupbyGroupId_Result)">
             <Parameter Name="Groupid" Mode="In" Type="Int32" />
@@ -1257,6 +1239,48 @@
           <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="GetAllGroupLisByUserId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllGroupList_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+        </ComplexType>
         <ComplexType Name="GetAllStudentRegistrationByRegId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="RegId" Nullable="false" MaxLength="100" />
@@ -1328,6 +1352,68 @@
           <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="CorseName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllTeacherQusAns_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Questions" Nullable="true" />
+          <Property Type="String" Name="Option1" Nullable="false" />
+          <Property Type="String" Name="Option2" Nullable="false" />
+          <Property Type="String" Name="Option3" Nullable="false" />
+          <Property Type="String" Name="Option4" Nullable="false" />
+          <Property Type="String" Name="CorrectAns" Nullable="false" />
+          <Property Type="String" Name="Mark" Nullable="false" />
+          <Property Type="String" Name="PrevQnYear" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="ChapterId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllTeacherQusAnsByUserId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Questions" Nullable="true" />
+          <Property Type="String" Name="Option1" Nullable="false" />
+          <Property Type="String" Name="Option2" Nullable="false" />
+          <Property Type="String" Name="Option3" Nullable="false" />
+          <Property Type="String" Name="Option4" Nullable="false" />
+          <Property Type="String" Name="CorrectAns" Nullable="false" />
+          <Property Type="String" Name="Mark" Nullable="false" />
+          <Property Type="String" Name="PrevQnYear" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="ChapterId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubpName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ChapterName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="GetStudentGroupbyGroupId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1989,6 +2075,56 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllGroupLisByUserId" FunctionName="Exam_DBModel.Store.GetAllGroupLisByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetAllGroupLisByUserId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="SubpName" ColumnName="SubpName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllGroupList" FunctionName="Exam_DBModel.Store.GetAllGroupList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetAllGroupList_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="SubpName" ColumnName="SubpName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllStudentRegistrationByRegId" FunctionName="Exam_DBModel.Store.GetAllStudentRegistrationByRegId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Exam_DBModel.GetAllStudentRegistrationByRegId_Result">
@@ -2062,6 +2198,76 @@
                 <ScalarProperty Name="SubpName" ColumnName="SubpName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="CorseName" ColumnName="CorseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTeacherQusAns" FunctionName="Exam_DBModel.Store.GetAllTeacherQusAns">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetAllTeacherQusAns_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="PrevQnYear" ColumnName="PrevQnYear" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="SubpName" ColumnName="SubpName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ChapterName" ColumnName="ChapterName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTeacherQusAnsByUserId" FunctionName="Exam_DBModel.Store.GetAllTeacherQusAnsByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetAllTeacherQusAnsByUserId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="PrevQnYear" ColumnName="PrevQnYear" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="SubpName" ColumnName="SubpName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ChapterName" ColumnName="ChapterName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

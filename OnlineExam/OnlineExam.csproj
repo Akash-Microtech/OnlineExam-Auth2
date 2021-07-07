@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\exam.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DbContext\OnlineExam.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -137,6 +138,7 @@
     <Content Include="Theme\assets\img\svg\icons\class.png" />
     <Content Include="Theme\assets\img\svg\icons\Code.svg" />
     <Content Include="Theme\assets\img\svg\icons\course .png" />
+    <Content Include="Theme\assets\img\svg\icons\group.png" />
     <Content Include="Theme\assets\img\svg\icons\leadership.png" />
     <Content Include="Theme\assets\img\svg\icons\online-course.png" />
     <Content Include="Theme\assets\img\svg\icons\sub-programme.png" />
@@ -239,6 +241,9 @@
     <Content Include="Theme\assets\libs\bootstrap\dist\js\bootstrap.bundle.min.js" />
     <Content Include="Theme\assets\libs\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Theme\assets\libs\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Theme\assets\libs\Chosen\chosen-sprite.png" />
+    <Content Include="Theme\assets\libs\Chosen\chosen.css" />
+    <Content Include="Theme\assets\libs\Chosen\chosen.jquery.js" />
     <Content Include="Theme\assets\libs\datatable\css\tables\datatable\datatables.min.css" />
     <Content Include="Theme\assets\libs\datatable\css\tables\datatable\extensions\dataTables.checkboxes.css" />
     <Content Include="Theme\assets\libs\datatable\css\tables\datatable\select.dataTables.min.css" />
@@ -752,7 +757,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\Student_AcademicPerformanceController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DbContext\AllStudentRegistrationDetails_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
@@ -784,7 +788,19 @@
     <Compile Include="DbContext\GetAllDtpQusAns_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetAllGroupLisByUserId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllGroupList_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetAllStudentRegistrationByRegId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllTeacherQusAnsByUserId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllTeacherQusAns_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
@@ -889,6 +905,7 @@
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
+    <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
     <Compile Include="ViewModel\QsAsViewModel.cs" />
@@ -966,6 +983,10 @@
     <Content Include="Views\DTP\QaAsList.cshtml" />
     <Content Include="Views\DTP\QaAsAccount.cshtml" />
     <Content Include="Views\DTP\QsAs.cshtml" />
+    <Content Include="Views\Teacher\QaAsList.cshtml" />
+    <Content Include="Views\Teacher\QsAs.cshtml" />
+    <Content Include="Views\Admin\Groups.cshtml" />
+    <Content Include="Views\Admin\Group.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -978,6 +999,7 @@
     <Folder Include="Theme\assets\libs\fortawesome\fontawesome-free\svgs\" />
     <Folder Include="Theme\Js\" />
     <Folder Include="Uploads\QuestionDtp\" />
+    <Folder Include="Uploads\QuestionTeacher\" />
     <Folder Include="Uploads\StudentRegistration\Image\" />
     <Folder Include="Uploads\StudentRegistration\Sign\" />
   </ItemGroup>

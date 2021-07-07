@@ -29,7 +29,7 @@
             <div class="col-lg-10">
                 <div class="row align-items-center">
                     <div class="col">
-                        <span class="surtitle">DTP account</span>
+                        <span class="surtitle">Teacher account</span>
                         <h1 class="h3 mb-0">Questions Answers Management</h1>
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                     <div class="col">
                         <ul class="nav nav-tabs overflow-x">
                             <li class="nav-item">
-                                <a href="~/DTP/QaAsList" class="nav-link">QaAs List</a>
+                                <a href="~/Teacher/QaAsList" class="nav-link">QaAs List</a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/DTP/QsAs" class="nav-link active">Create QaAs</a>
+                                <a href="~/Teacher/QsAs" class="nav-link active">Create QaAs</a>
                             </li>
                         </ul>
                     </div>
@@ -164,7 +164,7 @@
                                     <div class="row align-items-center upload" style="display:none;">
                                         <div class="col-md-12">
 
-                                            <input type="hidden" id="photo" name="photo" value="@Model.Photo" />
+                                            <input type="hidden" id="Photo" name="Photo" value="@Model.Photo" />
 
                                             <div class="form-group">
                                                 <input type="file" name="fileQus" id="fileQus" class="custom-input-file" onchange="loadFile(event)" />
@@ -177,6 +177,12 @@
                                                 <img id="fileQus_src" class="qsAs-img">
                                                 <div class="remove-file">
                                                     <label id="remove1" class="qs-error img-remove">Remove</label>
+                                                </div>
+                                            </div>
+                                            <div class="up-img img2">
+                                                <img id="fileQus_src" class="qsAs-img"src="@Model.Photo" >
+                                                <div class="remove-file">
+                                                    <label id="remove2" class="qs-error img-remove">Remove</label>
                                                 </div>
                                             </div>
                                             <div class="er1 size-er">
@@ -304,7 +310,19 @@
     <script>
         $(document).ready(function () {
 
-            $('#customRadioInline1').attr('checked', true);
+            var photo = $('#Photo').val();
+
+            if (photo != '') {
+                $('#customRadioInline2').attr('checked', true);
+                $('.enter').hide();
+                $('.upload').show();
+                $('.img2').show();
+            }
+            else {
+                $('#customRadioInline1').attr('checked', true);
+            }
+
+           
 
             $('#customRadioInline1').click(function () {
                 $('.enter').show();
@@ -334,7 +352,15 @@
                 $('#1up').text("Choose a file…");
             })
 
-            $("#Questions").change(function (){
+            $("#remove2").on("click", function () {
+                document.getElementById("fileQus").value = "";
+                $('.img1').hide();
+                $('.img2').hide();
+                $('#1up').empty();
+                $('#1up').text("Choose a file…");
+            })
+
+            $("#Questions").change(function () {
                 $('.valid-qsu').hide();
             });
         });
@@ -442,13 +468,13 @@
                     var data2 = $('#fileQus').val();
                     var data3 = $('#photo').val();
 
-                    if (data1 != '' || data2 != '' || data3 != '' ) {
+                    if (data1 != '' || data2 != '' || data3 != '') {
                         form.submit();
                     }
                     else {
                         $('.valid-qsu').show();
                     }
-                    
+
                 }
             });
         });

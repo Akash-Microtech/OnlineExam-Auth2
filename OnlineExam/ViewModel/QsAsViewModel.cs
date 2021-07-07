@@ -10,8 +10,6 @@ namespace OnlineExam.ViewModel
     public class QsAsViewModel
     {
         public int? Id { get; set; }
-
-        [Display(Name = "Questions")]
         public string Questions { get; set; }
         [Required]
         [Display(Name = "Option1")]

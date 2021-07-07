@@ -1208,5 +1208,290 @@ namespace OnlineExam.Controllers
         {
             return View();
         }
+
+        public ActionResult Groups()
+        {
+            var data = db.GetAllGroupList().Where(g=>g.IsDeleted==0).ToList();
+            return View(data);
+        }
+
+        public async Task<ActionResult> Group(int? id)
+        {
+            if (id == null)
+            {
+                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
+                ViewBag.PgmId = pro;
+                var cou = new SelectList(db.Classes.Where(c => c.IsDeleted == 0), "Id", "Name");
+                ViewBag.ClassId = cou;
+                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
+                ViewBag.SubjectId = subj;
+                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.TeacherId = teach;
+                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
+                ViewBag.StudentId = stud;
+                var sub = new SelectList(Enumerable.Empty<SelectListItem>());
+                ViewBag.SubPgmId = sub;
+                ViewBag.CourseId = sub;
+            }
+            else
+            {
+
+                var data = await db.Groups.Where(d => d.Id == id).FirstOrDefaultAsync();
+                GroupViewModel groupView = new GroupViewModel()
+                {
+                    Id = data.Id,
+                    GroupName = data.GroupName,
+                    PgmId = data.PgmId,
+                    SubPgmId = data.SubPgmId,
+                    ClassId = data.ClassId,
+                    CourseId = data.CourseId,
+                    SubjectId = data.SubjectId,
+                };
+                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
+                ViewBag.PgmId = pro;
+                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", data.SubPgmId);
+                ViewBag.SubPgmId = sub;
+                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
+                ViewBag.CourseId = cou;
+                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
+                ViewBag.SubjectId = subj;
+                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", data.ClassId);
+                ViewBag.ClassId = chap;
+
+
+                var dteach = db.Group_Teacher.Where(d => d.GroupId == id).ToList();
+                List<int> tList = new List<int>();
+                foreach (var item in dteach)
+                {
+                    tList.Add(item.TeacherId);
+                }
+                var teach = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName", tList).ToList();
+                ViewBag.TeacherId = teach;
+
+                var datastud = db.Group_StudentTable.Where(d => d.GroupId == id).ToList();
+                List<int> SList = new List<int>();
+                foreach (var item in datastud)
+                {
+                    SList.Add(item.StudentId);
+                }
+                var stud = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName", SList).ToList();
+                ViewBag.StudentId = stud;
+                
+                return View(groupView);
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult SubProgram(int ID)
+        {
+            var sub = new SelectList(db.SubPrograms.Where(s => s.PgmId == ID), "Id", "Name");
+            return Json(sub, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult Course(int ID)
+        {
+            var chap = new SelectList(db.Courses.Where(c => c.ClassId == ID), "Id", "Name");
+            return Json(chap, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Group(GroupViewModel groupView)
+        {
+
+            if (groupView.Id != null)
+            {
+                Group data = db.Groups.Find(groupView.Id);
+                if (data != null)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        data.GroupName = groupView.GroupName;
+                        data.PgmId = groupView.PgmId;
+                        data.SubPgmId = groupView.SubPgmId;
+                        data.ClassId = groupView.ClassId;
+                        data.CourseId = groupView.CourseId;
+                        data.SubjectId = groupView.SubjectId;
+                        data.ModifiedDateTime = DateTime.Now;
+                        data.ModifiedBy = 1;
+                        db.Entry(data).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+
+                        int gid = data.Id;
+
+                        var dteach = db.Group_Teacher.Where(d => d.GroupId == gid).ToList();
+                        int[] tData = groupView.TeacherId;
+
+                        foreach (var item in tData)
+                        {
+                            var tGroup = dteach.Where(at => at.TeacherId == item && at.GroupId == gid).FirstOrDefault();
+                            if (tGroup == null)
+                            {
+                                Group_Teacher teacher = new Group_Teacher
+                                {
+                                    TeacherId = item,
+                                    GroupId = gid
+                                };
+                                db.Group_Teacher.Add(teacher);
+                            }
+                        }
+
+                        foreach (var item in dteach)
+                        {
+                            if (!tData.Contains(item.TeacherId))
+                            {
+                                db.Group_Teacher.Remove(item);
+                            }
+                        }
+
+
+                        var Steach = db.Group_StudentTable.Where(d => d.GroupId == gid).ToList();
+                        int[] sData = groupView.StudentId;
+
+                        foreach (var item in sData)
+                        {
+                            var sGroup = Steach.Where(at => at.StudentId == item && at.GroupId == gid).FirstOrDefault();
+                            if (sGroup == null)
+                            {
+                                Group_StudentTable student = new Group_StudentTable
+                                {
+                                    StudentId = item,
+                                    GroupId = gid
+                                };
+
+                                db.Group_StudentTable.Add(student);
+                            }
+                        }
+
+                        foreach (var item in Steach)
+                        {
+                            if (!sData.Contains(item.StudentId))
+                            {
+                                db.Group_StudentTable.Remove(item);
+                            }
+                        }
+
+                        await db.SaveChangesAsync();
+
+                        return RedirectToAction("Groups");
+                    }
+                }
+
+                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
+                ViewBag.PgmId = pro;
+                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.SubPgmId);
+                ViewBag.SubPgmId = sub;
+                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", groupView.CourseId);
+                ViewBag.CourseId = cou;
+                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
+                ViewBag.SubjectId = subj;
+                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
+                ViewBag.ClassId = chap;
+                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.TeacherId = teach;
+                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
+                ViewBag.StudentId = stud;
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                return View(groupView);
+
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    Group group = new Group
+                    {
+                        GroupName = groupView.GroupName,
+                        PgmId = groupView.PgmId,
+                        SubPgmId = groupView.SubPgmId,
+                        ClassId = groupView.ClassId,
+                        CourseId = groupView.CourseId,
+                        SubjectId = groupView.SubjectId,
+                        CreatedDateTime = DateTime.Now,
+                        ModifiedDateTime = DateTime.Now,
+                        DeletedDateTime = DateTime.Now
+                    };
+                    db.Groups.Add(group);
+                    await db.SaveChangesAsync();
+
+                    int gid = group.Id;
+                    int[] tData = groupView.TeacherId;
+
+                    foreach (var item in tData)
+                    {
+                        Group_Teacher teacher = new Group_Teacher
+                        {
+                            TeacherId = item,
+                            GroupId = gid
+                        };
+                        db.Group_Teacher.Add(teacher);
+                    }
+                    db.SaveChanges();
+
+                    int[] sData = groupView.StudentId;
+                    foreach (var items in sData)
+                    {
+                        Group_StudentTable studentTable = new Group_StudentTable
+                        {
+                            StudentId = items,
+                            GroupId = gid
+                        };
+                        db.Group_StudentTable.Add(studentTable);
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Groups");
+                }
+
+                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
+                ViewBag.PgmId = pro;
+                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.SubPgmId);
+                ViewBag.SubPgmId = sub;
+                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", groupView.CourseId);
+                ViewBag.CourseId = cou;
+                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
+                ViewBag.SubjectId = subj;
+                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
+                ViewBag.ClassId = chap;
+
+                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.TeacherId = teach;
+                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
+                ViewBag.StudentId = stud;
+
+                ViewBag.ErrorMessage = "Please fill in all the required fields";
+                return View(groupView);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteGroup(int? groupId)
+        {
+            if (groupId == null)
+            {
+                TempData["ErrorMessage"] = "Account Not Deleted";
+                return RedirectToAction("Groups");
+            }
+            else
+            {
+                Group group = db.Groups.Find(groupId);
+                if (group != null)
+                {
+                    group.IsDeleted = 1;
+                    group.DeletedDateTime = DateTime.Now;
+                    db.Entry(group).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["StatusMessage"] = "Account Deleted Succesfully.";
+                    return RedirectToAction("Groups");
+                }
+                TempData["ErrorMessage"] = "Account Not Deleted";
+                return RedirectToAction("Groups");
+            }
+        }
     }
 }
