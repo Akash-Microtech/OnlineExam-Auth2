@@ -292,5 +292,77 @@ namespace OnlineExam.Controllers
             TempData["ErrorMessage"] = "Questions Answers Not Deleted.";
             return RedirectToAction("QaAsList");
         }
+
+        public ActionResult Exams()
+        {
+            if (TempData["StatusMessage"] != null)
+            {
+                ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+            int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+            var list = db.GetAllExam().Where(e => e.IsDeleted == 0).ToList();
+            return View(list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ActiveExam(int? activeId)
+        {
+            if (activeId == null)
+            {
+                TempData["ErrorMessage"] = "Account Not Activated";
+                return RedirectToAction("Exams");
+            }
+            else
+            {
+                Exam exam = await db.Exams.Where(c => c.Id == activeId).FirstOrDefaultAsync();
+                if (exam != null)
+                {
+                    exam.IsActive = 1;
+                    db.Entry(exam).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "Account Activated Succesfully.";
+                    return RedirectToAction("Exams");
+                }
+                TempData["ErrorMessage"] = "Account Not Activated";
+                return RedirectToAction("Exams");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> InactiveExam(int? inactiveId)
+        {
+            if (inactiveId == null)
+            {
+                TempData["ErrorMessage"] = "Account Not Inactivated";
+                return RedirectToAction("Exams");
+            }
+            else
+            {
+                Exam programmes = await db.Exams.Where(c => c.Id == inactiveId).FirstOrDefaultAsync();
+                if (programmes != null)
+                {
+                    programmes.IsActive = 0;
+                    db.Entry(programmes).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "Account Inactivated Succesfully.";
+                    return RedirectToAction("Exams");
+                }
+                TempData["ErrorMessage"] = "Account Not Inactivated";
+                return RedirectToAction("Exams");
+            }
+        }
+
+        public ActionResult DeleteExam()
+        {
+            return View();
+        }
     }
 }

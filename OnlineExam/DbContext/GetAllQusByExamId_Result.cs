@@ -10,16 +10,9 @@
 namespace OnlineExam.DbContext
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Exam
+    public partial class GetAllQusByExamId_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Exam()
-        {
-            this.Exam_QnTable = new HashSet<Exam_QnTable>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public int ExGroupId { get; set; }
@@ -39,8 +32,32 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public string ExamTime { get; set; }
         public int TotalMark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exam_QnTable> Exam_QnTable { get; set; }
+        public int Id1 { get; set; }
+        public int ExamId { get; set; }
+        public string QnId { get; set; }
+        public Nullable<int> IsDataEntryQn { get; set; }
+        public int Id2 { get; set; }
+        public string Questions { get; set; }
+        public string Option1 { get; set; }
+        public string Option2 { get; set; }
+        public string Option3 { get; set; }
+        public string Option4 { get; set; }
+        public string CorrectAns { get; set; }
+        public string Mark { get; set; }
+        public string PrevQnYear { get; set; }
+        public int SubjectId1 { get; set; }
+        public int ChapterId { get; set; }
+        public int CreatedBy1 { get; set; }
+        public int IsDeleted1 { get; set; }
+        public int DeletedBy1 { get; set; }
+        public int ModifiedBy1 { get; set; }
+        public int IsActive1 { get; set; }
+        public System.DateTime CreatedDateTime1 { get; set; }
+        public System.DateTime ModifiedDateTime1 { get; set; }
+        public System.DateTime DeletedDateTime1 { get; set; }
+        public int PgmId1 { get; set; }
+        public int CourseId1 { get; set; }
+        public int SubPgmId { get; set; }
+        public string Photo { get; set; }
     }
 }

@@ -79,9 +79,8 @@ body.loaded > div.preloader {
 
 .qsAs-img {
     border-radius: .375rem !important;
-    width: 600px;
-    height: 300px;
-
+    max-width: 600px;
+    max-height: 300px;
 }
 
 @media (max-width: 767px) {

@@ -109,8 +109,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\exam.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="DbContext\OnlineExam.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OnlineExam.edmx</DependentUpon>
@@ -121,6 +119,8 @@
       <DependentUpon>OnlineExam.edmx</DependentUpon>
       <LastGenOutput>OnlineExam.cs</LastGenOutput>
     </Content>
+    <Content Include="Theme\exam\css\exam.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="DbContext\role.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>role.edmx</DependentUpon>
@@ -739,7 +739,15 @@
     <Content Include="Theme\assets\libs\sweetalert2\dist\sweetalert2.min.js" />
     <Content Include="Theme\assets\quick-website.css" />
     <Content Include="Theme\assets\quick-website.js" />
+    <Content Include="Theme\exam\QuizIcons\down.png" />
+    <Content Include="Theme\exam\QuizIcons\Logo1.png" />
+    <Content Include="Theme\exam\QuizIcons\Logo2.png" />
+    <Content Include="Theme\exam\QuizIcons\Logo3.png" />
+    <Content Include="Theme\exam\QuizIcons\Logo4.png" />
+    <Content Include="Theme\exam\QuizIcons\Logo5.png" />
+    <Content Include="Theme\exam\QuizIcons\up.png" />
     <Content Include="Theme\favicon.png" />
+    <Content Include="Uploads\QuestionDtp\1_20200621191455.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -788,10 +796,19 @@
     <Compile Include="DbContext\GetAllDtpQusAns_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetAllExamById_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllExam_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetAllGroupLisByUserId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetAllGroupList_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetAllQusByExamId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetAllStudentRegistrationByRegId_Result.cs">
@@ -801,6 +818,9 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetAllTeacherQusAns_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetExamByUserId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
@@ -987,6 +1007,9 @@
     <Content Include="Views\Teacher\QsAs.cshtml" />
     <Content Include="Views\Admin\Groups.cshtml" />
     <Content Include="Views\Admin\Group.cshtml" />
+    <Content Include="Views\Student\Instructions.cshtml" />
+    <Content Include="Views\Student\Exam.cshtml" />
+    <Content Include="Views\Teacher\Exams.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -998,7 +1021,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Theme\assets\libs\fortawesome\fontawesome-free\svgs\" />
     <Folder Include="Theme\Js\" />
-    <Folder Include="Uploads\QuestionDtp\" />
     <Folder Include="Uploads\QuestionTeacher\" />
     <Folder Include="Uploads\StudentRegistration\Image\" />
     <Folder Include="Uploads\StudentRegistration\Sign\" />

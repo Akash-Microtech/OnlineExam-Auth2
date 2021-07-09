@@ -49,9 +49,9 @@
                                             <li>
                                                 <a href="~/Admin/UserAccount" class="dropdown-item">Create Users</a>
                                             </li>
-                                           @* <li>
-                                                <a href="~/Admin/Role" class="dropdown-item">Roles</a>
-                                            </li>*@
+                                            @* <li>
+                                    <a href="~/Admin/Role" class="dropdown-item">Roles</a>
+                                </li>*@
                                         </ul>
                                     </li>
                                     <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
@@ -123,7 +123,7 @@
                                                 <a href="~/Admin/TeacherRegistrations" class="dropdown-item">Teacher</a>
                                             </li>
                                         </ul>
-                                    </li>                                   
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -202,6 +202,33 @@
                         </li>
                     }
 
+                    @if (User.IsInRole("Student"))
+                    {
+                        <li class="nav-item nav-item-spaced dropdown dropdown-animate" data-toggle="hover">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exam</a>
+                            <div class="dropdown-menu dropdown-menu-md p-0">
+                                <ul class="list-group list-group-flush px-lg-4">
+                                    <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
+                                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="d-flex">
+                                                <figure style="width:20px">
+                                                    <img src="~/Theme/assets/img/svg/icons/Code.svg" style="width: 20px;">
+                                                </figure><div class="ml-3"><h6 class="heading mb-0">Exams</h6><p class="mb-0">Menu option for Exam.</p></div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="~/Student/Instructions" class="dropdown-item">Exams</a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Student/Exams" class="dropdown-item">Exam Results</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
 
                 </ul>
                 <ul class="navbar-nav align-items-lg-center d-none d-lg-flex ml-lg-auto">

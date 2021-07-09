@@ -20,5 +20,15 @@ namespace OnlineExam.Controllers
         {
             return View();
         }
+
+        public ActionResult Instructions()
+        {
+            return View();
+        }
+
+        public ActionResult Exam()
+        {
+            return View();
+        }
     }
 }
