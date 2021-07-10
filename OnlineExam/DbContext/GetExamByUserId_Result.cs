@@ -10,16 +10,12 @@
 namespace OnlineExam.DbContext
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Exam
+    public partial class GetExamByUserId_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Exam()
-        {
-            this.Exam_QnTable = new HashSet<Exam_QnTable>();
-        }
-    
+        public int gsId { get; set; }
+        public int gId { get; set; }
+        public string GroupName { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int ExGroupId { get; set; }
@@ -39,8 +35,9 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public string ExamTime { get; set; }
         public int TotalMark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exam_QnTable> Exam_QnTable { get; set; }
+        public string PName { get; set; }
+        public string ClassName { get; set; }
+        public string SubjectName { get; set; }
+        public string CourseName { get; set; }
     }
 }

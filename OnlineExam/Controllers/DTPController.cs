@@ -164,6 +164,12 @@ namespace OnlineExam.Controllers
                 var sub = new SelectList(Enumerable.Empty<SelectListItem>());
                 ViewBag.SubPgmId = sub;
                 ViewBag.ChapterId = sub;
+                QsAsViewModel dtpQA = new QsAsViewModel()
+                {
+                    Questions = ""
+                };
+
+                return View(dtpQA);
 
             }
             else
@@ -200,7 +206,6 @@ namespace OnlineExam.Controllers
 
                 return View(dtpQA);
             }
-            return View();
         }
 
         [HttpGet]
@@ -221,11 +226,11 @@ namespace OnlineExam.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> QsAs(QsAsViewModel dtpQAView, HttpPostedFileBase fileQus)
         {
-            if(dtpQAView.Questions != null || fileQus.FileName != null)
+            if (dtpQAView.Questions != null || fileQus != null || dtpQAView.Photo != null)
             {
                 var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg" };
                 var uploadPath = "";
-                var FileExt = Path.GetExtension(fileQus.FileName);
+                var oldPath = "";
                 string alpha = "Question_";
                 Random random = new Random();
                 int unique = random.Next(10000, 99999);
@@ -252,8 +257,10 @@ namespace OnlineExam.Controllers
 
                 if (dtpQAView.Id != null)
                 {
-                    if(fileQus.FileName != null)
+                    if (fileQus != null)
                     {
+                        oldPath = dtpQAView.Photo;
+                        var FileExt = Path.GetExtension(fileQus.FileName);
                         if (allowedExtensions.Contains(FileExt))
                         {
                             string dtpRegId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UniqueID;
@@ -261,7 +268,7 @@ namespace OnlineExam.Controllers
                             uploadPath = Path.Combine(Server.MapPath("~/Uploads/QuestionDtp/"), myfile);
                             dtpQAView.Photo = "../../Uploads/QuestionDtp/" + myfile;
                         }
-                    }                    
+                    }
 
                     DataEntry_QuestionBank data = db.DataEntry_QuestionBank.Find(dtpQAView.Id);
                     if (data != null)
@@ -275,7 +282,7 @@ namespace OnlineExam.Controllers
                         data.CorrectAns = dtpQAView.CorrectAns;
                         data.Mark = dtpQAView.Mark;
                         data.ModifiedDateTime = DateTime.Now;
-                        data.ModifiedBy = dtpQAView.ChapterId;
+                        data.ModifiedBy = dtpQAView.CuserId;
                         data.PgmId = dtpQAView.PgmId;
                         data.SubPgmId = dtpQAView.SubPgmId;
                         data.CourseId = dtpQAView.CourseId;
@@ -285,7 +292,17 @@ namespace OnlineExam.Controllers
                         db.Entry(data).State = EntityState.Modified;
                         await db.SaveChangesAsync();
 
-                        fileQus.SaveAs(uploadPath);
+                        if (fileQus != null)
+                        {
+                            fileQus.SaveAs(uploadPath);
+
+                            string path = Server.MapPath(oldPath);
+                            FileInfo file = new FileInfo(path);
+                            if (file.Exists)//check file exsit or not
+                            {
+                                file.Delete();
+                            }
+                        }
 
                         TempData["StatusMessage"] = "Questions Answers Edited Succesfully.";
                         return RedirectToAction("QaAsList");
@@ -296,15 +313,19 @@ namespace OnlineExam.Controllers
                 }
                 else
                 {
-                    if (allowedExtensions.Contains(FileExt))
+                    if (fileQus != null)
                     {
-                        string dtpRegId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UniqueID;
-                        string myfile = dtpRegId + "_" + upFileName + FileExt;
-                        uploadPath = Path.Combine(Server.MapPath("~/Uploads/QuestionDtp"), myfile);
-                        dtpQAView.Photo = "../../Uploads/QuestionDtp/" + myfile;
+                        var FileExt = Path.GetExtension(fileQus.FileName);
+                        if (allowedExtensions.Contains(FileExt))
+                        {
+                            string dtpRegId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UniqueID;
+                            string myfile = dtpRegId + "_" + upFileName + FileExt;
+                            uploadPath = Path.Combine(Server.MapPath("~/Uploads/QuestionDtp"), myfile);
+                            dtpQAView.Photo = "../../Uploads/QuestionDtp/" + myfile;
+                        }
                     }
 
-                    DataEntry_QuestionBank data = new DataEntry_QuestionBank
+                    DataEntry_QuestionBank data = new DataEntry_QuestionBank()
                     {
                         Questions = dtpQAView.Questions,
                         Option1 = dtpQAView.Option1,
@@ -317,7 +338,7 @@ namespace OnlineExam.Controllers
                         CreatedDateTime = DateTime.Now,
                         ModifiedDateTime = DateTime.Now,
                         DeletedDateTime = DateTime.Now,
-                        CreatedBy = dtpQAView.ChapterId,
+                        CreatedBy = dtpQAView.CuserId,
                         PgmId = dtpQAView.PgmId,
                         SubPgmId = dtpQAView.SubPgmId,
                         CourseId = dtpQAView.CourseId,
@@ -328,7 +349,11 @@ namespace OnlineExam.Controllers
 
                     db.DataEntry_QuestionBank.Add(data);
                     await db.SaveChangesAsync();
-                    fileQus.SaveAs(uploadPath);
+
+                    if (fileQus != null)
+                    {
+                        fileQus.SaveAs(uploadPath);
+                    }
 
                     TempData["StatusMessage"] = "Questions Answers Created Succesfully.";
                     return RedirectToAction("QaAsList");
@@ -349,8 +374,28 @@ namespace OnlineExam.Controllers
 
                 ViewBag.ErrorMessage = "Please enter Questions or Select a Image Questions";
                 return View(dtpQAView);
-            }          
+            }
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteQsAS(int? deleteQsAsId)
+        {
+            if (deleteQsAsId != null)
+            {
+                DataEntry_QuestionBank dataEntry = db.DataEntry_QuestionBank.Find(deleteQsAsId);
+                dataEntry.IsDeleted = 1;
+                dataEntry.DeletedDateTime = DateTime.Now;
+                db.Entry(dataEntry).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["StatusMessage"] = "Questions Answers Deleted Succesfully.";
+                return RedirectToAction("QaAsList");
+            }
+
+            TempData["ErrorMessage"] = "Questions Answers Not Deleted.";
+            return RedirectToAction("QaAsList");
         }
 
     }

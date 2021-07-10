@@ -16,7 +16,8 @@ namespace OnlineExam.DbContext
     {
         public int Id { get; set; }
         public int ExamId { get; set; }
-        public int QnId { get; set; }
+        public string QnId { get; set; }
+        public Nullable<int> IsDataEntryQn { get; set; }
     
         public virtual Exam Exam { get; set; }
     }

@@ -29,7 +29,7 @@
             <div class="col-lg-10">
                 <div class="row align-items-center">
                     <div class="col">
-                        <span class="surtitle">DTP account</span>
+                        <span class="surtitle">Teacher account</span>
                         <h1 class="h3 mb-0">Questions Answers Management</h1>
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                     <div class="col">
                         <ul class="nav nav-tabs overflow-x">
                             <li class="nav-item">
-                                <a href="~/DTP/QaAsList" class="nav-link">QaAs List</a>
+                                <a href="~/Teacher/QaAsList" class="nav-link">QaAs List</a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/DTP/QsAs" class="nav-link active">Create QaAs</a>
+                                <a href="~/Teacher/QsAs" class="nav-link active">Create QaAs</a>
                             </li>
                         </ul>
                     </div>
@@ -180,7 +180,7 @@
                                                 </div>
                                             </div>
                                             <div class="up-img img2">
-                                                <img id="fileQus_src" class="qsAs-img" src="@Model.Photo">
+                                                <img id="fileQus_src" class="qsAs-img"src="@Model.Photo" >
                                                 <div class="remove-file">
                                                     <label id="remove2" class="qs-error img-remove">Remove</label>
                                                 </div>
@@ -270,6 +270,7 @@
 </div>
 
 
+
 @section Scripts {
 
     <script type="text/javascript">
@@ -321,7 +322,7 @@
                 $('#customRadioInline1').attr('checked', true);
             }
 
-
+           
 
             $('#customRadioInline1').click(function () {
                 $('.enter').show();
@@ -512,4 +513,6 @@
 
     </script>
 }
+
+
 
