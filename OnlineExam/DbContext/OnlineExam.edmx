@@ -530,6 +530,9 @@
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="Date" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetExamIdWiseQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetStudentGroupbyGroupId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Groupid" Type="int" Mode="In" />
         </Function>
@@ -1153,6 +1156,9 @@
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="Date" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="GetExamIdWiseQuestions" ReturnType="Collection(Exam_DBModel.GetExamIdWiseQuestions_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetStudentGroupbyGroupId" ReturnType="Collection(Exam_DBModel.GetStudentGroupbyGroupId_Result)">
             <Parameter Name="Groupid" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1566,6 +1572,26 @@
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetExamIdWiseQuestions_Result">
+          <Property Type="Int32" Name="ExamId" Nullable="false" />
+          <Property Type="String" Name="QnId" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Questions" Nullable="true" />
+          <Property Type="String" Name="Option1" Nullable="false" />
+          <Property Type="String" Name="Option2" Nullable="false" />
+          <Property Type="String" Name="Option3" Nullable="false" />
+          <Property Type="String" Name="Option4" Nullable="false" />
+          <Property Type="String" Name="CorrectAns" Nullable="false" />
+          <Property Type="String" Name="Mark" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="String" Name="PrevQnYear" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="ChapterId" Nullable="false" />
+          <Property Type="Int32" Name="IsDataEntryQn" Nullable="true" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="SubPgmId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetStudentGroupbyGroupId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2564,6 +2590,30 @@
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetExamIdWiseQuestions" FunctionName="Exam_DBModel.Store.GetExamIdWiseQuestions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetExamIdWiseQuestions_Result">
+                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+                <ScalarProperty Name="QnId" ColumnName="QnId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+                <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PrevQnYear" ColumnName="PrevQnYear" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
+                <ScalarProperty Name="IsDataEntryQn" ColumnName="IsDataEntryQn" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="SubPgmId" ColumnName="SubPgmId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

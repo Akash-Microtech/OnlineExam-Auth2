@@ -1,4 +1,4 @@
-﻿
+﻿@model OnlineExam.ViewModel.StudentDashboardViewModel
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -99,80 +99,33 @@
         <div>
             <h3 class="h4">Exams</h3>
 
-            <div class="card mb-3 hover-shadow-lg">
-                <div class="card-body d-flex align-items-center flex-wrap flex-lg-nowrap py-0">
-                    <div class="col-auto col-lg-1 d-flex align-items-center px-0 pt-3 pt-lg-0 zindex-100">
-                        <div class="custom-rating d-none d-sm-inline-block">
-                            <i data-feather="edit" class="text-primary"></i>
+            @foreach (var item in Model.GetExamByUserId)
+            {
+                <div class="card mb-3 hover-shadow-lg">
+                    <div class="card-body d-flex align-items-center flex-wrap flex-lg-nowrap py-0">
+                        <div class="col-auto col-lg-1 d-flex align-items-center px-0 pt-3 pt-lg-0 zindex-100">
+                            <div class="custom-rating d-none d-sm-inline-block">
+                                <i data-feather="edit" class="text-primary"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-8 pl-0 pl-md-2 pt-3 pt-lg-0">
-                        <span class="h6 text-sm">Aaliyah Haworth</span>
-                    </div>
-                    <div class="col col-lg-1 text-right px-0 order-lg-4 pt-3 pt-lg-0">
-                        <span class="text-muted text-sm">16-06-2021</span>
-                    </div>
-                    <div class="col-12 col-lg-8 d-flex align-items-center position-static pb-3 py-lg-3 px-0">
-                        <div class="col col-lg-11 position-static px-0">
-                            <div class="d-flex flex-wrap flex-lg-nowrap align-items-center">
-                                <div class="col-12 col-lg-auto px-0 position-static">
-                                    <a href="#" class="stretched-link h6 d-block mb-0 lh-140 text-sm font-weight-light">Today we are happy to announce Bit's public Beta support for Vue components</a>
+                        <div class="col-lg-2 col-8 pl-0 pl-md-2 pt-3 pt-lg-0">
+                            <span class="h6 text-sm">@item.Name</span>
+                        </div>
+                        <div class="col col-lg-1 text-right px-0 order-lg-4 pt-3 pt-lg-0">
+                            <span class="text-muted text-sm">16-06-2021</span>
+                        </div>
+                        <div class="col-12 col-lg-8 d-flex align-items-center position-static pb-3 py-lg-3 px-0">
+                            <div class="col col-lg-11 position-static px-0">
+                                <div class="d-flex flex-wrap flex-lg-nowrap align-items-center">
+                                    <div class="col-12 col-lg-auto px-0 position-static">
+                                        <a href="#" class="stretched-link h6 d-block mb-0 lh-140 text-sm font-weight-light">Today we are happy to announce Bit's public Beta support for Vue components</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card mb-3 hover-shadow-lg">
-                <div class="card-body d-flex align-items-center flex-wrap flex-lg-nowrap py-0">
-                    <div class="col-auto col-lg-1 d-flex align-items-center px-0 pt-3 pt-lg-0 zindex-100">
-                        <div class="custom-rating d-none d-sm-inline-block">
-                            <i data-feather="edit" class="text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-8 pl-0 pl-md-2 pt-3 pt-lg-0">
-                        <span class="h6 text-sm">Aaliyah Haworth</span>
-                    </div>
-                    <div class="col col-lg-1 text-right px-0 order-lg-4 pt-3 pt-lg-0">
-                        <span class="text-muted text-sm">16-06-2021</span>
-                    </div>
-                    <div class="col-12 col-lg-8 d-flex align-items-center position-static pb-3 py-lg-3 px-0">
-                        <div class="col col-lg-11 position-static px-0">
-                            <div class="d-flex flex-wrap flex-lg-nowrap align-items-center">
-                                <div class="col-12 col-lg-auto px-0 position-static">
-                                    <a href="#" class="stretched-link h6 d-block mb-0 lh-140 text-sm font-weight-light">Today we are happy to announce Bit's public Beta support for Vue components</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3 hover-shadow-lg">
-                <div class="card-body d-flex align-items-center flex-wrap flex-lg-nowrap py-0">
-                    <div class="col-auto col-lg-1 d-flex align-items-center px-0 pt-3 pt-lg-0 zindex-100">
-                        <div class="custom-rating d-none d-sm-inline-block">
-                            <i data-feather="edit" class="text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-8 pl-0 pl-md-2 pt-3 pt-lg-0">
-                        <span class="h6 text-sm">Aaliyah Haworth</span>
-                    </div>
-                    <div class="col col-lg-1 text-right px-0 order-lg-4 pt-3 pt-lg-0">
-                        <span class="text-muted text-sm">16-06-2021</span>
-                    </div>
-                    <div class="col-12 col-lg-8 d-flex align-items-center position-static pb-3 py-lg-3 px-0">
-                        <div class="col col-lg-11 position-static px-0">
-                            <div class="d-flex flex-wrap flex-lg-nowrap align-items-center">
-                                <div class="col-12 col-lg-auto px-0 position-static">
-                                    <a href="#" class="stretched-link h6 d-block mb-0 lh-140 text-sm font-weight-light">Today we are happy to announce Bit's public Beta support for Vue components</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
 
         </div>
     </div>

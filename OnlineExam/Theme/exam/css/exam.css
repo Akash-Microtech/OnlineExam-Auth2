@@ -51,7 +51,7 @@
     padding: 6px 11px;
     font-size: 13px;
     line-height: 1.42857143;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 #intro .item h1, .btn, .navbar .yamm-content h3, .navbar .yamm-content h5, .navbar ul.dropdown-menu li, .navbar ul.nav > li > a {
@@ -129,6 +129,8 @@
 
 .panel-body {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .pagination {
@@ -163,3 +165,22 @@
         background-color: #fff;
         border: 1px solid #ddd;
     }
+
+.mobile-exam-details-2 {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .mobile-exam-details-1 {
+        display: none;
+    }
+
+    .mobile-exam-details-2 {
+        display: block;
+    }
+}
+
+
+.qsas-btns{
+   display:flex;
+}
