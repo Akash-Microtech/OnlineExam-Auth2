@@ -769,6 +769,9 @@
     <Compile Include="DbContext\AllStudentRegistrationDetails_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\AttendExam.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\Chapter.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -785,6 +788,9 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Exam.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\ExamResult.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Exam_QnTable.cs">
@@ -818,6 +824,9 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetAllTeacherQusAns_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetExamByTeacherId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetExamByUserId_Result.cs">
@@ -925,6 +934,7 @@
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
+    <Compile Include="ViewModel\ExamViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
@@ -933,10 +943,12 @@
     <Compile Include="ViewModel\RoleViewModel.cs" />
     <Compile Include="ViewModel\StdClassViewModel.cs" />
     <Compile Include="ViewModel\StudentAcademicPerformanceViewModel.cs" />
+    <Compile Include="ViewModel\StudentDashboardViewModel.cs" />
     <Compile Include="ViewModel\StudentPreviousEntranceViewModel.cs" />
     <Compile Include="ViewModel\StudentRegistrationViewModel.cs" />
     <Compile Include="ViewModel\SubjectViewModel.cs" />
     <Compile Include="ViewModel\SubProgramViewModel.cs" />
+    <Compile Include="ViewModel\TeacherDashboardViewModel.cs" />
     <Compile Include="ViewModel\TeacherRegViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1008,8 +1020,10 @@
     <Content Include="Views\Admin\Groups.cshtml" />
     <Content Include="Views\Admin\Group.cshtml" />
     <Content Include="Views\Student\Instructions.cshtml" />
-    <Content Include="Views\Student\Exam.cshtml" />
     <Content Include="Views\Teacher\Exams.cshtml" />
+    <Content Include="Views\Student\ExamDetails.cshtml" />
+    <Content Include="Views\Student\Exam.cshtml" />
+    <Content Include="Views\Teacher\Exam.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

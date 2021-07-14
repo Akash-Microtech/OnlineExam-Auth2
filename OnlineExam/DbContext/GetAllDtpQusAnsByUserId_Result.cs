@@ -34,10 +34,10 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public int PgmId { get; set; }
         public int CourseId { get; set; }
-        public int SubPgmId { get; set; }
+        public int ClassId { get; set; }
         public string Photo { get; set; }
         public string PName { get; set; }
-        public string SubpName { get; set; }
+        public string ClassName { get; set; }
         public string SubjectName { get; set; }
         public string CourseName { get; set; }
         public string ChapterName { get; set; }

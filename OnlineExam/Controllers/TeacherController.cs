@@ -25,7 +25,16 @@ namespace OnlineExam.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+            DateTime today = DateTime.Now.Date;
+            var data = db.GetExamByUserId(id, today).ToList();
+
+            StudentDashboardViewModel studentDashboard = new StudentDashboardViewModel()
+            {
+                GetExamByUserId = data
+            };
+
+            return View(studentDashboard);
         }
 
         public ActionResult QaAsList()
@@ -49,16 +58,12 @@ namespace OnlineExam.Controllers
         {
             if (id == null)
             {
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
-                ViewBag.PgmId = pro;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name");
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
-                ViewBag.SubjectId = subj;
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
+                ViewBag.ClassId = new SelectList(db.Classes.Where(s => s.IsDeleted == 0), "Id", "Name");
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
+                ViewBag.CourseId = new SelectList(Enumerable.Empty<SelectListItem>());
+                ViewBag.ChapterId = new SelectList(Enumerable.Empty<SelectListItem>());
 
-                var sub = new SelectList(Enumerable.Empty<SelectListItem>());
-                ViewBag.SubPgmId = sub;
-                ViewBag.ChapterId = sub;
                 QsAsViewModel dtpQA = new QsAsViewModel()
                 {
                     Questions = ""
@@ -82,31 +87,27 @@ namespace OnlineExam.Controllers
                     CorrectAns = data.CorrectAns,
                     Mark = data.Mark,
                     PgmId = data.PgmId,
-                    SubPgmId = data.SubPgmId,
+                    ClassId = data.ClassId,
                     CourseId = data.CourseId,
                     SubjectId = data.SubjectId,
                     ChapterId = data.ChapterId,
                     Photo = data.Photo
                 };
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
-                ViewBag.PgmId = pro;
-                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", data.SubPgmId);
-                ViewBag.SubPgmId = sub;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
-                ViewBag.SubjectId = subj;
-                var chap = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", data.ChapterId);
-                ViewBag.ChapterId = chap;
+
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(s => s.IsDeleted == 0), "Id", "Name", data.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
+                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", data.ChapterId);
 
                 return View(dtpQA);
             }
         }
 
         [HttpGet]
-        public JsonResult SubProgram(int ID)
+        public JsonResult Course(int ID)
         {
-            var sub = new SelectList(db.SubPrograms.Where(s => s.PgmId == ID && s.IsDeleted == 0), "Id", "Name");
+            var sub = new SelectList(db.Courses.Where(s => s.ClassId == ID && s.IsDeleted == 0), "Id", "Name");
             return Json(sub, JsonRequestBehavior.AllowGet);
         }
 
@@ -135,16 +136,11 @@ namespace OnlineExam.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
-                    ViewBag.PgmId = pro;
-                    var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.SubPgmId);
-                    ViewBag.SubPgmId = sub;
-                    var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
-                    ViewBag.CourseId = cou;
-                    var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
-                    ViewBag.SubjectId = subj;
-                    var chap = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
-                    ViewBag.ChapterId = chap;
+                    ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
+                    ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
+                    ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
+                    ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
+                    ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
 
                     ViewBag.ErrorMessage = "Please fill in all the required fields";
                     return View(dtpQAView);
@@ -179,7 +175,7 @@ namespace OnlineExam.Controllers
                         data.ModifiedDateTime = DateTime.Now;
                         data.ModifiedBy = dtpQAView.CuserId;
                         data.PgmId = dtpQAView.PgmId;
-                        data.SubPgmId = dtpQAView.SubPgmId;
+                        data.ClassId = dtpQAView.ClassId;
                         data.CourseId = dtpQAView.CourseId;
                         data.SubjectId = dtpQAView.SubjectId;
                         data.ChapterId = dtpQAView.ChapterId;
@@ -235,7 +231,7 @@ namespace OnlineExam.Controllers
                         DeletedDateTime = DateTime.Now,
                         CreatedBy = dtpQAView.CuserId,
                         PgmId = dtpQAView.PgmId,
-                        SubPgmId = dtpQAView.SubPgmId,
+                        ClassId = dtpQAView.ClassId,
                         CourseId = dtpQAView.CourseId,
                         SubjectId = dtpQAView.SubjectId,
                         ChapterId = dtpQAView.ChapterId,
@@ -256,16 +252,11 @@ namespace OnlineExam.Controllers
             }
             else
             {
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
-                ViewBag.PgmId = pro;
-                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.SubPgmId);
-                ViewBag.SubPgmId = sub;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
-                ViewBag.SubjectId = subj;
-                var chap = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
-                ViewBag.ChapterId = chap;
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
+                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
 
                 ViewBag.ErrorMessage = "Please enter Questions or Select a Image Questions";
                 return View(dtpQAView);
@@ -308,6 +299,45 @@ namespace OnlineExam.Controllers
             int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
             var list = db.GetAllExam().Where(e => e.IsDeleted == 0).ToList();
             return View(list);
+        }
+
+        public ActionResult Exam()
+        {
+            ViewBag.ClassID = new SelectList(db.Classes.Where(d => d.IsDeleted == 0), "Id", "Name");
+            ViewBag.ProgramID = new SelectList(db.Programmes.Where(d => d.IsDeleted == 0), "Id", "Name");
+            ViewBag.SubProgramID = new SelectList(db.SubPrograms.Where(d => d.IsDeleted == 0), "Id", "Name");
+            ViewBag.SubjectID = new SelectList(db.Subjects.Where(d => d.IsDeleted == 0), "Id", "Name");
+            ViewBag.CourseID = new SelectList(db.Courses.Where(d => d.IsDeleted == 0), "Id", "Name");
+            ViewBag.Group = new SelectList(db.Groups.Where(d => d.IsDeleted == 0), "Id", "GroupName");
+
+            return View();
+        }
+
+        //  GetCourseWiseClass
+        public ActionResult GetCourseWiseClass(int id)
+        {
+            var result = new SelectList(db.Courses.Where(r => r.ClassId == id && r.IsDeleted == 0), "Id", "Name");
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //  GetCourseWiseClass
+        public ActionResult GetGroup(int id)
+        {
+            var result = new SelectList(db.Groups.Where(r => r.SubjectId == id && r.IsDeleted == 0), "Id", "GroupName");
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetQnFromQnBank(Exam exam)
+        {
+            var result = db.DataEntry_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //GetManualQn
+        public ActionResult GetManualQn(Exam exam)
+        {
+            var result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

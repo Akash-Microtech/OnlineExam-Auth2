@@ -35,7 +35,7 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public int PgmId { get; set; }
         public int CourseId { get; set; }
-        public int SubPgmId { get; set; }
+        public int ClassId { get; set; }
         public string Photo { get; set; }
     }
 }

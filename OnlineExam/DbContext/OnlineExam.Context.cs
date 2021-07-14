@@ -27,6 +27,7 @@ namespace OnlineExam.DbContext
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AttendExam> AttendExams { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
@@ -34,6 +35,7 @@ namespace OnlineExam.DbContext
         public virtual DbSet<DataEntry_Registration> DataEntry_Registration { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<Exam_QnTable> Exam_QnTable { get; set; }
+        public virtual DbSet<ExamResult> ExamResults { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Group_StudentTable> Group_StudentTable { get; set; }
         public virtual DbSet<Group_Teacher> Group_Teacher { get; set; }
@@ -129,6 +131,19 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTeacherQusAnsByUserId_Result>("GetAllTeacherQusAnsByUserId", useridParameter);
         }
     
+        public virtual ObjectResult<GetExamByTeacherId_Result> GetExamByTeacherId(Nullable<int> userId, Nullable<System.DateTime> date)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamByTeacherId_Result>("GetExamByTeacherId", userIdParameter, dateParameter);
+        }
+    
         public virtual ObjectResult<GetExamByUserId_Result> GetExamByUserId(Nullable<int> userId, Nullable<System.DateTime> date)
         {
             var userIdParameter = userId.HasValue ?
@@ -140,6 +155,15 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("Date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamByUserId_Result>("GetExamByUserId", userIdParameter, dateParameter);
+        }
+    
+        public virtual int GetExamIdWiseQuestions(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetExamIdWiseQuestions", iDParameter);
         }
     
         public virtual ObjectResult<GetStudentGroupbyGroupId_Result> GetStudentGroupbyGroupId(Nullable<int> groupid)
