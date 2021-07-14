@@ -66,6 +66,7 @@ namespace OnlineExam.Controllers
                     FirstName = teacherRegView.FirstName,
                     MiddleName = teacherRegView.MiddleName,
                     LastName = teacherRegView.LastName,
+                    Email = teacherRegView.Email,
                     WhatsApp = teacherRegView.WhatsApp,
                     PrimarySubject = teacherRegView.PrimarySubject,
                     SecondarySubject = teacherRegView.SecondarySubject,

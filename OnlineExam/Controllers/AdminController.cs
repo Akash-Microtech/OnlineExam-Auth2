@@ -1193,9 +1193,10 @@ namespace OnlineExam.Controllers
             return View(studreg);
         }
 
-        public ActionResult StudentRegSingleView()
+        public ActionResult StudentRegView(string regId)
         {
-            return View();
+            var data = db.GetAllStudentRegistrationByRegId(regId).FirstOrDefault();
+            return View(data);
         }
 
         public ActionResult TeacherRegistrations()
@@ -1204,9 +1205,10 @@ namespace OnlineExam.Controllers
             return View(teacher);
         }
 
-        public ActionResult TeacherRegSingleView()
+        public ActionResult TeacherRegView(string regId)
         {
-            return View();
+            var data = db.Teachers_Registration.Where(t=>t.TeachRegId == regId).FirstOrDefault();
+            return View(data);
         }
 
         public ActionResult Groups()

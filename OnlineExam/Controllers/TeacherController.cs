@@ -333,7 +333,6 @@ namespace OnlineExam.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //GetManualQn
         public ActionResult GetManualQn(Exam exam)
         {
             var result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
