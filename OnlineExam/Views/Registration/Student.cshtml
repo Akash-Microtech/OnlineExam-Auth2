@@ -150,7 +150,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Application date</label>
-                                    <input type="text" class="form-control" id="ApplnDate" name="ApplnDate" disabled>
+                                    <input type="text" class="form-control" id="ApplnDate" name="ApplnDate" onkeydown="return false;">
                                     @Html.ValidationMessageFor(model => model.ApplnDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Preferred date to attend admission test</label>
-                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select a date" id="AdmissionTestDate" name="AdmissionTestDate">
+                                    <input type="text" class="form-control" placeholder="Select a date" onkeydown="return false;" id="AdmissionTestDate" name="AdmissionTestDate">
                                 </div>
                             </div>
 
@@ -247,7 +247,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Date of birth</label>
-                                    <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date" id="DOB" name="DOB">
+                                    <input type="text" class="form-control" placeholder="Select your birth date" onkeydown="return false;" id="DOB" name="DOB">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -940,7 +940,6 @@
 
 @section Scripts {
 
-    <script src="~/Theme/assets/jquery.validate.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
@@ -952,6 +951,40 @@
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
 
     <script>
+        $('#AdmissionTestDate').focus(function () {
+            Datepicker = function () {
+                var t = $('#AdmissionTestDate')
+
+                t.length && t.each(function () {
+                    !function (t) {
+                        t.flatpickr({
+                            enableTime: !1,
+                            allowInput: !0
+                        })
+                    }($(this))
+                })
+            }()
+        });
+
+        $('#DOB').focus(function () {
+            Datepicker = function () {
+                var t = $('#DOB')
+
+                t.length && t.each(function () {
+                    !function (t) {
+                        t.flatpickr({
+                            enableTime: !1,
+                            allowInput: !0
+                        })
+                    }($(this))
+                })
+            }()
+        });
+
+
+    </script>
+
+    <script>       
 
         var dataTable1;
         var dataTable2;

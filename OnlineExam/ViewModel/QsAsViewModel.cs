@@ -45,8 +45,8 @@ namespace OnlineExam.ViewModel
         [Display(Name = "Course")]
         public int CourseId { get; set; }
         [Required]
-        [Display(Name = "Sub Program")]
-        public int SubPgmId { get; set; }
+        [Display(Name = "Class")]
+        public int ClassId { get; set; }
 
         public string Photo { get; set; }
         public int CuserId { get; set; }

@@ -184,3 +184,17 @@
 .qsas-btns{
    display:flex;
 }
+
+
+.result-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.dataTables_length {
+    text-align: left;
+}
+
+.dataTables_info {
+    text-align: left;
+}

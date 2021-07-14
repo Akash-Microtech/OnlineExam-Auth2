@@ -10,33 +10,34 @@
 namespace OnlineExam.DbContext
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Teachers_QuestionBank
+    public partial class GetExamByTeacherId_Result
     {
+        public int gsId { get; set; }
+        public int gId { get; set; }
+        public string GroupName { get; set; }
         public int Id { get; set; }
-        public string Questions { get; set; }
-        public string Option1 { get; set; }
-        public string Option2 { get; set; }
-        public string Option3 { get; set; }
-        public string Option4 { get; set; }
-        public string CorrectAns { get; set; }
-        public string Mark { get; set; }
-        public string PrevQnYear { get; set; }
+        public string Name { get; set; }
+        public int ExGroupId { get; set; }
+        public int PgmId { get; set; }
+        public int ClassId { get; set; }
+        public int CourseId { get; set; }
         public int SubjectId { get; set; }
-        public int ChapterId { get; set; }
         public int CreatedBy { get; set; }
+        public System.DateTime CreatedDateTime { get; set; }
+        public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public int DeletedBy { get; set; }
         public int ModifiedBy { get; set; }
-        public int IsActive { get; set; }
-        public System.DateTime CreatedDateTime { get; set; }
         public System.DateTime ModifiedDateTime { get; set; }
+        public System.DateTime FromDate { get; set; }
+        public System.DateTime ToDate { get; set; }
         public System.DateTime DeletedDateTime { get; set; }
-        public int PgmId { get; set; }
-        public int CourseId { get; set; }
-        public int ClassId { get; set; }
-        public int TeacherId { get; set; }
-        public string Photo { get; set; }
+        public string ExamTime { get; set; }
+        public int TotalMark { get; set; }
+        public string PName { get; set; }
+        public string ClassName { get; set; }
+        public string SubjectName { get; set; }
+        public string CourseName { get; set; }
     }
 }

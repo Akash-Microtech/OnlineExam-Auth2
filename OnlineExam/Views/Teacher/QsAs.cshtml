@@ -92,28 +92,28 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="form-control-label">Programme</label>
-                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
-                                                @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
-                                                <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
+                                                <label class="form-control-label">Class</label>
+                                                @Html.DropDownList("ClassId", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "error" })
+                                                <label id="ClassId-error" class="error" for="ClassId" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label class="form-control-label">Sub Programme</label>
-                                                @Html.DropDownList("SubPgmId", null, "Select Sub Programme", htmlAttributes: new { @class = "custom-select" })
-                                                @Html.ValidationMessageFor(model => model.SubPgmId, "", new { @class = "error" })
-                                                <label id="SubPgmId-error" class="error" for="SubPgmId" style="display:none;"></label>
+                                                <label class="form-control-label">Course</label>
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
+                                                <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="form-control-label">Course</label>
-                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
-                                                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
-                                                <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
+                                                <label class="form-control-label">Programme</label>
+                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
+                                                <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -127,7 +127,7 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="form-control-label">Chapter</label>
-                                                @Html.DropDownList("ChapterId", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("ChapterId", null, "Select Chapter", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.ChapterId, "", new { @class = "error" })
                                                 <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
                                             </div>
@@ -180,7 +180,7 @@
                                                 </div>
                                             </div>
                                             <div class="up-img img2">
-                                                <img id="fileQus_src" class="qsAs-img"src="@Model.Photo" >
+                                                <img id="fileQus_src" class="qsAs-img" src="@Model.Photo">
                                                 <div class="remove-file">
                                                     <label id="remove2" class="qs-error img-remove">Remove</label>
                                                 </div>
@@ -275,19 +275,19 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var subProgram = '@Url.Action("SubProgram")';
+            var subProgram = '@Url.Action("Course")';
             var chapters = '@Url.Action("Chapters")';
-            var SubPgmId = $('#SubPgmId');
+            var CourseId = $('#CourseId');
             var ChapterId = $('#ChapterId');
-            $('#PgmId').change(function () {
-                SubPgmId.empty();
+            $('#ClassId').change(function () {
+                CourseId.empty();
                 $.getJSON(subProgram, { ID: $(this).val() }, function (data) {
                     if (!data) {
                         return;
                     }
-                    SubPgmId.append($('<option></option>').val('').text('Please select'));
+                    CourseId.append($('<option></option>').val('').text('Select Course'));
                     $.each(data, function (index, item) {
-                        SubPgmId.append($('<option></option>').val(item.Value).text(item.Text));
+                        CourseId.append($('<option></option>').val(item.Value).text(item.Text));
                     });
                 });
             })
@@ -298,7 +298,7 @@
                     if (!data) {
                         return;
                     }
-                    ChapterId.append($('<option></option>').val('').text('Please select'));
+                    ChapterId.append($('<option></option>').val('').text('Select Chapter'));
                     $.each(data, function (index, item) {
                         ChapterId.append($('<option></option>').val(item.Value).text(item.Text));
                     });
@@ -379,7 +379,7 @@
                     PgmId: {
                         required: true
                     },
-                    SubPgmId: {
+                    ClassId: {
                         required: true
                     },
                     CourseId: {

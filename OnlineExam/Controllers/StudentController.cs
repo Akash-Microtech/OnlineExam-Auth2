@@ -61,7 +61,7 @@ namespace OnlineExam.Controllers
         public ActionResult Exam(int? examId)
         {
             var data = db.GetAllExamById(examId).FirstOrDefault();
-            var qus = db.GetExamIdWiseQuestions(examId).ToList();
+            var qus = db.GetAllQusByExamId(examId).ToList();
             if (examId != null && data != null)
             {
                 ExamViewModel exam = new ExamViewModel()
@@ -70,6 +70,7 @@ namespace OnlineExam.Controllers
                     GetAllQus = qus
                 };
 
+                TempData["ExamId"] = data.Id;
                 return View(exam);
             }
 

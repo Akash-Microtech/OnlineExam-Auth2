@@ -769,6 +769,9 @@
     <Compile Include="DbContext\AllStudentRegistrationDetails_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\AttendExam.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\Chapter.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -785,6 +788,9 @@
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Exam.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\ExamResult.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Exam_QnTable.cs">
@@ -820,10 +826,10 @@
     <Compile Include="DbContext\GetAllTeacherQusAns_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\GetExamByUserId_Result.cs">
+    <Compile Include="DbContext\GetExamByTeacherId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\GetExamIdWiseQuestions_Result.cs">
+    <Compile Include="DbContext\GetExamByUserId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
@@ -1017,6 +1023,7 @@
     <Content Include="Views\Teacher\Exams.cshtml" />
     <Content Include="Views\Student\ExamDetails.cshtml" />
     <Content Include="Views\Student\Exam.cshtml" />
+    <Content Include="Views\Teacher\Exam.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
