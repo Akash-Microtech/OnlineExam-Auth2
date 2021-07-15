@@ -181,6 +181,7 @@
 
                                     <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
 
+
                                     <div class="row align-items-center" style="display:none;" id="qsasArea">
                                         <div class="col-md-12">
                                             <div class="card">
@@ -246,6 +247,35 @@
                                         </div>
                                     </div>
 
+                                    @if (Model != null)
+                                    {
+                                        <div class="row align-items-center" style="display:none;" id="editQsasArea">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="mt-3 text-center">
+                                                        <h6 class="h4 mb-1">Questions</h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="py-3 table-responsive">
+                                                            <table id="editFromDtpQsBank" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                                                <thead>
+                                                                    <tr role="row">
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;"></th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="max-width: 500px;">Questions</th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Ans</th>
+                                                                        <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="editFromDtpQsBank_body"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
                                     <div class="mt-3 text-right">
                                         <a href="Exams" class="btn btn-sm btn-secondary">Cancel</a>
                                         <button type="submit" class="btn btn-sm btn-primary">Save</button>
@@ -285,7 +315,7 @@
                 var selectid = { "id": id }
 
                 $.ajax({
-                    url: "GetCourseWiseClass",
+                    url: "../GetCourseWiseClass",
                     data: JSON.stringify(selectid),
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -308,7 +338,7 @@
                 var selectid = { "id": id }
 
                 $.ajax({
-                    url: "GetGroup",
+                    url: "../GetGroup",
                     data: JSON.stringify(selectid),
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -371,6 +401,70 @@
     </script>
 
     <script>
+
+        $(document).ready(function () {
+
+            var id = $('#Id').val();
+
+            if(id != '')
+            {
+                GetEditQsAs();
+            }
+        });
+
+        function GetEditQsAs() {
+
+            var i = 1;
+            dataTable3 = $("#editFromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../../api/Exam/QsAs/" + $('#Id').val(),
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                return full.Questions;
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return `<div class="row text-center">
+                                       <a href="javascript:void(0)" class="action-item mr-2">
+                                          <i class="fa fa-eye fa-1x text-success"></i>
+                                       </a>
+                                       <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
+                                          <i class="fa fa-trash text-danger"></i>
+                                       </a>
+                                   </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#editQsasArea').show();
+
+        }
+    </script>
+
+    <script>
         function GetQsAsBank() {
 
             var i = 1;
@@ -378,7 +472,7 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "GetQnFromQnBank",
+                    "url": "../../Teacher/GetQnFromQnBank",
                     "type": "POST",
                     "data": {
                         "pgmId": $("#PgmId").find(":selected").val(),
@@ -408,15 +502,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                            <div class="row text-center">
-                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                </div>
-                                                <a href="javascript:void(0)" class="action-item mr-2">
-                                                    <i class="fa fa-eye fa-1x text-success"></i>
-                                                </a>
-                                            </div>`;
+                                                    <div class="row text-center">
+                                                         <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                            <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="action-item mr-2">
+                                                            <i class="fa fa-eye fa-1x text-success"></i>
+                                                        </a>
+                                                    </div>`;
                         }
                     }
                 ],
@@ -440,7 +534,7 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "GetManualQn",
+                    "url": "../../Teacher/GetManualQn",
                     "type": "POST",
                     "data": {
                         "CreatedBy": $("#CuserId").val(),
@@ -471,15 +565,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                            <div class="row text-center">
-                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                </div>
-                                                <a href="javascript:void(0)" class="action-item mr-2">
-                                                    <i class="fa fa-eye fa-1x text-success"></i>
-                                                </a>
-                                            </div>`;
+                                                    <div class="row text-center">
+                                                         <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                            <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="action-item mr-2">
+                                                            <i class="fa fa-eye fa-1x text-success"></i>
+                                                        </a>
+                                                    </div>`;
                         }
                     }
                 ],
@@ -629,10 +723,15 @@
                 },
                 submitHandler: function (form) {
 
-                    var qsId = $('#QnIds').val();
+                    var id = $('#Id').val();
                     var isDataen = $('#IsDataEntryQn').val();
+                    var qsId = $('#QnIds').val();
 
-                    if (qsId == "" || isDataen == "") {
+                    if (id != "")
+                    {
+                        form.submit();
+                    }
+                    else if (qsId == "" || isDataen == "") {
 
                         Swal.fire(
                             'Questions ?',
@@ -642,10 +741,48 @@
                     }
                     else {
                         form.submit();
-                    }                    
-                                         
+                    }
+
                 }
             });
         });
+    </script>
+
+    <script>
+        function DeleteQsAsEditList(id) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value == true) {
+
+                    $.ajax({
+                        type: "Delete",
+                        url: '../../api/Exam/DeleteExamQsAs/' + id + '/' + $('#Id').val(),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your QsAs has been deleted.',
+                                'success'
+                            )
+
+                            dataTable3.ajax.reload();
+                        },
+                        error: function () {
+                            alert("Error while deleting data");
+                        }
+                    });                    
+                }
+            })
+        }
     </script>
 }

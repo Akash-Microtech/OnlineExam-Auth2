@@ -48,7 +48,6 @@ namespace OnlineExam.ViewModel
         public int CuserId { get; set; }
         [Required]
         public int IsDataEntryQn { get; set; }
-        public List<DataEntry_QuestionBank> QuestionBank { get; set; }
-        public List<Teachers_QuestionBank> ManualQuestion { get; set; }
+        public virtual ICollection<Exam_QnTable> ExamQns { get; set; }
     }
 }

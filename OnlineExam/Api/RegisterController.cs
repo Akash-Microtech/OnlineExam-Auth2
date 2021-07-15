@@ -46,8 +46,6 @@ namespace OnlineExam.Api
         }
 
 
-
-        // DELETE: api/Student_AcademicPerformance/5
         [Route("api/Register/DeletePerformance/{id:int}")]
         [ResponseType(typeof(Student_AcademicPerformance))]
         public IHttpActionResult DeletePerformance(int id)
@@ -64,7 +62,6 @@ namespace OnlineExam.Api
             return Ok(student_AcademicPerformance);
         }        
 
-        // POST: api/Student_PreviousEntrance
 
         [Route("api/Register/PreviousEntrance")]
         [ResponseType(typeof(Student_PreviousEntrance))]
@@ -83,8 +80,6 @@ namespace OnlineExam.Api
         }
 
 
-
-        // DELETE: api/Student_PreviousEntrance/5
         [Route("api/Register/DeletePreviousEntrance/{id:int}")]
         [ResponseType(typeof(Student_PreviousEntrance))]
         public IHttpActionResult DeletePreviousEntrance(int id)
@@ -100,7 +95,6 @@ namespace OnlineExam.Api
 
             return Ok(student_PreviousEntrance);
         }
-
 
 
         protected override void Dispose(bool disposing)
