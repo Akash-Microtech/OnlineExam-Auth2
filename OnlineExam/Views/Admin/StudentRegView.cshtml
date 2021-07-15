@@ -1,4 +1,4 @@
-﻿@model OnlineExam.DbContext.GetAllStudentRegistrationByRegId_Result
+﻿@model OnlineExam.ViewModel.StudentRegPdfViewModel
 
 @{
     ViewBag.Title = "StudentRegView";
@@ -16,116 +16,274 @@
                     </div>
                 </div>
 
-                <div class="row align-items-center mt-4">
+                <div class="row align-items-center mt-4" id="printableArea">
                     <div class="card card-body p-md-5">
                         <div class="row align-items-center mb-5">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="../../assets/img/brand/dark.png" alt="" height="30">
+                            <div class="col-sm-3 mb-3 mb-sm-0">
+                                <span class="badge badge-pill badge-success ml-3">@Model.GetAllStudentRegistrationByRegId.RegId</span>
                             </div>
-                            <div class="col-sm-6 text-sm-right">
-                                <h6 class="d-inline-block m-0 d-print-none">Registration ID</h6>
-                                <span class="badge badge-pill badge-success ml-3">@Model.RegId</span>
+
+                            <div class="col-sm-9 mb-3 mb-sm-0 photo-dis">
+
+                                <div class="row align-items-center inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.Photo" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.StudentName</a><div>
+                                            <small>Student Photo</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.FrSign" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.FrName</a><div>
+                                            <small>Father Sign</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center  inner">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="@Model.GetAllStudentRegistrationByRegId.MrSign" class="avatar  avatar-lg">
+                                    </div>
+                                    <div class="col ml-n2">
+                                        <a href="#!" class="d-block h6 mb-0">@Model.GetAllStudentRegistrationByRegId.MrName</a><div>
+                                            <small>Mother Sign</small>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+                     
 
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <h5>Delivery data</h5>
+                                <h5 style="font-size:18px;">About the Student</h5>
                                 <dl class="row mt-4 align-items-center">
-                                    <dt class="col-sm-3 h6 text-sm">Recipient</dt>
-                                    <dd class="col-sm-9 text-sm">Mike Lowrie</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Phone</dt>
-                                    <dd class="col-sm-9 text-sm">+30-588.90.86</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Street</dt>
-                                    <dd class="col-sm-9 text-sm">8945 Henry Ave. Mankato, MN 56001</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Town</dt>
-                                    <dd class="col-sm-9 text-sm">New York</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Country</dt>
-                                    <dd class="col-sm-9 text-sm">United States</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Email</dt>
-                                    <dd class="col-sm-9 text-sm">example@company.com</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Full Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.StudentName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Registration No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.RegId</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Application Date</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.ApplnDate</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Class</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.ClassName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Programme</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.SpName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected SubProgram</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.SubpName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Selected Course</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.CorseName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Academic Year</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AcademicYear</dd>
+                                    <dt class="col-sm-7 h6 text-sm">WhatsApp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.WhatsappNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Date of Birth</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.DOB</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Gender</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Gender</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Religion</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Religion</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Caste</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Caste</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Community</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Community</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Nationality</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Nationalty</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Blood Group</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.BloodGroup</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Present address</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.PresentAddress</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Area</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Area</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Location/PostOffice</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Location</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.District</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.State</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Pincode</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.Pincode</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Contact number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickContNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Whatsapp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickWhatsApp</dd>
                                 </dl>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5>Invoice data</h5>
+                                <h5 style="font-size:18px;">About the Parents</h5>
                                 <dl class="row mt-4 align-items-center">
-                                    <dt class="col-sm-3 h6 text-sm">Buyer</dt>
-                                    <dd class="col-sm-9 text-sm">Mike Lowrie</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Phone</dt>
-                                    <dd class="col-sm-9 text-sm">+30-588.90.86</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Street</dt>
-                                    <dd class="col-sm-9 text-sm">8945 Henry Ave. Mankato, MN 56001</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Father Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Father Occupation</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrOcc</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mobile Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrMobNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrWhatsapp</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email ID</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrMailid</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrDistrict</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.FrState</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mother Name</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrName</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mother Occupation</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrOcc</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Mobile Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrMobNo</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrWhatsapp</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email ID</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrMailid</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrDistrict</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.MrState</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Address 1</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AddressHome1</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Address 2</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AddressHome2</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Area</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.AreaHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Location / Post Office</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.LocationHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">District</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.DistrictHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">State</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.StateHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Pincode</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.PincodeHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Email</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.EmaiIdHome</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Contact number</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickHomeContact</dd>
+                                    <dt class="col-sm-7 h6 text-sm">Quick Whatsapp No</dt>
+                                    <dd class="col-sm-5 text-sm text-right">@Model.GetAllStudentRegistrationByRegId.QuickHomeWhatsapp</dd>
                                 </dl>
                             </div>
                         </div>
-                        <div class="row">
+
+                        <div class="row mt-4">
                             <div class="col-12">
-                                <h5>Product List</h5>
+                                <h5 style="font-size:18px;"> Academic Details</h5>
                                 <!-- Table -->
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="px-0 bg-transparent border-top-0">Description</th>
-                                                <th class="px-0 bg-transparent border-top-0">Hours</th>
-                                                <th class="px-0 bg-transparent border-top-0 text-right">Cost</th>
+                                                <th class="px-0 bg-transparent border-top-0">Class</th>
+                                                <th class="px-0 bg-transparent border-top-0">Pass Year</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">School Address</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Register No</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Board</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Physics Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Chemistry Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Biology Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Mathematics Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Percentage of Mark</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="px-0">
-                                                    <span class="h6 text-sm">Custom theme development</span>
-                                                </td>
-                                                <td class="px-0">
-                                                    125
-                                                </td>
-                                                <td class="px-0 text-right">
-                                                    $6,250
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-0">
-                                                    <span class="h6 text-sm">Logo design</span>
-                                                </td>
-                                                <td class="px-0">
-                                                    15
-                                                </td>
-                                                <td class="px-0 text-right">
-                                                    $750
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-0">
-                                                    <span class="h6 text-sm">Custom theme development</span>
-                                                </td>
-                                                <td class="px-0">
-                                                    125
-                                                </td>
-                                                <td class="px-0 text-right">
-                                                    $6,250
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-0">
-                                                    <span class="h6 text-sm">Logo design</span>
-                                                </td>
-                                                <td class="px-0">
-                                                    15
-                                                </td>
-                                                <td class="px-0 text-right">
-                                                    $750
-                                                </td>
-                                            </tr>
+                                            @foreach (var item in Model.Student_AcademicPerformancebyRegid)
+                                            {
+                                                <tr>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.Class</span>
+                                                    </td>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.PassYear</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.SchoolAddress</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.RegNo</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Board</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.PhyMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.ChemMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.BiologyMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.MathsMark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.PercOfMark</span>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <h5 style="font-size:18px;" class=" mt-4">Previous Entrance Details</h5>
+                                <!-- Table Previous Entrance Details -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-0 bg-transparent border-top-0">Previous Entrance Exam</th>
+                                                <th class="px-0 bg-transparent border-top-0">Roll No</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Attempted Year</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Mark</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">Rank</th>
+                                                <th class="px-0 bg-transparent border-top-0 text-right">No of Attempts</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Student_PreviousEntrancebyRegid)
+                                            {
+                                                <tr>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.PrevEntranceExamName</span>
+                                                    </td>
+                                                    <td class="px-0">
+                                                        <span class="h6 text-sm">@item.RollNo</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.AttemptedYear</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Mark</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.Rank</span>
+                                                    </td>
+                                                    <td class="px-0 text-right">
+                                                        <span class="h6 text-sm">@item.NoOfAttempts</span>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4 justify-content-center text-center">
                     <div class="col-lg-7 col-md-9 mb-5">
-                        <button type="button" class="btn btn-sm btn-primary">Print Application</button>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="window.print();">Print Application</button>
                         <a href="TeacherRegistrations" class="btn btn-sm btn-secondary text-dark font-weight-bold">Back To List</a>
                     </div>
                 </div>
@@ -134,563 +292,22 @@
     </div>
 </section>
 
-<h2>StudentRegView</h2>
 
-<div>
-    <h4>GetAllStudentRegistrationByRegId_Result</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RegId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RegId)
-        </dd>
+@section Scripts {
+    <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExamAttendingYear)
-        </dt>
+                document.body.innerHTML = printContents;
 
-        <dd>
-            @Html.DisplayFor(model => model.ExamAttendingYear)
-        </dd>
+                window.print();
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PreferredDay)
-        </dt>
+                document.body.innerHTML = originalContents;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.PreferredDay)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplnDate)
-        </dt>
+    </script>
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplnDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicYear)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AcademicYear)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AdmissionTestDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AdmissionTestDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PreferredTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PreferredTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WhatsappNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WhatsappNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Religion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Religion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Caste)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Caste)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Community)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Community)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BloodGroup)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BloodGroup)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nationalty)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nationalty)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PresentAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PresentAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Area)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pincode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pincode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuickContNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuickContNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuickWhatsApp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuickWhatsApp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PgmId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PgmId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ClassId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClassId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SubPgmId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SubPgmId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PRegId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PRegId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PCreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PCreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PIsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PIsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrOcc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrOcc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrMobNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrMobNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrMailid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrMailid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrDistrict)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrDistrict)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrSign)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrSign)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FrWhatsapp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FrWhatsapp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrOcc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrOcc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrMobNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrMobNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrMailid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrMailid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrDistrict)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrDistrict)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrSign)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrSign)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MrWhatsapp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MrWhatsapp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressHome1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressHome1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressHome2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressHome2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AreaHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AreaHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmaiIdHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmaiIdHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HCreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HCreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HIsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HIsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DistrictHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DistrictHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PincodeHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PincodeHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuickHomeContact)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuickHomeContact)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuickHomeWhatsapp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuickHomeWhatsapp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StateHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StateHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HregId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HregId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SubpName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SubpName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ClassName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClassName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorseName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorseName)
-        </dd>
-
-    </dl>
-</div>

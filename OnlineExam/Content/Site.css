@@ -99,4 +99,25 @@ body.loaded > div.preloader {
     font-size: initial;
 }
 
+.photo-dis {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
 
+    .photo-dis .inner {
+        margin-right: 10px;
+    }
+
+@media (max-width: 767px) {
+    .photo-dis {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+        .photo-dis .inner {
+            margin-top: 10px;
+        }
+}

@@ -1,7 +1,7 @@
 ﻿@model OnlineExam.DbContext.Teachers_Registration
 
 @{
-    ViewBag.Title = "TeacherRegView";
+    ViewBag.Title = "Teacher Application";
 }
 
 
@@ -18,11 +18,11 @@
                     </div>
                 </div>
 
-                <div class="row align-items-center mt-4">
+                <div class="row align-items-center mt-4" id="printableArea">
                     <div class="card card-body p-md-5">
                         <div class="row align-items-center mb-5">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="../../assets/img/brand/dark.png" alt="" height="30">
+                                @*<img src="../../assets/img/brand/dark.png" alt="" height="30">*@
                             </div>
                             <div class="col-sm-6 text-sm-right">
                                 <h6 class="d-inline-block m-0 d-print-none">Registration ID</h6>
@@ -32,39 +32,53 @@
 
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <h5>Delivery data</h5>
+                                <h5>General Information</h5>
                                 <dl class="row mt-4 align-items-center">
-                                    <dt class="col-sm-3 h6 text-sm">Recipient</dt>
-                                    <dd class="col-sm-9 text-sm">Mike Lowrie</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Phone</dt>
-                                    <dd class="col-sm-9 text-sm">+30-588.90.86</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Street</dt>
-                                    <dd class="col-sm-9 text-sm">8945 Henry Ave. Mankato, MN 56001</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Town</dt>
-                                    <dd class="col-sm-9 text-sm">New York</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Country</dt>
-                                    <dd class="col-sm-9 text-sm">United States</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Email</dt>
-                                    <dd class="col-sm-9 text-sm">example@company.com</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Full Name</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.FirstName @Model.MiddleName @Model.LastName</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Address</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Address</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Location</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Location</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Street</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Street</dd>
+                                    <dt class="col-sm-5 h6 text-sm">District</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.District</dd>
+                                    <dt class="col-sm-5 h6 text-sm">State</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.State</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Country</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Country</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Whatsapp Number</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.WhatsApp</dd>
                                 </dl>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h5>Invoice data</h5>
+                                <h5>Teaching information</h5>
                                 <dl class="row mt-4 align-items-center">
-                                    <dt class="col-sm-3 h6 text-sm">Buyer</dt>
-                                    <dd class="col-sm-9 text-sm">Mike Lowrie</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Phone</dt>
-                                    <dd class="col-sm-9 text-sm">+30-588.90.86</dd>
-                                    <dt class="col-sm-3 h6 text-sm">Street</dt>
-                                    <dd class="col-sm-9 text-sm">8945 Henry Ave. Mankato, MN 56001</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Primary Subject</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.PrimarySubject</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Secondary Subject</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.SecondarySubject</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Student Grades</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.StudentGrade</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Weekdays</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Weekdays Hours</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Weekends</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Weekends Hours</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Available Timings</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Time</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Post Office</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.PO</dd>
+                                    <dt class="col-sm-5 h6 text-sm">Email</dt>
+                                    <dd class="col-sm-7 text-sm">@Model.Email</dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-4 justify-content-center text-center">
+                <div class="row mt-4 justify-content-center text-center print_btns">
                     <div class="col-lg-7 col-md-9 mb-5">
-                        <button type="button" class="btn btn-sm btn-primary">Print Application</button>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="printDiv('printableArea')">Print Application</button>
                         <a href="TeacherRegistrations" class="btn btn-sm btn-secondary text-dark font-weight-bold">Back To List</a>
                     </div>
                 </div>
@@ -74,187 +88,17 @@
 </section>
 
 
-<h2>TeacherRegView</h2>
+@section Scripts {
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
 
-<div>
-    <h4>Teachers_Registration</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TeachRegId)
-        </dt>
+            document.body.innerHTML = printContents;
 
-        <dd>
-            @Html.DisplayFor(model => model.TeachRegId)
-        </dd>
+            window.print();
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WhatsApp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WhatsApp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PrimarySubject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PrimarySubject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SecondarySubject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SecondarySubject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletedDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletedDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentGrade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentGrade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weekdays)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weekdays)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weekends)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weekends)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-    </dl>
-</div>
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

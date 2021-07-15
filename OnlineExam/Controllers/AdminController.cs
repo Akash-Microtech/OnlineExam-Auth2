@@ -1196,7 +1196,19 @@ namespace OnlineExam.Controllers
         public ActionResult StudentRegView(string regId)
         {
             var data = db.GetAllStudentRegistrationByRegId(regId).FirstOrDefault();
-            return View(data);
+            var data1 = db.Student_AcademicPerformancebyRegid(regId).ToList();
+            var data2 = db.Student_PreviousEntrancebyRegid(regId).ToList();
+
+
+            StudentRegPdfViewModel student = new StudentRegPdfViewModel()
+            {
+                GetAllStudentRegistrationByRegId = data,
+                Student_AcademicPerformancebyRegid = data1,
+                Student_PreviousEntrancebyRegid = data2
+
+            };
+
+            return View(student);
         }
 
         public ActionResult TeacherRegistrations()

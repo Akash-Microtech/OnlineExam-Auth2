@@ -934,6 +934,7 @@
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
+    <Compile Include="ViewModel\ExamCreateViewModel.cs" />
     <Compile Include="ViewModel\ExamViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />
@@ -946,6 +947,7 @@
     <Compile Include="ViewModel\StudentDashboardViewModel.cs" />
     <Compile Include="ViewModel\StudentPreviousEntranceViewModel.cs" />
     <Compile Include="ViewModel\StudentRegistrationViewModel.cs" />
+    <Compile Include="ViewModel\StudentRegPdfViewModel.cs" />
     <Compile Include="ViewModel\SubjectViewModel.cs" />
     <Compile Include="ViewModel\SubProgramViewModel.cs" />
     <Compile Include="ViewModel\TeacherDashboardViewModel.cs" />

@@ -1,4 +1,4 @@
-﻿@model OnlineExam.DbContext.Exam
+﻿@model OnlineExam.ViewModel.ExamCreateViewModel
 @using OnlineExam.Authentication
 
 @{
@@ -55,9 +55,17 @@
                             }
                             <div>
                                 <h5 class="mb-3">Create Exam</h5>
-                                <form id="qsAs" method="post" enctype="multipart/form-data">
+                                <form id="CreateExam" method="post" enctype="multipart/form-data">
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(model => model.Id)
+
+                                    @Html.HiddenFor(model => model.QnIds)
+                                    @Html.ValidationMessageFor(model => model.QnIds, "", new { @class = "error" })
+                                    <label id="QnIds-error" class="error" for="QnIds" style="display:none;"></label><br />
+
+                                    @Html.HiddenFor(model => model.IsDataEntryQn)
+                                    @Html.ValidationMessageFor(model => model.IsDataEntryQn, "", new { @class = "error" })
+                                    <label id="IsDataEntryQn-error" class="error" for="IsDataEntryQn" style="display:none;"></label>
 
                                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                     {
@@ -77,7 +85,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="form-control-label">Class</label>
-                                                @Html.DropDownList("ClassID", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("ClassId", null, "Select Class", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "error" })
                                                 <label id="ClassId-error" class="error" for="ClassId" style="display:none;"></label>
                                             </div>
@@ -85,7 +93,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="form-control-label">Subject</label>
-                                                @Html.DropDownList("SubjectID", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("SubjectId", null, "Select Subject", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "error" })
                                                 <label id="SubjectId-error" class="error" for="SubjectId" style="display:none;"></label>
                                             </div>
@@ -96,7 +104,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">Programme</label>
-                                                @Html.DropDownList("ProgramID", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("PgmId", null, "Select Programme", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.PgmId, "", new { @class = "error" })
                                                 <label id="PgmId-error" class="error" for="PgmId" style="display:none;"></label>
                                             </div>
@@ -104,7 +112,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">Course</label>
-                                                @Html.DropDownList("CourseID", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
                                                 <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
                                             </div>
@@ -112,7 +120,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">Group</label>
-                                                @Html.DropDownList("Group", null, "Select Group", htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("ExGroupId", null, "Select Group", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.ExGroupId, "", new { @class = "error" })
                                                 <label id="ExGroupId-error" class="error" for="ExGroupId" style="display:none;"></label>
                                             </div>
@@ -153,7 +161,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row align-items-center">
+                                    <div class="row align-items-center my-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">Questions</label>
@@ -173,7 +181,7 @@
 
                                     <link rel="stylesheet" type="text/css" href="~/Theme/assets/libs/datatable/css/tables/datatable/datatables.min.css">
 
-                                    <div class="row align-items-center" style="display:none;" id="qsasArea" >
+                                    <div class="row align-items-center" style="display:none;" id="qsasArea">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="mt-3 text-center">
@@ -200,6 +208,38 @@
                                                     <div class="text-right">
 
                                                         <input class="btn btn-sm btn-warning" type="button" id="Confirm" value="Confirm" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center" style="display:none;" id="selectedArea">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="mt-3 text-center">
+                                                    <h6 class="h4 mb-1">Selected Questions</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="py-3 table-responsive">
+                                                        <table id="selectedqns" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="theadres_info">
+                                                            <thead>
+                                                                <tr role="row">
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;"></th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="max-width: 500px;">Questions</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Ans</th>
+                                                                    <th class="sorting" tabindex="0" aria-controls="theadres" rowspan="1" colspan="1" style="width: 0px;">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="fromDtpQsBank_body">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="text-right">
+
+                                                        <input class="btn btn-sm btn-outline-success" type="button" id="selectEdit" value="Edit Selected QsAs" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +280,7 @@
     <script>
         jQuery(document).ready(function () {
 
-            $("#ClassID").change(function () {
+            $("#ClassId").change(function () {
                 var id = $(this).find(":selected").val()
                 var selectid = { "id": id }
 
@@ -250,20 +290,20 @@
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        $("#CourseID").empty();
-                        $("#CourseID").append('<option value="">Select Course</option>');
+                        $("#CourseId").empty();
+                        $("#CourseId").append('<option value="">Select Course</option>');
 
                         $.each(data, function (i) {
                             var optionhtml = '<option value="' +
                                 data[i].Value + '">' + data[i].Text + '</option>';
-                            $("#CourseID").append(optionhtml);
+                            $("#CourseId").append(optionhtml);
                         });
                     }
                 });
 
             });
 
-            $("#SubjectID").change(function () {
+            $("#SubjectId").change(function () {
                 var id = $(this).find(":selected").val()
                 var selectid = { "id": id }
 
@@ -273,42 +313,77 @@
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        $("#Group").empty();
-                        $("#Group").append('<option value="">Select Group</option>');
+                        $("#ExGroupId").empty();
+                        $("#ExGroupId").append('<option value="">Select Group</option>');
 
                         $.each(data, function (i) {
                             var optionhtml = '<option value="' +
                                 data[i].Value + '">' + data[i].Text + '</option>';
-                            $("#Group").append(optionhtml);
+                            $("#ExGroupId").append(optionhtml);
                         });
                     }
                 });
 
             });
 
+            $('#FromDate').focus(function () {
+                Datepicker = function () {
+                    var t = $('#FromDate')
+
+                    t.length && t.each(function () {
+                        !function (t) {
+                            t.flatpickr({
+                                enableTime: !1,
+                                allowInput: !0
+                            })
+                        }($(this))
+                    })
+                }()
+            });
+
+            $('#ToDate').focus(function () {
+                Datepicker = function () {
+                    var t = $('#ToDate')
+
+                    t.length && t.each(function () {
+                        !function (t) {
+                            t.flatpickr({
+                                enableTime: !1,
+                                allowInput: !0
+                            })
+                        }($(this))
+                    })
+                }()
+            });
+
 
 
             $("#customRadioInline1").change(function () {
-                GetEntrance();
+                GetQsAsBank();
+                $('#IsDataEntryQn').val(1);
+            });
+
+            $("#customRadioInline2").change(function () {
+                GetManual();
+                $('#IsDataEntryQn').val(0);
             });
         });
     </script>
 
-
     <script>
-        function GetEntrance() {
+        function GetQsAsBank() {
 
             var i = 1;
-            dataTable2 = $("#fromDtpQsBank").DataTable({
+            dataTable1 = $("#fromDtpQsBank").DataTable({
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
                     "url": "GetQnFromQnBank",
                     "type": "POST",
                     "data": {
-                        "pgmId": $("#ProgramID").find(":selected").val(),
-                        "courseId": $("#CourseID").find(":selected").val(),
-                        "subjectId": $("#SubjectID").find(":selected").val()
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val()
                     },
                     "datatype": "json",
                     "dataSrc": ""
@@ -316,7 +391,7 @@
                 "columns": [
                     {
                         "render": function (data, type, full, meta) {
-                            return i++;
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
                         }
                     },
                     {
@@ -333,15 +408,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                    <div class="row text-center">
-                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                            <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                        </div>
-                                        <a href="javascript:void(0)" class="action-item mr-2">
-                                            <i class="fa fa-eye fa-1x text-success"></i>
-                                        </a>
-                                    </div>`;
+                                            <div class="row text-center">
+                                                 <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                </div>
+                                                <a href="javascript:void(0)" class="action-item mr-2">
+                                                    <i class="fa fa-eye fa-1x text-success"></i>
+                                                </a>
+                                            </div>`;
                         }
                     }
                 ],
@@ -356,4 +431,221 @@
         }
     </script>
 
+
+    <script>
+        function GetManual() {
+
+            var i = 1;
+            dataTable2 = $("#fromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "GetManualQn",
+                    "type": "POST",
+                    "data": {
+                        "CreatedBy": $("#CuserId").val(),
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val()
+                    },
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                return full.Questions;
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                            <div class="row text-center">
+                                                 <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                </div>
+                                                <a href="javascript:void(0)" class="action-item mr-2">
+                                                    <i class="fa fa-eye fa-1x text-success"></i>
+                                                </a>
+                                            </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#qsasArea').show();
+
+        }
+    </script>
+
+
+    <script>
+        $("#Confirm").on("click", function () {
+            var qnidtextbox = '';
+            $('#selectedqns tbody').empty();
+            $('#selectedArea').show();
+            $('#qsasArea').hide();
+
+            var qns = new Array();
+            $("#fromDtpQsBank_body tr").each(function () {
+
+                var row = $(this).has("input[type=checkbox]:checked");
+                var qn = {};
+                qn.Slno = row.find("TD").eq(0).html();
+                qn.Questions = row.find("TD").eq(1).html();
+                qn.Mark = row.find("TD").eq(2).html();
+                qn.QnId = row.find('TD input[type="hidden"]').eq(0).val();
+
+                qns.push(qn);
+
+                var table = $("#selectedqns");
+                if (row.length != 0) {
+                    table.append("<tr><td>" + qn.Slno + "</td><td>" + qn.Questions + "</td><td>" + qn.Mark + "</td><td><a href='javascript:void(0)' class='action-item mr-2'><i class='fa fa-eye fa-1x text-danger'></i></a></td></tr>");
+                    $('#QnIds').val(qnidtextbox + qn.QnId + '|');
+                    qnidtextbox = $('#QnIds').val();
+                }
+
+                $('#selectedqns').DataTable();
+            });
+        });
+
+        $("#selectEdit").on("click", function () {
+            $('#selectedArea').hide();
+            $('#qsasArea').show();
+        });
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#CreateExam').validate({
+                rules: {
+                    QnIds: {
+                        required: true
+                    },
+                    Name: {
+                        required: true
+                    },
+                    ClassId: {
+                        required: true,
+                        digits: true
+                    },
+                    SubjectId: {
+                        required: true,
+                        digits: true
+                    },
+                    PgmId: {
+                        required: true,
+                        digits: true
+                    },
+                    CourseId: {
+                        required: true,
+                        digits: true
+                    },
+                    ExGroupId: {
+                        required: true,
+                        digits: true
+                    },
+                    FromDate: {
+                        required: true
+                    },
+                    ToDate: {
+                        required: true
+                    },
+                    ExamTime: {
+                        required: true,
+                        digits: true
+                    },
+                    TotalMark: {
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages: {
+                    QnIds: {
+                        required: 'Please Select Questions'
+                    },
+                    Name: {
+                        required: 'Please enter Exam Name'
+                    },
+                    ClassId: {
+                        required: 'Please Select Class'
+                    },
+                    CourseId: {
+                        required: 'Please Select Course'
+                    },
+                    SubjectId: {
+                        required: 'Please Select Subject'
+                    },
+                    ExGroupId: {
+                        required: 'Please Select Group'
+                    },
+                    PgmId: {
+                        required: 'Please Select Programme'
+                    },
+                    FromDate: {
+                        required: 'Select From Date'
+                    },
+                    ToDate: {
+                        required: 'Select To Date'
+                    },
+                    ExamTime: {
+                        required: 'Enter Exam Time'
+                    },
+                    TotalMark: {
+                        required: 'Enter Total Mark'
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+
+                    var data = element.id;
+                    $("#" + data).addClass("is-invalid");
+                    $("." + data).css({ 'border-color': '#f25767' });
+                    $(".error" + data + "-error").show();
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    var data = element.id;
+                    $("#" + data).removeClass("is-invalid");
+                    $("." + data).css({ 'border-color': '' });
+                    $("." + data + "-error").hide();
+                },
+                submitHandler: function (form) {
+
+                    var qsId = $('#QnIds').val();
+                    var isDataen = $('#IsDataEntryQn').val();
+
+                    if (qsId == "" || isDataen == "") {
+
+                        Swal.fire(
+                            'Questions ?',
+                            'Please Select From Question Bank or Manually',
+                            'question'
+                        )
+                    }
+                    else {
+                        form.submit();
+                    }                    
+                                         
+                }
+            });
+        });
+    </script>
 }
