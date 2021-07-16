@@ -39,6 +39,7 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public string ExamTime { get; set; }
         public int TotalMark { get; set; }
+        public int QsAsFrom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exam_QnTable> Exam_QnTable { get; set; }

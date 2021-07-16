@@ -319,9 +319,10 @@ namespace OnlineExam.Controllers
 
                 ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
                 ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", data.ClassId);
-                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
                 ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
-                ViewBag.ExGroupId = new SelectList(db.Groups.Where(p => p.IsDeleted == 0), "Id", "GroupName", data.ExGroupId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == data.ClassId), "Id", "Name", data.CourseId);
+                ViewBag.ExGroupId = new SelectList(db.Groups.Where(p => p.IsDeleted == 0 && p.SubjectId == data.SubjectId), "Id", "GroupName", data.ExGroupId);
+
 
                 return View(viewModel);
             }
@@ -346,18 +347,6 @@ namespace OnlineExam.Controllers
         public ActionResult GetGroup(int id)
         {
             var result = new SelectList(db.Groups.Where(r => r.SubjectId == id && r.IsDeleted == 0), "Id", "GroupName");
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetQnFromQnBank(Exam exam)
-        {
-            var result = db.DataEntry_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetManualQn(Exam exam)
-        {
-            var result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

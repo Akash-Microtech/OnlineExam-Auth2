@@ -13,11 +13,11 @@ namespace OnlineExam.Api
     {
         private readonly Exam_DBEntities db = new Exam_DBEntities();
 
-        [Route("api/Exam/QsAs/{id:int}")]
+        [Route("api/Exam/QsAs/{id:int}/{fromId:int}")]
         [ResponseType(typeof(GetAllQusByExamId_Result))]
-        public IHttpActionResult GetExamQsAs(int id)
+        public IHttpActionResult GetExamQsAs(int id, int fromId)
         {
-            List<GetAllQusByExamId_Result> GetAllQusByExamId = db.GetAllQusByExamId(id).ToList();
+            List<GetAllQusByExamId_Result> GetAllQusByExamId = db.GetAllQusByExamId(id, fromId).ToList();
             return Ok(GetAllQusByExamId);
         }
 
@@ -56,6 +56,25 @@ namespace OnlineExam.Api
             db.SaveChanges();
 
             return Ok(exam_Qn);
+        }
+
+        [HttpPost]
+        [Route("api/Exam/GetQsAsBank")]
+        [ResponseType(typeof(Student_AcademicPerformance))]
+        public IHttpActionResult GetQsAsFromQnBank(Exam exam)
+        {
+            List<DataEntry_QuestionBank> result = db.DataEntry_QuestionBank
+                .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList();
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("api/Exam/GetQsAsManual")]
+        [ResponseType(typeof(Student_AcademicPerformance))]
+        public IHttpActionResult GetQsAsFromManual(Exam exam)
+        {
+            List<Teachers_QuestionBank> result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
+            return Ok(result);
         }
     }
 }

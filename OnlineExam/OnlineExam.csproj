@@ -119,6 +119,8 @@
       <DependentUpon>OnlineExam.edmx</DependentUpon>
       <LastGenOutput>OnlineExam.cs</LastGenOutput>
     </Content>
+    <Content Include="Theme\assets\img\svg\icons\Call_Out.svg" />
+    <Content Include="Theme\assets\img\svg\icons\Email.svg" />
     <Content Include="Theme\exam\css\exam.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DbContext\role.Context.tt">
@@ -932,6 +934,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AttendExamViewModel.cs" />
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
@@ -1029,6 +1032,7 @@
     <Content Include="Views\Teacher\Exam.cshtml" />
     <Content Include="Views\Admin\StudentRegView.cshtml" />
     <Content Include="Views\Admin\TeacherRegView.cshtml" />
+    <Content Include="Views\Student\Support.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

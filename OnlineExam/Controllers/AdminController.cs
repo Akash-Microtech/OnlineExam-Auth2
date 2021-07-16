@@ -1233,19 +1233,13 @@ namespace OnlineExam.Controllers
         {
             if (id == null)
             {
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
-                ViewBag.PgmId = pro;
-                var cou = new SelectList(db.Classes.Where(c => c.IsDeleted == 0), "Id", "Name");
-                ViewBag.ClassId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
-                ViewBag.SubjectId = subj;
-                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
-                ViewBag.TeacherId = teach;
-                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
-                ViewBag.StudentId = stud;
-                var sub = new SelectList(Enumerable.Empty<SelectListItem>());
-                ViewBag.SubPgmId = sub;
-                ViewBag.CourseId = sub;
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
+                ViewBag.ClassId = new SelectList(db.Classes.Where(c => c.IsDeleted == 0), "Id", "Name");
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
+                ViewBag.TeacherId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.StudentId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
+                ViewBag.SubPgmId = new SelectList(Enumerable.Empty<SelectListItem>());
+                ViewBag.CourseId = new SelectList(Enumerable.Empty<SelectListItem>());
             }
             else
             {
@@ -1261,16 +1255,12 @@ namespace OnlineExam.Controllers
                     CourseId = data.CourseId,
                     SubjectId = data.SubjectId,
                 };
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
-                ViewBag.PgmId = pro;
-                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", data.SubPgmId);
-                ViewBag.SubPgmId = sub;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
-                ViewBag.SubjectId = subj;
-                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", data.ClassId);
-                ViewBag.ClassId = chap;
+
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", data.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == data.ClassId), "Id", "Name", data.CourseId);
+                ViewBag.SubPgmId = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0 && p.PgmId == data.PgmId), "Id", "Name", data.SubPgmId);
 
 
                 var dteach = db.Group_Teacher.Where(d => d.GroupId == id).ToList();
@@ -1394,20 +1384,14 @@ namespace OnlineExam.Controllers
                     }
                 }
 
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
-                ViewBag.PgmId = pro;
-                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.SubPgmId);
-                ViewBag.SubPgmId = sub;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", groupView.CourseId);
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
-                ViewBag.SubjectId = subj;
-                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
-                ViewBag.ClassId = chap;
-                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
-                ViewBag.TeacherId = teach;
-                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
-                ViewBag.StudentId = stud;
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == groupView.ClassId), "Id", "Name", groupView.CourseId);
+                ViewBag.SubPgmId = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0 && p.PgmId == groupView.PgmId), "Id", "Name", groupView.SubPgmId);
+
+                ViewBag.TeacherId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.StudentId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
                 return View(groupView);
@@ -1460,21 +1444,14 @@ namespace OnlineExam.Controllers
                     return RedirectToAction("Groups");
                 }
 
-                var pro = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
-                ViewBag.PgmId = pro;
-                var sub = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.SubPgmId);
-                ViewBag.SubPgmId = sub;
-                var cou = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", groupView.CourseId);
-                ViewBag.CourseId = cou;
-                var subj = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
-                ViewBag.SubjectId = subj;
-                var chap = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
-                ViewBag.ClassId = chap;
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.PgmId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", groupView.SubjectId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", groupView.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == groupView.ClassId), "Id", "Name", groupView.CourseId);
+                ViewBag.SubPgmId = new SelectList(db.SubPrograms.Where(p => p.IsDeleted == 0 && p.PgmId == groupView.PgmId), "Id", "Name", groupView.SubPgmId);
 
-                var teach = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
-                ViewBag.TeacherId = teach;
-                var stud = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
-                ViewBag.StudentId = stud;
+                ViewBag.TeacherId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
+                ViewBag.StudentId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
 
                 ViewBag.ErrorMessage = "Please fill in all the required fields";
                 return View(groupView);

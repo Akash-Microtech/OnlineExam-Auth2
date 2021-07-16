@@ -32,6 +32,7 @@ namespace OnlineExam.DbContext
         public System.DateTime DeletedDateTime { get; set; }
         public string ExamTime { get; set; }
         public int TotalMark { get; set; }
+        public int QsAsFrom { get; set; }
         public string PName { get; set; }
         public string ClassName { get; set; }
         public string SubjectName { get; set; }

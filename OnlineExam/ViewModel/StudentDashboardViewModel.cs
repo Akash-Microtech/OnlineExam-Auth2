@@ -9,6 +9,7 @@ namespace OnlineExam.ViewModel
     public class StudentDashboardViewModel
     {
         public List<GetExamByUserId_Result> GetExamByUserId { get; set; }
+        public int StudentId { get; set; }
 
     }
 }

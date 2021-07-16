@@ -1,7 +1,12 @@
 ﻿@model OnlineExam.DbContext.GetAllExamById_Result
+@using OnlineExam.Authentication
 
 @{
     ViewBag.Title = "Instructions";
+
+    int time = Convert.ToInt32(Model.ExamTime);
+    int min = time * 60;
+
 }
 
 <div class="container d-flex align-items-center text-center text-lg-left py-5 py-lg-5 border-bottom">
@@ -22,7 +27,7 @@
 
                 <div class="mb-5">
                     <h5 id="item-1">General Instructions</h5>
-                    <p>1. Total duration of NEET - PHYSICS is 180 min.</p>
+                    <p>1. Total duration of @Model.Name is @min min.</p>
                     <p>2. The clock will be set at the server. The countdown timer in the top right corner of screen will display the remaining time available for you to complete the examination. When the timer reaches zero, the examination will end by itself. You will not be required to end or submit your examination.</p>
                     <p>3. The Questions Palette displayed on the right side of screen will show the status of each question using one of the following symbols:</p>
                     <ol>
@@ -91,12 +96,27 @@
 
                 <div class="mb-5">
                     <div class="row mb-5 justify-content-center text-center">
-                        <button type="button" class="btn btn-success btn-sm btn-icon" onclick="check_instruction('1');">
-                            <span class="btn-inner--text">Proceed To Exam</span>
-                            <span class="btn-inner--icon">
-                                <i data-feather="arrow-right"></i>
-                            </span>
-                        </button>
+                       
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="id" name="id" value="@Model.Id" />
+                            <input type="hidden" id="Name" name="Name" value="@ViewBag.AttendData" />
+
+                            if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                <input type="hidden" id="ExGroupId" name="ExGroupId" value="@identity.UserId" />
+                            }
+
+                            <button type="submit" class="btn btn-success btn-sm btn-icon">
+                                <span class="btn-inner--text">Proceed To Exam</span>
+                                <span class="btn-inner--icon">
+                                    <i data-feather="arrow-right"></i>
+                                </span>
+                            </button>
+                        }
                     </div>
                 </div>
 

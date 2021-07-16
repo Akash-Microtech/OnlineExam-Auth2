@@ -129,6 +129,7 @@
           <Property Name="DeletedDateTime" Type="datetime" Nullable="false" />
           <Property Name="ExamTime" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TotalMark" Type="int" Nullable="false" />
+          <Property Name="QsAsFrom" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Exam_QnTable">
           <Key>
@@ -543,6 +544,7 @@
         <Function Name="GetAllGroupList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllQusByExamId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="From" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAllStudentRegistrationByRegId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RegId" Type="varchar" Mode="In" />
@@ -762,6 +764,7 @@
           <Property Name="DeletedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExamTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TotalMark" Type="Int32" Nullable="false" />
+          <Property Name="QsAsFrom" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Exam_QnTable" Relationship="Self.FK_Exam_QnTable_Exam" FromRole="Exam" ToRole="Exam_QnTable" />
         </EntityType>
         <EntityType Name="Exam_QnTable">
@@ -1202,6 +1205,7 @@
           <FunctionImport Name="GetAllGroupList" ReturnType="Collection(Exam_DBModel.GetAllGroupList_Result)" />
           <FunctionImport Name="GetAllQusByExamId" ReturnType="Collection(Exam_DBModel.GetAllQusByExamId_Result)">
             <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="From" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllStudentRegistrationByRegId" ReturnType="Collection(Exam_DBModel.GetAllStudentRegistrationByRegId_Result)">
             <Parameter Name="RegId" Mode="In" Type="String" />
@@ -1353,6 +1357,7 @@
           <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
           <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
@@ -1378,6 +1383,7 @@
           <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
           <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
@@ -1602,6 +1608,7 @@
           <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
           <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
@@ -1630,6 +1637,7 @@
           <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
           <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
@@ -1884,6 +1892,7 @@
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
                 <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2346,6 +2355,7 @@
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
                 <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
@@ -2375,6 +2385,7 @@
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
                 <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
@@ -2627,6 +2638,7 @@
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
                 <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
@@ -2659,6 +2671,7 @@
                 <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
                 <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
                 <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />

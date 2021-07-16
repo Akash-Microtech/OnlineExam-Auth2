@@ -315,7 +315,7 @@
                 var selectid = { "id": id }
 
                 $.ajax({
-                    url: "../GetCourseWiseClass",
+                    url: "../Teacher/GetCourseWiseClass",
                     data: JSON.stringify(selectid),
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -338,7 +338,7 @@
                 var selectid = { "id": id }
 
                 $.ajax({
-                    url: "../GetGroup",
+                    url: "../Teacher/GetGroup",
                     data: JSON.stringify(selectid),
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -472,14 +472,15 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "../../Teacher/GetQnFromQnBank",
+                    "url": "../api/Exam/GetQsAsBank",
                     "type": "POST",
                     "data": {
                         "pgmId": $("#PgmId").find(":selected").val(),
                         "CourseId": $("#CourseId").find(":selected").val(),
                         "subjectId": $("#SubjectId").find(":selected").val()
                     },
-                    "datatype": "json",
+                    "dataType": 'json',
+                    "Content-Type": 'application/json',
                     "dataSrc": ""
                 },
                 "columns": [
@@ -534,7 +535,7 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "../../Teacher/GetManualQn",
+                    "url": "~/api/Exam/GetQsAsManual",
                     "type": "POST",
                     "data": {
                         "CreatedBy": $("#CuserId").val(),
