@@ -59,6 +59,10 @@
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(model => model.Id)
 
+                                    @Html.HiddenFor(model => model.QsAsFrom)
+                                    @Html.ValidationMessageFor(model => model.QsAsFrom, "", new { @class = "error" })
+                                    <label id="QsAsFrom-error" class="error" for="QsAsFrom" style="display:none;"></label><br />
+
                                     @Html.HiddenFor(model => model.QnIds)
                                     @Html.ValidationMessageFor(model => model.QnIds, "", new { @class = "error" })
                                     <label id="QnIds-error" class="error" for="QnIds" style="display:none;"></label><br />
@@ -207,8 +211,12 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <div class="text-right">
-
-                                                        <input class="btn btn-sm btn-warning" type="button" id="Confirm" value="Confirm" />
+                                                        <button type="button" class="btn btn-outline-warning btn-sm btn-icon" id="Confirm">
+                                                            <span class="btn-inner--text">Confirm</span>
+                                                            <span class="btn-inner--icon">
+                                                                <i data-feather="check"></i>
+                                                            </span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,8 +247,12 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <div class="text-right">
-
-                                                        <input class="btn btn-sm btn-outline-success" type="button" id="selectEdit" value="Edit Selected QsAs" />
+                                                        <button type="button" class="btn btn-outline-success btn-sm btn-icon" id="selectEdit">
+                                                            <span class="btn-inner--text">Edit Selected QsAs</span>
+                                                            <span class="btn-inner--icon">
+                                                                <i data-feather="edit"></i>
+                                                            </span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,6 +282,16 @@
                                                             </table>
                                                         </div>
                                                     </div>
+                                                    <div class="card-footer">
+                                                        <div class="text-right">
+                                                            <button type="button" class="btn btn-outline-success btn-sm btn-icon" id="AddMoreQsAs">
+                                                                <span class="btn-inner--text">Add More QsAs</span>
+                                                                <span class="btn-inner--icon">
+                                                                    <i data-feather="plus"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -277,7 +299,7 @@
 
 
                                     <div class="mt-3 text-right">
-                                        <a href="Exams" class="btn btn-sm btn-secondary">Cancel</a>
+                                        <a href="/Teacher/Exams" class="btn btn-sm btn-secondary">Cancel</a>
                                         <button type="submit" class="btn btn-sm btn-primary">Save</button>
                                     </div>
                                 </form>
@@ -294,9 +316,34 @@
 </div>
 
 
+<div class="modal fade docs-example-modal-lg" id="viewQsas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h6" id="myLargeModalLabel">View Question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="gifLoader text-center">
+                    <img alt="Image" src="~/Theme/assets/img/gif/Book.gif" class="avatar  avatar-lg mb-3"><br />
+                    <p class="d-inline-block text-sm text-muted mb-3 text-underline--dashed">Please wait until content is fully loaded</p>
+                </div>
+                <div class="dataShow">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
 
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="~/Theme/assets/libs/feather-icons/dist/feather.min.js"></script>
+
+    <script src="~/Theme/assets/jquery-ui.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/pdfmake.min.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/vfs_fonts.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
@@ -389,14 +436,41 @@
 
 
             $("#customRadioInline1").change(function () {
-                GetQsAsBank();
-                $('#IsDataEntryQn').val(1);
+                var pgmId = $("#PgmId").find(":selected").val();
+                var CourseId = $("#CourseId").find(":selected").val();
+                var subjectId = $("#SubjectId").find(":selected").val()
+                if (pgmId != '' && CourseId != '' && subjectId != '') {
+                    GetQsAsBank();
+                    $('#IsDataEntryQn').val(1);
+                    $('#QsAsFrom').val(1);
+                }
+                else {
+                    Swal.fire(
+                        'Please Select ?',
+                        'Programme, Course and Subject',
+                        'question'
+                    )
+                }
             });
 
             $("#customRadioInline2").change(function () {
-                GetManual();
-                $('#IsDataEntryQn').val(0);
+                var pgmId = $("#PgmId").find(":selected").val();
+                var CourseId = $("#CourseId").find(":selected").val();
+                var subjectId = $("#SubjectId").find(":selected").val()
+                if (pgmId != '' && CourseId != '' && subjectId != '') {
+                    GetManual();
+                    $('#IsDataEntryQn').val(0);
+                    $('#QsAsFrom ').val(0);
+                }
+                else {
+                    Swal.fire(
+                        'Please Select ?',
+                        'Programme, Course and Subject',
+                        'question'
+                    )
+                }
             });
+            
         });
     </script>
 
@@ -406,8 +480,7 @@
 
             var id = $('#Id').val();
 
-            if(id != '')
-            {
+            if (id != '') {
                 GetEditQsAs();
             }
         });
@@ -419,7 +492,7 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "../../api/Exam/QsAs/" + $('#Id').val(),
+                    "url": "../../api/Exam/QsAs/" + $('#Id').val() + '/' + $('#QsAsFrom').val(),
                     "type": "GET",
                     "datatype": "json",
                     "dataSrc": ""
@@ -443,13 +516,13 @@
                     {
                         "render": function (data, type, full, meta) {
                             return `<div class="row text-center">
-                                       <a href="javascript:void(0)" class="action-item mr-2">
-                                          <i class="fa fa-eye fa-1x text-success"></i>
-                                       </a>
-                                       <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
-                                          <i class="fa fa-trash text-danger"></i>
-                                       </a>
-                                   </div>`;
+                                               <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${full.Id}')">
+                                                   <i class="fa fa-eye fa-1x text-success"></i>
+                                               </a>
+                                               <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
+                                                  <i class="fa fa-trash text-danger"></i>
+                                               </a>
+                                           </div>`;
                         }
                     }
                 ],
@@ -503,15 +576,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                                    <div class="row text-center">
-                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                            <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                        </div>
-                                                        <a href="javascript:void(0)" class="action-item mr-2">
-                                                            <i class="fa fa-eye fa-1x text-success"></i>
-                                                        </a>
-                                                    </div>`;
+                                                            <div class="row text-center">
+                                                                 <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                </div>
+                                                                <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${data}')">
+                                                                    <i class="fa fa-eye fa-1x text-success"></i>
+                                                                </a>
+                                                            </div>`;
                         }
                     }
                 ],
@@ -535,7 +608,7 @@
                 "bDestroy": true,
                 "ordering": false,
                 "ajax": {
-                    "url": "~/api/Exam/GetQsAsManual",
+                    "url": "../api/Exam/GetQsAsManual",
                     "type": "POST",
                     "data": {
                         "CreatedBy": $("#CuserId").val(),
@@ -566,15 +639,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                                    <div class="row text-center">
-                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                            <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                        </div>
-                                                        <a href="javascript:void(0)" class="action-item mr-2">
-                                                            <i class="fa fa-eye fa-1x text-success"></i>
-                                                        </a>
-                                                    </div>`;
+                                                            <div class="row text-center">
+                                                                 <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                </div>
+                                                                <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
+                                                                    <i class="fa fa-eye fa-1x text-success"></i>
+                                                                </a>
+                                                            </div>`;
                         }
                     }
                 ],
@@ -592,10 +665,10 @@
 
     <script>
         $("#Confirm").on("click", function () {
+
+
             var qnidtextbox = '';
             $('#selectedqns tbody').empty();
-            $('#selectedArea').show();
-            $('#qsasArea').hide();
 
             var qns = new Array();
             $("#fromDtpQsBank_body tr").each(function () {
@@ -611,13 +684,29 @@
 
                 var table = $("#selectedqns");
                 if (row.length != 0) {
-                    table.append("<tr><td>" + qn.Slno + "</td><td>" + qn.Questions + "</td><td>" + qn.Mark + "</td><td><a href='javascript:void(0)' class='action-item mr-2'><i class='fa fa-eye fa-1x text-danger'></i></a></td></tr>");
+                    table.append("<tr><td>" + qn.Slno + "</td><td>" + qn.Questions + "</td><td>" + qn.Mark + "</td><td><a href='javascript:void(0)' class='action-item mr-2' onclick='ViewQsAs(" + qn.QnId + ")'><i class='fa fa-eye fa-1x text-danger'></i></a></td></tr>");
                     $('#QnIds').val(qnidtextbox + qn.QnId + '|');
                     qnidtextbox = $('#QnIds').val();
                 }
 
                 $('#selectedqns').DataTable();
             });
+
+            var qnIds = $('#QnIds').val();
+
+            if (qnIds != "") {
+
+                $('#selectedArea').show();
+                $('#qsasArea').hide();
+            }
+            else {
+                Swal.fire(
+                    'Questions Select ?',
+                    'Please select Questions from the list.',
+                    'question'
+                )
+            }
+
         });
 
         $("#selectEdit").on("click", function () {
@@ -728,8 +817,7 @@
                     var isDataen = $('#IsDataEntryQn').val();
                     var qsId = $('#QnIds').val();
 
-                    if (id != "")
-                    {
+                    if (id != "") {
                         form.submit();
                     }
                     else if (qsId == "" || isDataen == "") {
@@ -781,9 +869,50 @@
                         error: function () {
                             alert("Error while deleting data");
                         }
-                    });                    
+                    });
                 }
             })
         }
+    </script>
+
+    <script>
+        function ViewQsAs(id) {
+
+            
+           @* $.ajax({
+                type: "GET",
+                url: '../api/Exam/ViewQsAs/' + id,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+
+                },
+                error: function () {
+                    alert("Error while getting data");
+                }
+            });*@
+        }
+    </script>
+
+    <script>
+        $("#AddMoreQsAs").on("click", function () {
+
+            var qsasFrom = $('#QsAsFrom').Val();
+
+            if (qsasFrom === 1)
+            {
+
+            }
+            else if (qsasFrom === 0)
+            {
+
+            }
+            else
+            {
+
+            }
+
+        });
     </script>
 }

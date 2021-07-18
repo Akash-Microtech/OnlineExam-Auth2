@@ -119,8 +119,10 @@
       <DependentUpon>OnlineExam.edmx</DependentUpon>
       <LastGenOutput>OnlineExam.cs</LastGenOutput>
     </Content>
+    <Content Include="Theme\assets\img\gif\Book.gif" />
     <Content Include="Theme\assets\img\svg\icons\Call_Out.svg" />
     <Content Include="Theme\assets\img\svg\icons\Email.svg" />
+    <Content Include="Theme\assets\jquery-ui.js" />
     <Content Include="Theme\exam\css\exam.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DbContext\role.Context.tt">

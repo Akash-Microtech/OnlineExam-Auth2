@@ -314,7 +314,8 @@ namespace OnlineExam.Controllers
                     ToDate = data.ToDate,
                     ExamTime = data.ExamTime,
                     TotalMark = data.TotalMark,
-                    ExamQns = data.Exam_QnTable
+                    ExamQns = data.Exam_QnTable,
+                    QsAsFrom = data.QsAsFrom
                 };
 
                 ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
@@ -354,7 +355,6 @@ namespace OnlineExam.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Exam(ExamCreateViewModel examCreateView)
         {
-            int examid = 0;
             var qnIds = examCreateView.QnIds;            
 
             if (ModelState.IsValid)
@@ -372,6 +372,7 @@ namespace OnlineExam.Controllers
                     TotalMark = examCreateView.TotalMark,
                     CreatedBy = examCreateView.CuserId,
                     ExGroupId = examCreateView.ExGroupId,
+                    QsAsFrom = examCreateView.QsAsFrom,
                     IsDeleted = 0,
                     IsActive = 0,
                     DeletedBy = 0,
@@ -379,15 +380,14 @@ namespace OnlineExam.Controllers
                     ModifiedDateTime = DateTime.Now,
                     DeletedDateTime = DateTime.Now,
                     CreatedDateTime = DateTime.Now
-
                 };
-
-                db.Exams.Add(Exam);
-                db.SaveChanges();
-                examid = db.Exams.Max(item => item.Id);
 
                 if (qnIds != null)
                 {
+                    db.Exams.Add(Exam);
+                    db.SaveChanges();
+                    int examid = db.Exams.Max(item => item.Id);
+
                     List<string> result = qnIds.Split('|').ToList();
 
                     foreach (string qnId in result)
