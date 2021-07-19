@@ -460,7 +460,7 @@
                 if (pgmId != '' && CourseId != '' && subjectId != '') {
                     GetManual();
                     $('#IsDataEntryQn').val(0);
-                    $('#QsAsFrom ').val(0);
+                    $('#QsAsFrom').val(0);
                 }
                 else {
                     Swal.fire(
@@ -470,7 +470,7 @@
                     )
                 }
             });
-            
+
         });
     </script>
 
@@ -516,13 +516,13 @@
                     {
                         "render": function (data, type, full, meta) {
                             return `<div class="row text-center">
-                                               <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${full.Id}')">
-                                                   <i class="fa fa-eye fa-1x text-success"></i>
-                                               </a>
-                                               <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
-                                                  <i class="fa fa-trash text-danger"></i>
-                                               </a>
-                                           </div>`;
+                                                   <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${full.Id}')">
+                                                       <i class="fa fa-eye fa-1x text-success"></i>
+                                                   </a>
+                                                   <a href="javascript:void(0)" class="action-item mr-2" onclick="DeleteQsAsEditList('${full.Id}');">
+                                                      <i class="fa fa-trash text-danger"></i>
+                                                   </a>
+                                               </div>`;
                         }
                     }
                 ],
@@ -576,15 +576,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                                            <div class="row text-center">
-                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                                </div>
-                                                                <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${data}')">
-                                                                    <i class="fa fa-eye fa-1x text-success"></i>
-                                                                </a>
-                                                            </div>`;
+                                                                <div class="row text-center">
+                                                                     <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                        <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                    </div>
+                                                                    <a href="javascript:void(0)" class="action-item mr-2" data-toggle="modal" data-target=".docs-example-modal-lg" onclick="ViewQsAs('${data}')">
+                                                                        <i class="fa fa-eye fa-1x text-success"></i>
+                                                                    </a>
+                                                                </div>`;
                         }
                     }
                 ],
@@ -639,15 +639,15 @@
                         "data": "Id",
                         "render": function (data) {
                             return `
-                                                            <div class="row text-center">
-                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
-                                                                    <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
-                                                                </div>
-                                                                <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
-                                                                    <i class="fa fa-eye fa-1x text-success"></i>
-                                                                </a>
-                                                            </div>`;
+                                                                <div class="row text-center">
+                                                                     <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                                                        <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                                                    </div>
+                                                                    <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
+                                                                        <i class="fa fa-eye fa-1x text-success"></i>
+                                                                    </a>
+                                                                </div>`;
                         }
                     }
                 ],
@@ -878,7 +878,7 @@
     <script>
         function ViewQsAs(id) {
 
-            
+
            @* $.ajax({
                 type: "GET",
                 url: '../api/Exam/ViewQsAs/' + id,
@@ -898,21 +898,73 @@
     <script>
         $("#AddMoreQsAs").on("click", function () {
 
-            var qsasFrom = $('#QsAsFrom').Val();
-
-            if (qsasFrom === 1)
-            {
-
+            var qsasFrom = $('#QsAsFrom').val();
+            if (qsasFrom != '') {
+                GetEditExamQsas();
             }
-            else if (qsasFrom === 0)
-            {
-
-            }
-            else
-            {
-
-            }
-
         });
+    </script>
+
+    <script>
+        function GetEditExamQsas() {
+
+            var i = 1;
+            dataTable2 = $("#fromDtpQsBank").DataTable({
+                "bDestroy": true,
+                "ordering": false,
+                "ajax": {
+                    "url": "../../api/Exam/GetExamEditQsAs",
+                    "type": "POST",
+                    "data": {
+                        "CreatedBy": $("#CuserId").val(),
+                        "pgmId": $("#PgmId").find(":selected").val(),
+                        "CourseId": $("#CourseId").find(":selected").val(),
+                        "subjectId": $("#SubjectId").find(":selected").val(),
+                        "QsAsFrom": $('#QsAsFrom').val()
+                    },
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {
+                        "render": function (data, type, full, meta) {
+                            return "<input type='hidden' id='qsasId' name='qsasId' value='" + full.Id + "' />" + i++;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if (full.Photo != null) {
+                                return "<img style='max-width:700px;' src= " + full.Photo + " />";
+                            } else {
+                                return full.Questions;
+                            }
+                        }
+                    },
+                    { "data": "Mark" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                    <div class="row text-center">
+                                       <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="chkInboxItem'${data}'">
+                                          <label class="custom-control-label" for="chkInboxItem'${data}'"></label>
+                                      </div>
+                                      <a href="javascript:void(0)" class="action-item mr-2" onclick="ViewQsAs('${data}')">
+                                          <i class="fa fa-eye fa-1x text-success"></i>
+                                      </a>
+                                   </div>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable": "no data found"
+                }
+            });
+
+
+            $('#qsasArea').show();
+
+        }
     </script>
 }

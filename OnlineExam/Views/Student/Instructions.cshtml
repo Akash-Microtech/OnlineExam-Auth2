@@ -110,7 +110,7 @@
                                 <input type="hidden" id="ExGroupId" name="ExGroupId" value="@identity.UserId" />
                             }
 
-                            <button type="submit" class="btn btn-success btn-sm btn-icon">
+                            <button type="button" class="btn btn-success btn-sm btn-icon" onclick="check_instruction(@Model.Id)">
                                 <span class="btn-inner--text">Proceed To Exam</span>
                                 <span class="btn-inner--icon">
                                     <i data-feather="arrow-right"></i>
@@ -132,11 +132,15 @@
 
 
         function check_instruction(id) {
-
-            0 == $("#customCheck1").prop("checked") ?
-                "1" == id && Swal.fire({ title: "Warning!", text: "Please accept terms and conditions before proceeding.", type: "warning", closeOnConfirm: !0, confirmButtonText: "OK", confirmButtonClass: "btn-primary", showLoaderOnConfirm: !0 }) :
-                window.location.href = "Exam?examId=@Model.Id"
-
+            var check = $("#customCheck1").prop("checked");
+            if(check == false)
+            {
+                Swal.fire({ title: "Warning!", text: "Please accept terms and conditions before proceeding.", type: "warning", closeOnConfirm: !0, confirmButtonText: "OK", confirmButtonClass: "btn-primary", showLoaderOnConfirm: !0 });
+            }
+            else
+            {
+                $('form').submit();
+            }            
         }
 
     </script>

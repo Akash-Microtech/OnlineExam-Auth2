@@ -38,10 +38,13 @@ namespace OnlineExam.Controllers
                 }
             }
 
+            int attendCut = db.AttendExams.Where(a => a.StudentId == id && a.IsAttented == 1).Count();
+
             StudentDashboardViewModel studentDashboard = new StudentDashboardViewModel()
             {
                 GetExamByUserId = exams,
-                StudentId = id
+                StudentId = id,
+                AttendExamCount = attendCut
             };
 
             return View(studentDashboard);
@@ -157,7 +160,7 @@ namespace OnlineExam.Controllers
                 if (attendExam.Name == "AttendDataEC2")
                 {
                     AttendExam attend = db.AttendExams.Where(a => a.ExamId == attendExam.Id && a.StudentId == attendExam.ExGroupId).FirstOrDefault();
-                    attend.IsAttented = 3;
+                    attend.IsAttented = 2;
                     db.Entry(attend).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -188,7 +191,7 @@ namespace OnlineExam.Controllers
 
             AttendExam attend = db.AttendExams.Where(a => a.ExamId == examId && a.StudentId == Id).FirstOrDefault();
 
-            if (attend != null && attend.IsAttented == 3)
+            /*if (attend != null && attend.IsAttented == 3)
             {
                 attend.IsAttented = 1;
                 db.Entry(attend).State = EntityState.Modified;
@@ -207,7 +210,21 @@ namespace OnlineExam.Controllers
 
                     return View(exam);
                 }
-            } 
+            }*/
+
+            var data = db.GetAllExamById(examId).FirstOrDefault();
+            var qus = db.GetAllQusByExamId(data.Id, data.QsAsFrom).ToList();
+
+            if (examId != null && data != null)
+            {
+                ExamViewModel exam = new ExamViewModel()
+                {
+                    GetExam = data,
+                    GetAllQus = qus
+                };
+
+                return View(exam);
+            }
 
             TempData["ErrorMessage"] = "You are already attended the examination.";
             return RedirectToAction("Support");

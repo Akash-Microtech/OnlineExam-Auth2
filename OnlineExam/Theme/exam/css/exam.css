@@ -198,3 +198,7 @@
 .dataTables_info {
     text-align: left;
 }
+
+.question-height > img {
+    max-width:621px;
+}

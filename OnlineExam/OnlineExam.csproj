@@ -941,6 +941,7 @@
     <Compile Include="ViewModel\CourseViewModel.cs" />
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
     <Compile Include="ViewModel\ExamCreateViewModel.cs" />
+    <Compile Include="ViewModel\ExamEditQsAsViewModel.cs" />
     <Compile Include="ViewModel\ExamViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\ListViewModel.cs" />

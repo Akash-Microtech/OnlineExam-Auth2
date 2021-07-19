@@ -1,4 +1,5 @@
 ﻿using OnlineExam.DbContext;
+using OnlineExam.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,33 @@ namespace OnlineExam.Api
         {
             List<Teachers_QuestionBank> result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("api/Exam/GetExamEditQsAs")]
+        [ResponseType(typeof(Student_AcademicPerformance))]
+        public IHttpActionResult GetExamEditQsAs(Exam exam)
+        {
+            if(exam.QsAsFrom == 1)
+            {
+                ExamEditQsAsViewModel editQsas = new ExamEditQsAsViewModel
+                {
+                    QuestionBank = db.DataEntry_QuestionBank
+                    .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList()
+                };
+
+                return Ok(editQsas);
+            }
+            else
+            {
+                ExamEditQsAsViewModel editQsas = new ExamEditQsAsViewModel
+                {
+                    ManualQuestionBank = db.Teachers_QuestionBank
+                    .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList()
+                };
+                return Ok(editQsas);
+            }
+            
         }
     }
 }

@@ -243,6 +243,7 @@
                                 var identity = ((CustomPrincipal)HttpContext.Current.User);
                                 var fullName = identity.FirstName + " " + identity.LastName;
 
+
                                 <input type="hidden" id="userFullName" value="@fullName" />
                                 <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
                                 <a href="~/@string.Format("{0}", identity.Roles)/Profile" class="dropdown-item">
