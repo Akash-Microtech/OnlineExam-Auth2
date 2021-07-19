@@ -242,8 +242,13 @@
                             {
                                 var identity = ((CustomPrincipal)HttpContext.Current.User);
                                 var fullName = identity.FirstName + " " + identity.LastName;
+                                var first = identity.FirstName;
+                                var second = identity.LastName;
+                                var fl = first.Substring(0, 1);
+                                var lt = second.Substring(0, 1);
+                                var tw = fl.ToUpper() + lt.ToUpper();
 
-
+                                <input type="hidden" id="twoLetter" value="@tw" />
                                 <input type="hidden" id="userFullName" value="@fullName" />
                                 <h6 class="dropdown-header px-0 mb-2 text-primary">Hi, @identity.FirstName!</h6>
                                 <a href="~/@string.Format("{0}", identity.Roles)/Profile" class="dropdown-item">
@@ -277,11 +282,17 @@
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     var identity = ((CustomPrincipal)HttpContext.Current.User);
-                    <a class="" href="~/@string.Format("{0}", identity.Roles)/Profile">
-                        <div class="icon bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360">
-                            <i data-feather="user"></i>
-                        </div>
-                    </a>
+                    var first = identity.FirstName;
+                    var second = identity.LastName;
+                    var fl = first.Substring(0, 1);
+                    var lt = second.Substring(0, 1);
+                    var tw = fl.ToUpper() + lt.ToUpper();
+
+                <a class="" href="~/@string.Format("{0}", identity.Roles)/Profile">
+                    <div class="avatar bg-gradient-primary text-white rounded-circle icon-shape hover-rotate-360 mr-3">
+                        @tw
+                    </div>
+                </a>
                 }
             </div>
         </div>

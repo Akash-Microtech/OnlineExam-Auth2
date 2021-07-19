@@ -822,6 +822,9 @@
     <Compile Include="DbContext\GetAllQusByExamId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetAllQusForEdit_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetAllStudentRegistrationByRegId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -831,10 +834,16 @@
     <Compile Include="DbContext\GetAllTeacherQusAns_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetCourseDetailsByUserId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetExamByTeacherId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetExamByUserId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\GetGroupUserByTeacherId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\GetStudentGroupbyGroupId_Result.cs">
