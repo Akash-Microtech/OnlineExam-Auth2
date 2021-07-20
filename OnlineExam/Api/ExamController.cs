@@ -59,13 +59,22 @@ namespace OnlineExam.Api
             return Ok(exam_Qn);
         }
 
+        [Route("api/Exam/GetQsasByDtp/{id:int}")]
+        [ResponseType(typeof(Exam_QnTable))]
+        public IHttpActionResult GetQsasByDtp(int id)
+        {
+            List<GetAllDtpQusAnsByUserId_Result> qsas = db.GetAllDtpQusAnsByUserId(id).Where(q=>q.IsDeleted == 0).ToList();
+            return Ok(qsas);
+        }
+
         [HttpPost]
         [Route("api/Exam/GetQsAsBank")]
         [ResponseType(typeof(Student_AcademicPerformance))]
         public IHttpActionResult GetQsAsFromQnBank(Exam exam)
         {
             List<DataEntry_QuestionBank> result = db.DataEntry_QuestionBank
-                .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList();
+                .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && 
+                d.SubjectId == exam.SubjectId && d.IsDeleted == 0 && d.IsActive == 1).ToList();
             return Ok(result);
         }
 
@@ -74,7 +83,9 @@ namespace OnlineExam.Api
         [ResponseType(typeof(Student_AcademicPerformance))]
         public IHttpActionResult GetQsAsFromManual(Exam exam)
         {
-            List<Teachers_QuestionBank> result = db.Teachers_QuestionBank.Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList();
+            List<Teachers_QuestionBank> result = db.Teachers_QuestionBank
+                .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && 
+                d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy && d.IsDeleted == 0 && d.IsActive == 1).ToList();
             return Ok(result);
         }
 
@@ -83,7 +94,7 @@ namespace OnlineExam.Api
         [ResponseType(typeof(Student_AcademicPerformance))]
         public IHttpActionResult GetExamEditQsAs(Exam exam)
         {
-            List<GetAllQusForEdit_Result> editQsas = db.GetAllQusForEdit(exam.Id, exam.QsAsFrom, exam.CourseId, exam.PgmId, exam.SubjectId).ToList();
+            List<GetAllQusForEdit_Result> editQsas = db.GetAllQusForEdit(exam.Id, exam.QsAsFrom, exam.CourseId, exam.PgmId, exam.SubjectId).Where(e=>e.IsDeleted == 0 && e.IsActive == 1).ToList();
             return Ok(editQsas);
         }
 

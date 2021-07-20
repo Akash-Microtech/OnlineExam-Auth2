@@ -99,7 +99,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Sub Programme</label>
-                                                @Html.DropDownList("SubPgmId", null, htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("SubPgmId", null, "Select Sub Programme", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.SubPgmId, "", new { @class = "error" })
                                                 <label id="SubPgmId-error" class="error" for="SubPgmId" style="display:none;"></label>
                                             </div>
@@ -109,7 +109,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Course</label>
-                                                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "custom-select" })
+                                                @Html.DropDownList("CourseId", null, "Select Course", htmlAttributes: new { @class = "custom-select" })
                                                 @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "error" })
                                                 <label id="CourseId-error" class="error" for="CourseId" style="display:none;"></label>
                                             </div>
@@ -164,8 +164,8 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var subProgram = '@Url.Action("SubProgram")';
-            var chapters = '@Url.Action("Course")';
+            var subProgram = '@Url.Action("GetSubProgram")';
+            var chapters = '@Url.Action("GetCourse")';
             var SubPgmId = $('#SubPgmId');
             var CourseId = $('#CourseId');
             $('#PgmId').change(function () {

@@ -1054,6 +1054,9 @@
     <Content Include="Views\Student\Support.cshtml" />
     <Content Include="Views\Student\Exams.cshtml" />
     <Content Include="Views\Student\Results.cshtml" />
+    <Content Include="Views\Admin\QsAs.cshtml" />
+    <Content Include="Views\Admin\QaAsList.cshtml" />
+    <Content Include="Views\Admin\QsAsDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

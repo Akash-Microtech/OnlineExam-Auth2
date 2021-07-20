@@ -233,11 +233,11 @@ namespace OnlineExam.Controllers
                     }
                     else if (model.RoleId == 2)
                     {
-                        alpha = "ECS";
+                        alpha = "ECT";
                     }
                     else if (model.RoleId == 3)
                     {
-                        alpha = "ECT";
+                        alpha = "ECS";
                     }
                     else if (model.RoleId == 4)
                     {
@@ -1236,8 +1236,8 @@ namespace OnlineExam.Controllers
                 ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name");
                 ViewBag.ClassId = new SelectList(db.Classes.Where(c => c.IsDeleted == 0), "Id", "Name");
                 ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name");
-                ViewBag.TeacherId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName");
-                ViewBag.StudentId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName");
+                ViewBag.TeacherId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "UniqueID");
+                ViewBag.StudentId = new SelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "UniqueID");
                 ViewBag.SubPgmId = new SelectList(Enumerable.Empty<SelectListItem>());
                 ViewBag.CourseId = new SelectList(Enumerable.Empty<SelectListItem>());
             }
@@ -1269,7 +1269,7 @@ namespace OnlineExam.Controllers
                 {
                     tList.Add(item.TeacherId);
                 }
-                var teach = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "FirstName", tList).ToList();
+                var teach = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 2), "Id", "UniqueID", tList).ToList();
                 ViewBag.TeacherId = teach;
 
                 var datastud = db.Group_StudentTable.Where(d => d.GroupId == id).ToList();
@@ -1278,7 +1278,7 @@ namespace OnlineExam.Controllers
                 {
                     SList.Add(item.StudentId);
                 }
-                var stud = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "FirstName", SList).ToList();
+                var stud = new MultiSelectList(db.Users.Where(p => p.IsDeleted == 0 && p.RoleId == 3), "Id", "UniqueID", SList).ToList();
                 ViewBag.StudentId = stud;
                 
                 return View(groupView);
@@ -1288,14 +1288,14 @@ namespace OnlineExam.Controllers
         }
 
         [HttpGet]
-        public JsonResult SubProgram(int ID)
+        public JsonResult GetSubProgram(int ID)
         {
             var sub = new SelectList(db.SubPrograms.Where(s => s.PgmId == ID), "Id", "Name");
             return Json(sub, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult Course(int ID)
+        public JsonResult GetCourse(int ID)
         {
             var chap = new SelectList(db.Courses.Where(c => c.ClassId == ID), "Id", "Name");
             return Json(chap, JsonRequestBehavior.AllowGet);
@@ -1484,5 +1484,128 @@ namespace OnlineExam.Controllers
                 return RedirectToAction("Groups");
             }
         }
+
+        public ActionResult QsAs()
+        {
+            if (TempData["StatusMessage"] != null)
+            {
+                ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+            List<User> dtp = db.Users.Where(u => u.RoleId == 4 && u.IsActive == 1 && u.IsDeleted == 0).ToList();
+            return View(dtp);
+        }
+
+        public ActionResult QaAsList(int? id)
+        {
+            if (TempData["StatusMessage"] != null)
+            {
+                ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+            var list = db.GetAllDtpQusAnsByUserId(id).ToList();
+            return View(list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ActiveQsAs(int? activeId)
+        {
+            if (activeId == null)
+            {
+                TempData["ErrorMessage"] = "QsAs Not Activated";
+                return RedirectToAction("QaAsList");
+            }
+            else
+            {
+                DataEntry_QuestionBank programmes = await db.DataEntry_QuestionBank.Where(c => c.Id == activeId).FirstOrDefaultAsync();
+                if (programmes != null)
+                {
+                    programmes.IsActive = 1;
+                    db.Entry(programmes).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "QsAs Activated Succesfully.";
+                    return RedirectToAction("QaAsList", new { Id = programmes.CreatedBy });
+                }
+                TempData["ErrorMessage"] = "QsAs Not Activated";
+                return RedirectToAction("QsAs");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> InactiveQsAs(int? inactiveId)
+        {
+            if (inactiveId == null)
+            {
+                TempData["ErrorMessage"] = "QsAs Not Inactivated";
+                return RedirectToAction("QsAs");
+            }
+            else
+            {
+                DataEntry_QuestionBank programmes = await db.DataEntry_QuestionBank.Where(c => c.Id == inactiveId).FirstOrDefaultAsync();
+                if (programmes != null)
+                {
+                    programmes.IsActive = 0;
+                    db.Entry(programmes).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["StatusMessage"] = "QsAs Inactivated Succesfully.";
+                    return RedirectToAction("QaAsList", new { Id = programmes.CreatedBy });
+                }
+                TempData["ErrorMessage"] = "QsAs Not Inactivated";
+                return RedirectToAction("QsAs");
+            }
+        }
+
+        public async Task<ActionResult> QsAsDetails(int? id)
+        {
+            if(id != null)
+            {
+                var data = await db.DataEntry_QuestionBank.Where(d => d.Id == id).FirstOrDefaultAsync();
+                QsAsViewModel dtpQA = new QsAsViewModel()
+                {
+                    Id = data.Id,
+                    Questions = data.Questions,
+                    Option1 = data.Option1,
+                    Option2 = data.Option2,
+                    Option3 = data.Option3,
+                    Option4 = data.Option4,
+                    PrevQnYear = data.PrevQnYear,
+                    CorrectAns = data.CorrectAns,
+                    Mark = data.Mark,
+                    PgmId = data.PgmId,
+                    ClassId = data.ClassId,
+                    CourseId = data.CourseId,
+                    SubjectId = data.SubjectId,
+                    ChapterId = data.ChapterId,
+                    Photo = data.Photo,
+                    CuserId = data.CreatedBy
+                };
+
+                ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
+                ViewBag.ClassId = new SelectList(db.Classes.Where(s => s.IsDeleted == 0), "Id", "Name", data.ClassId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == data.ClassId), "Id", "Name", data.CourseId);
+                ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
+                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == data.SubjectId), "Id", "Name", data.ChapterId);
+
+                return View(dtpQA);
+            }
+
+            TempData["ErrorMessage"] = "Invalid Try";
+            return RedirectToAction("QsAs");
+        }
+
+
+
     }
 }
