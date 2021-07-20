@@ -8,7 +8,6 @@ namespace OnlineExam.ViewModel
 {
     public class ExamEditQsAsViewModel
     {
-        public List<DataEntry_QuestionBank> QuestionBank { get; set; }
-        public List<Teachers_QuestionBank> ManualQuestionBank { get; set; }
+        public List<GetAllQusForEdit_Result> QuestionBank { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace OnlineExam.DbContext
         public int ExamId { get; set; }
         public int StudentId { get; set; }
         public int IsAttented { get; set; }
+        public string OptMark { get; set; }
         public int IsDeletedEr { get; set; }
         public System.DateTime CreatedDateAe { get; set; }
     }

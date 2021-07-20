@@ -83,26 +83,39 @@ namespace OnlineExam.Api
         [ResponseType(typeof(Student_AcademicPerformance))]
         public IHttpActionResult GetExamEditQsAs(Exam exam)
         {
-            if(exam.QsAsFrom == 1)
-            {
-                ExamEditQsAsViewModel editQsas = new ExamEditQsAsViewModel
-                {
-                    QuestionBank = db.DataEntry_QuestionBank
-                    .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId).ToList()
-                };
-
-                return Ok(editQsas);
-            }
-            else
-            {
-                ExamEditQsAsViewModel editQsas = new ExamEditQsAsViewModel
-                {
-                    ManualQuestionBank = db.Teachers_QuestionBank
-                    .Where(d => d.IsDeleted == 0 && d.PgmId == exam.PgmId && d.CourseId == exam.CourseId && d.SubjectId == exam.SubjectId && d.CreatedBy == exam.CreatedBy).ToList()
-                };
-                return Ok(editQsas);
-            }
-            
+            List<GetAllQusForEdit_Result> editQsas = db.GetAllQusForEdit(exam.Id, exam.QsAsFrom, exam.CourseId, exam.PgmId, exam.SubjectId).ToList();
+            return Ok(editQsas);
         }
+
+        [Route("api/Exam/Result")]
+        [ResponseType(typeof(ExamResult))]
+        public IHttpActionResult Result(ExamViewModel examView)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            foreach (var item in examView.ExamResults)
+            {
+                ExamResult exam = new ExamResult()
+                {
+                    ExamId = item.ExamId,
+                    StudentId = item.StudentId,
+                    QuestionId = item.QuestionId,
+                    SelectedAnswer = item.SelectedAnswer,
+                    CorrectAnswer = item.CorrectAnswer,
+                    NotVisited = item.NotVisited,
+                    MarkForReview = item.MarkForReview,
+                    AnsMarkForReview = item.AnsMarkForReview,
+                    QsNo = item.QsNo
+                };
+                db.ExamResults.Add(exam);
+            }
+
+            db.SaveChanges();
+            return Ok(examView);
+        }
+
     }
 }

@@ -39,15 +39,67 @@ namespace OnlineExam.Controllers
             }
 
             int attendCut = db.AttendExams.Where(a => a.StudentId == id && a.IsAttented == 1).Count();
+            int courseCut = db.GetCourseDetailsByUserId(id, 1).Count();
 
             StudentDashboardViewModel studentDashboard = new StudentDashboardViewModel()
             {
                 GetExamByUserId = exams,
                 StudentId = id,
-                AttendExamCount = attendCut
+                AttendExamCount = attendCut,
+                CourseCount = courseCut
             };
 
             return View(studentDashboard);
+        }
+
+        public ActionResult Exams()
+        {
+            if (TempData["StatusMessage"] != null)
+            {
+                ViewBag.StatusMessage = TempData["StatusMessage"].ToString();
+            }
+
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+            int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+            DateTime today = DateTime.Now.Date;
+            var data = db.GetExamByUserId(id, today).ToList();
+            List<GetStudentExam> exams = new List<GetStudentExam>();
+            foreach (var item in data)
+            {
+                AttendExam attend = db.AttendExams.Where(a => a.ExamId == item.Id && a.StudentId == id).FirstOrDefault();
+
+                GetStudentExam exam = new GetStudentExam()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    FromDate = item.FromDate,
+                    ToDate = item.ToDate,
+                    TotalMark = item.TotalMark,
+                    PName = item.PName,
+                    ClassName = item.ClassName,
+                    CourseName = item.CourseName,
+                    ExamTime = item.ExamTime,
+                    SubjectName = item.SubjectName,
+                    StudentId = id
+                };
+
+                if (attend == null || attend.IsAttented != 1)
+                {
+                    exam.Attended = 0;
+                }
+                else
+                {
+                    exam.Attended = 1;
+                }
+
+                exams.Add(exam);
+            }
+
+            return View(exams);
         }
 
         public ActionResult ExamDetails(int? examId, int? Id)
@@ -160,7 +212,7 @@ namespace OnlineExam.Controllers
                 if (attendExam.Name == "AttendDataEC2")
                 {
                     AttendExam attend = db.AttendExams.Where(a => a.ExamId == attendExam.Id && a.StudentId == attendExam.ExGroupId).FirstOrDefault();
-                    attend.IsAttented = 2;
+                    attend.IsAttented = 3;
                     db.Entry(attend).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -191,7 +243,7 @@ namespace OnlineExam.Controllers
 
             AttendExam attend = db.AttendExams.Where(a => a.ExamId == examId && a.StudentId == Id).FirstOrDefault();
 
-            /*if (attend != null && attend.IsAttented == 3)
+            if (attend != null && attend.IsAttented == 3)
             {
                 attend.IsAttented = 1;
                 db.Entry(attend).State = EntityState.Modified;
@@ -205,29 +257,26 @@ namespace OnlineExam.Controllers
                     ExamViewModel exam = new ExamViewModel()
                     {
                         GetExam = data,
-                        GetAllQus = qus
+                        GetAllQus = qus,
+                        StudentId = Id
                     };
 
                     return View(exam);
                 }
-            }*/
-
-            var data = db.GetAllExamById(examId).FirstOrDefault();
-            var qus = db.GetAllQusByExamId(data.Id, data.QsAsFrom).ToList();
-
-            if (examId != null && data != null)
-            {
-                ExamViewModel exam = new ExamViewModel()
-                {
-                    GetExam = data,
-                    GetAllQus = qus
-                };
-
-                return View(exam);
             }
 
             TempData["ErrorMessage"] = "You are already attended the examination.";
             return RedirectToAction("Support");
+        }
+
+        public ActionResult Results()
+        {
+            return View();
+        }
+
+        public ActionResult Result()
+        {
+            return View();
         }
 
         public ActionResult Support()

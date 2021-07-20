@@ -917,6 +917,7 @@
                     "type": "POST",
                     "data": {
                         "CreatedBy": $("#CuserId").val(),
+                        "Id": $("#Id").val(),
                         "pgmId": $("#PgmId").find(":selected").val(),
                         "CourseId": $("#CourseId").find(":selected").val(),
                         "subjectId": $("#SubjectId").find(":selected").val(),
@@ -962,9 +963,8 @@
                 }
             });
 
-
             $('#qsasArea').show();
-
+            $('#editQsasArea').hide();     
         }
     </script>
 }

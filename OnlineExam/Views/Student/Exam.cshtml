@@ -468,11 +468,11 @@
                             </div>
 
                             @* <div class="">
-                                <span class="h6 text-muted">
-                                    Are you sure you want to submit for final marking?<br />
-                                    No changes will be allowed after submission.
-                                </span>
-                            </div>*@
+                                    <span class="h6 text-muted">
+                                        Are you sure you want to submit for final marking?<br />
+                                        No changes will be allowed after submission.
+                                    </span>
+                                </div>*@
 
                             <div class="p-3">
                                 <a href="~/Student/Results" class="btn btn-sm btn-success hover-translate-y-n3 hover-shadow-lg mb-3" id="btnExamComplete">Ok</a>
@@ -534,7 +534,58 @@
 </section>
 
 
-@section Scripts { 
+
+
+<table id="tblexamresult" class="table mb-0" style="display:none;">
+    <tbody>
+        @{int i = 1; }
+
+
+        @foreach (var item in Model.GetAllQus)
+        {
+
+
+            int c = i++;
+            var count = "";
+
+            if (c < 10)
+            {
+                var num = c.ToString().PadLeft(2, '0');
+
+                count = "page" + num;
+            }
+            else
+            {
+
+                count = "page" + c;
+            }
+
+            var id = "qsasId" + count;
+            var id1 = "curAnsId" + count;
+            var id2 = "selAnsId" + count;
+            var id3 = "notVisId" + count;
+            var id4 = "markRevId" + count;
+            var id5 = "ansMarkrevId" + count;
+            var id6 = "studentId" + count;
+            var id7 = "ExamId" + count;
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CorrectAns</td>
+                <td id="@id2">0</td>
+                <td id="@id3">0</td>
+                <td id="@id4">0</td>
+                <td id="@id5">0</td>
+                <td>@Model.StudentId</td>
+                <td>@item.ExamId</td>
+                <td>@c</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.min.js"></script>
     <script src="~/Theme/assets/libs/datatable/js/tables/datatable/datatables.bootstrap4.min.js"></script>
 
@@ -545,7 +596,7 @@
             var twoltr = $('#twoLetter').val();
             $('#studentName').text(fullName);
             $('#studentName2').text(fullName);
-            $('.res_name').text(fullName); 
+            $('.res_name').text(fullName);
             $('.twltr').text(twoltr);
         });
 
@@ -620,10 +671,9 @@
         function CleartTimer() {
             clearInterval(myInterval),
                 $("title").text("Time Out"),
-                $("#btnYesSubmitConfirm").trigger("click");
-
-            $('.regul').hide();
-            $('.time').show();
+                $("#btnYesSubmitConfirm").trigger("click"),
+            $('.regul').hide(),
+            $('.time').show()
         }
         function GetTime(e) {
             parseInt(e % 1e3 / 100);
@@ -765,7 +815,8 @@
                         t.find("a").removeClass("que-not-answered"),
                         t.find("a").removeClass("que-not-attempted"),
                         NextQuestion(!1),
-                        CheckQueAttemptStatus()
+                        CheckQueAttemptStatus(),
+                        SetValueSelect(a)
                 }
                 )),
 
@@ -792,7 +843,8 @@
                         t.find("a").removeClass("que-not-answered"),
                         t.find("a").removeClass("que-not-attempted"),
                         NextQuestion(!1),
-                        CheckQueAttemptStatus()
+                        CheckQueAttemptStatus(),
+                        AnsweredMarkedforReview(a)
                 }
                 )),
 
@@ -810,7 +862,8 @@
                         t.find("a").removeClass("que-not-answered"),
                         t.find("a").removeClass("que-not-attempted"),
                         NextQuestion(!1),
-                        CheckQueAttemptStatus()
+                        CheckQueAttemptStatus(),
+                        MarkedforReview(a)
                 }
                 )),
 
@@ -878,7 +931,8 @@
                         $(".exam-part-2").hide(),
 
                         $("#divdrplngcng").hide(),
-                        $(".exam-summery").hide()
+                        $(".exam-summery").hide(),
+                        SubmitResult()
                 }
                 )),
                 $("#btnNoSubmitConfirm").on("click", (function (e) {
@@ -951,6 +1005,79 @@
         }
         ));
 
+    </script>
+
+
+    <script>
+
+        function SetValueSelect(a) {
+            var sl = $("input[name='radios" + a + "']:checked").val();
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(slId).text(sl);
+            $(nvId).text(1);
+            $(mr).text(0);
+            $(amr).text(0);
+        }
+
+        function MarkedforReview(a) {
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(mr).text(1);
+            $(nvId).text(1);
+            $(slId).text(0);
+            $(amr).text(0);
+        }
+
+        function AnsweredMarkedforReview(a) {
+            var sl = $("input[name='radios" + a + "']:checked").val();
+            var slId = "#selAnsId" + a;
+            var nvId = "#notVisId" + a;
+            var amr = "#ansMarkrevId" + a;
+            var mr = "#markRevId" + a;
+            $(slId).text(sl);
+            $(nvId).text(1);
+            $(amr).text(1);
+            $(mr).text(0);
+        }
+
+        function SubmitResult() {
+            var datarr = {};
+            var data1 = new Array();
+            $("#tblexamresult TBODY TR").each(function () {
+                var row = $(this);
+                var data2 = {};
+                data2.QuestionId = row.find("TD").eq(0).html();
+                data2.SelectedAnswer = row.find("TD").eq(1).html();
+                data2.CorrectAnswer = row.find("TD").eq(2).html();
+                data2.NotVisited = row.find("TD").eq(3).html();
+                data2.MarkForReview = row.find("TD").eq(4).html();
+                data2.AnsMarkForReview = row.find("TD").eq(5).html();
+                data2.StudentId = row.find("TD").eq(6).html();
+                data2.ExamId = row.find("TD").eq(7).html();
+                data2.QsNo = row.find("TD").eq(8).html();
+                data1.push(data2);
+            });
+
+
+            datarr.examResults = data1;
+
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "../../api/Exam/Result",
+                data: JSON.stringify(datarr),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                }
+            });
+        }
+        
     </script>
 
 

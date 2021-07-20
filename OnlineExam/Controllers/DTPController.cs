@@ -193,9 +193,9 @@ namespace OnlineExam.Controllers
 
                 ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", data.PgmId);
                 ViewBag.ClassId = new SelectList(db.Classes.Where(s => s.IsDeleted == 0), "Id", "Name", data.ClassId);
-                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", data.CourseId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == data.ClassId), "Id", "Name", data.CourseId);
                 ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", data.SubjectId);
-                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", data.ChapterId);
+                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == data.SubjectId), "Id", "Name", data.ChapterId);
 
                 return View(dtpQA);
             }
@@ -235,9 +235,9 @@ namespace OnlineExam.Controllers
                 {
                     ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
                     ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
-                    ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
+                    ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == dtpQAView.ClassId), "Id", "Name", dtpQAView.CourseId);
                     ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
-                    ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
+                    ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == dtpQAView.SubjectId), "Id", "Name", dtpQAView.ChapterId);
 
                     ViewBag.ErrorMessage = "Please fill in all the required fields";
                     return View(dtpQAView);
@@ -351,9 +351,9 @@ namespace OnlineExam.Controllers
             {
                 ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
                 ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
-                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0), "Id", "Name", dtpQAView.CourseId);
+                ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == dtpQAView.ClassId), "Id", "Name", dtpQAView.CourseId);
                 ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
-                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ChapterId);
+                ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == dtpQAView.SubjectId), "Id", "Name", dtpQAView.ChapterId);
 
                 ViewBag.ErrorMessage = "Please enter Questions or Select a Image Questions";
                 return View(dtpQAView);

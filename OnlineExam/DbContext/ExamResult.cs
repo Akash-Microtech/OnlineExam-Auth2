@@ -23,5 +23,6 @@ namespace OnlineExam.DbContext
         public int NotVisited { get; set; }
         public int MarkForReview { get; set; }
         public int AnsMarkForReview { get; set; }
+        public int QsNo { get; set; }
     }
 }

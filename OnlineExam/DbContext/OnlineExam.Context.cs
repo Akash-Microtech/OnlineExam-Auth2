@@ -57,6 +57,15 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AllStudentRegistrationDetails_Result>("AllStudentRegistrationDetails");
         }
     
+        public virtual ObjectResult<GetAllAttentedExamByStudentId_Result> GetAllAttentedExamByStudentId(Nullable<int> studentId)
+        {
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllAttentedExamByStudentId_Result>("GetAllAttentedExamByStudentId", studentIdParameter);
+        }
+    
         public virtual ObjectResult<GetAllDtpQusAns_Result> GetAllDtpQusAns()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDtpQusAns_Result>("GetAllDtpQusAns");
@@ -112,7 +121,7 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllQusByExamId_Result>("GetAllQusByExamId", iDParameter, fromParameter);
         }
     
-        public virtual ObjectResult<GetAllQusForEdit_Result> GetAllQusForEdit(Nullable<int> id, Nullable<int> from)
+        public virtual ObjectResult<GetAllQusForEdit_Result> GetAllQusForEdit(Nullable<int> id, Nullable<int> from, Nullable<int> courseId, Nullable<int> pgId, Nullable<int> subId)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -122,7 +131,19 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("From", from) :
                 new ObjectParameter("From", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllQusForEdit_Result>("GetAllQusForEdit", idParameter, fromParameter);
+            var courseIdParameter = courseId.HasValue ?
+                new ObjectParameter("CourseId", courseId) :
+                new ObjectParameter("CourseId", typeof(int));
+    
+            var pgIdParameter = pgId.HasValue ?
+                new ObjectParameter("PgId", pgId) :
+                new ObjectParameter("PgId", typeof(int));
+    
+            var subIdParameter = subId.HasValue ?
+                new ObjectParameter("SubId", subId) :
+                new ObjectParameter("SubId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllQusForEdit_Result>("GetAllQusForEdit", idParameter, fromParameter, courseIdParameter, pgIdParameter, subIdParameter);
         }
     
         public virtual ObjectResult<GetAllStudentRegistrationByRegId_Result> GetAllStudentRegistrationByRegId(string regId)
@@ -194,6 +215,23 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetExamIdWiseQuestions", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetExamReultByQus_Result> GetExamReultByQus(Nullable<int> examId, Nullable<int> studentId, Nullable<int> from)
+        {
+            var examIdParameter = examId.HasValue ?
+                new ObjectParameter("ExamId", examId) :
+                new ObjectParameter("ExamId", typeof(int));
+    
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("From", from) :
+                new ObjectParameter("From", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamReultByQus_Result>("GetExamReultByQus", examIdParameter, studentIdParameter, fromParameter);
         }
     
         public virtual ObjectResult<GetGroupUserByTeacherId_Result> GetGroupUserByTeacherId(Nullable<int> id)
