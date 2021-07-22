@@ -55,10 +55,10 @@
     border-radius: 10px;
 }
 
-#intro .item h1, .btn, .navbar .yamm-content h3, .navbar .yamm-content h5, .navbar ul.dropdown-menu li, .navbar ul.nav > li > a {
+/*#intro .item h1, .btn, .navbar .yamm-content h3, .navbar .yamm-content h5, .navbar ul.dropdown-menu li, .navbar ul.nav > li > a {
     text-transform: uppercase;
     letter-spacing: .08em;
-}
+}*/
 
 #intro .item, .btn, .panel.sidebar-menu ul.nav.category-menu li a {
     font-family: Roboto, Helvetica, Arial, sans-serif;

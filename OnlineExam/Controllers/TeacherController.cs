@@ -355,82 +355,126 @@ namespace OnlineExam.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Exam(ExamCreateViewModel examCreateView)
         {
-            var qnIds = examCreateView.QnIds;            
-
-            if (ModelState.IsValid)
-            {
-                var Exam = new Exam()
-                {
-                    Name = examCreateView.Name,
-                    PgmId = examCreateView.PgmId,
-                    ClassId = examCreateView.ClassId,
-                    CourseId = examCreateView.CourseId,
-                    SubjectId = examCreateView.SubjectId,
-                    FromDate = examCreateView.FromDate,
-                    ToDate = examCreateView.ToDate,
-                    ExamTime = examCreateView.ExamTime,
-                    TotalMark = examCreateView.TotalMark,
-                    CreatedBy = examCreateView.CuserId,
-                    ExGroupId = examCreateView.ExGroupId,
-                    QsAsFrom = examCreateView.QsAsFrom,
-                    IsDeleted = 0,
-                    IsActive = 0,
-                    DeletedBy = 0,
-                    ModifiedBy = 0,
-                    ModifiedDateTime = DateTime.Now,
-                    DeletedDateTime = DateTime.Now,
-                    CreatedDateTime = DateTime.Now
-                };
-
-                if (qnIds != null)
-                {
-                    db.Exams.Add(Exam);
-                    db.SaveChanges();
-                    int examid = db.Exams.Max(item => item.Id);
-
-                    List<string> result = qnIds.Split('|').ToList();
-
-                    foreach (string qnId in result)
-                    {
-                        if (qnId != "")
-                        {
-                            var ExamQnTable = new Exam_QnTable()
-                            {
-                                QnId = qnId,
-                                ExamId = examid,
-                                IsDataEntryQn = examCreateView.IsDataEntryQn
-                            };
-                            db.Exam_QnTable.Add(ExamQnTable);
-                            db.SaveChanges();
-                        }
-                    }
-
-                    TempData["StatusMessage"] = "Exam Created Succesfully.";
-                    return RedirectToAction("Exams");
-                }
-                else
-                {
-                    ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", examCreateView.PgmId);
-                    ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", examCreateView.ClassId);
-                    ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", examCreateView.SubjectId);
-                    ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == examCreateView.ClassId), "Id", "Name", examCreateView.CourseId);
-                    ViewBag.ExGroupId = new SelectList(db.Groups.Where(p => p.IsDeleted == 0 && p.SubjectId == examCreateView.SubjectId), "Id", "GroupName", examCreateView.ExGroupId);
-
-                    ViewBag.ErrorMessage = "Please select Questions";
-
-                    return View(examCreateView);
-                }
-
-            }
-
             ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", examCreateView.PgmId);
             ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", examCreateView.ClassId);
             ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", examCreateView.SubjectId);
             ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == examCreateView.ClassId), "Id", "Name", examCreateView.CourseId);
             ViewBag.ExGroupId = new SelectList(db.Groups.Where(p => p.IsDeleted == 0 && p.SubjectId == examCreateView.SubjectId), "Id", "GroupName", examCreateView.ExGroupId);
 
-            ViewBag.ErrorMessage = "Please fill in all the required fields";
+            var qnIds = examCreateView.QnIds;            
 
+            if (ModelState.IsValid)
+            {
+                if(examCreateView.Id != null)
+                {
+                    Exam getExam = db.Exams.Find(examCreateView.Id);
+                    if(getExam != null)
+                    {
+                        getExam.Name = examCreateView.Name;
+                        getExam.PgmId = examCreateView.PgmId;
+                        getExam.ClassId = examCreateView.ClassId;
+                        getExam.CourseId = examCreateView.CourseId;
+                        getExam.SubjectId = examCreateView.SubjectId;
+                        getExam.FromDate = examCreateView.FromDate;
+                        getExam.ToDate = examCreateView.ToDate;
+                        getExam.ExamTime = examCreateView.ExamTime;
+                        getExam.TotalMark = examCreateView.TotalMark;
+                        getExam.CreatedBy = examCreateView.CuserId;
+                        getExam.ExGroupId = examCreateView.ExGroupId;
+                        getExam.QsAsFrom = examCreateView.QsAsFrom;
+                        getExam.ModifiedBy = examCreateView.CuserId;
+                        getExam.ModifiedDateTime = DateTime.Now;
+
+                        db.Entry(getExam).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        if (qnIds != null)
+                        {
+                            List<string> result = qnIds.Split('|').ToList();
+
+                            foreach (string qnId in result)
+                            {
+                                if (qnId != "")
+                                {
+                                    var ExamQnTable = new Exam_QnTable()
+                                    {
+                                        QnId = qnId,
+                                        ExamId = (int)examCreateView.Id,
+                                        IsDataEntryQn = examCreateView.QsAsFrom
+                                    };
+                                    db.Exam_QnTable.Add(ExamQnTable);
+                                    db.SaveChanges();
+                                }
+                            }                            
+                        }
+
+                        TempData["StatusMessage"] = "Exam Edited Succesfully.";
+                        return RedirectToAction("Exams");
+                    }
+
+                    ViewBag.ErrorMessage = "I can't find any exam with this ID";
+                    return View(examCreateView);
+                }
+                else
+                {
+                    var Exam = new Exam()
+                    {
+                        Name = examCreateView.Name,
+                        PgmId = examCreateView.PgmId,
+                        ClassId = examCreateView.ClassId,
+                        CourseId = examCreateView.CourseId,
+                        SubjectId = examCreateView.SubjectId,
+                        FromDate = examCreateView.FromDate,
+                        ToDate = examCreateView.ToDate,
+                        ExamTime = examCreateView.ExamTime,
+                        TotalMark = examCreateView.TotalMark,
+                        CreatedBy = examCreateView.CuserId,
+                        ExGroupId = examCreateView.ExGroupId,
+                        QsAsFrom = examCreateView.QsAsFrom,
+                        IsDeleted = 0,
+                        IsActive = 0,
+                        DeletedBy = 0,
+                        ModifiedBy = 0,
+                        ModifiedDateTime = DateTime.Now,
+                        DeletedDateTime = DateTime.Now,
+                        CreatedDateTime = DateTime.Now
+                    };
+
+                    if (qnIds != null)
+                    {
+                        db.Exams.Add(Exam);
+                        db.SaveChanges();
+                        int examid = db.Exams.Max(item => item.Id);
+
+                        List<string> result = qnIds.Split('|').ToList();
+
+                        foreach (string qnId in result)
+                        {
+                            if (qnId != "")
+                            {
+                                var ExamQnTable = new Exam_QnTable()
+                                {
+                                    QnId = qnId,
+                                    ExamId = examid,
+                                    IsDataEntryQn = examCreateView.IsDataEntryQn
+                                };
+                                db.Exam_QnTable.Add(ExamQnTable);
+                                db.SaveChanges();
+                            }
+                        }
+
+                        TempData["StatusMessage"] = "Exam Created Succesfully.";
+                        return RedirectToAction("Exams");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Please select Questions";
+                        return View(examCreateView);
+                    }
+                }    
+            }
+
+            ViewBag.ErrorMessage = "Please fill in all the required fields";
             return View(examCreateView);
         }
 

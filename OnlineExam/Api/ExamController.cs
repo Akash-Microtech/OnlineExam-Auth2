@@ -2,6 +2,7 @@
 using OnlineExam.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -126,6 +127,28 @@ namespace OnlineExam.Api
 
             db.SaveChanges();
             return Ok(examView);
+        }
+
+        [Route("api/Exam/ResultAttend")]
+        [ResponseType(typeof(ExamResult))]
+        public IHttpActionResult ResultAttend(ExamViewModel attend)
+        {
+            int eid = attend.Attends[0].ExamId;
+            int sid = attend.Attends[0].StudentId;
+            AttendExam attendExam = db.AttendExams.Where(a => a.ExamId == eid && a.StudentId == sid).FirstOrDefault();
+            if (attendExam != null)
+            {
+                attendExam.TQ = attend.Attends[0].TQ;
+                attendExam.TA = attend.Attends[0].TA;
+                attendExam.CA = attend.Attends[0].CA;
+                attendExam.IA = attend.Attends[0].IA;
+                attendExam.ES = attend.Attends[0].ES;
+                db.Entry(attendExam).State = EntityState.Modified;
+                db.SaveChanges();
+                return Ok(attendExam);
+            }
+
+            return BadRequest(ModelState);
         }
 
     }

@@ -16,6 +16,11 @@
           <Property Name="OptMark" Type="varchar" MaxLength="10" />
           <Property Name="IsDeletedEr" Type="int" Nullable="false" />
           <Property Name="CreatedDateAe" Type="datetime" Nullable="false" />
+          <Property Name="TQ" Type="int" Nullable="false" />
+          <Property Name="TA" Type="int" Nullable="false" />
+          <Property Name="CA" Type="int" Nullable="false" />
+          <Property Name="IA" Type="int" Nullable="false" />
+          <Property Name="ES" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Chapter">
           <Key>
@@ -672,6 +677,11 @@
           <Property Name="OptMark" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsDeletedEr" Type="Int32" Nullable="false" />
           <Property Name="CreatedDateAe" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TQ" Type="Int32" Nullable="false" />
+          <Property Name="TA" Type="Int32" Nullable="false" />
+          <Property Name="CA" Type="Int32" Nullable="false" />
+          <Property Name="IA" Type="Int32" Nullable="false" />
+          <Property Name="ES" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Chapter">
           <Key>
@@ -1790,6 +1800,14 @@
           <Property Type="Int32" Name="CourseId" Nullable="false" />
           <Property Type="Int32" Name="ClassId" Nullable="false" />
           <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="Int32" Name="ExReId" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="Int32" Name="SelectedAnswer" Nullable="false" />
+          <Property Type="Int32" Name="CorrectAnswer" Nullable="false" />
+          <Property Type="Int32" Name="NotVisited" Nullable="false" />
+          <Property Type="Int32" Name="AnsMarkForReview" Nullable="false" />
+          <Property Type="Int32" Name="QsNo" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetGroupUserByTeacherId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1941,6 +1959,11 @@
                 <ScalarProperty Name="OptMark" ColumnName="OptMark" />
                 <ScalarProperty Name="IsDeletedEr" ColumnName="IsDeletedEr" />
                 <ScalarProperty Name="CreatedDateAe" ColumnName="CreatedDateAe" />
+                <ScalarProperty Name="TQ" ColumnName="TQ" />
+                <ScalarProperty Name="TA" ColumnName="TA" />
+                <ScalarProperty Name="CA" ColumnName="CA" />
+                <ScalarProperty Name="IA" ColumnName="IA" />
+                <ScalarProperty Name="ES" ColumnName="ES" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2963,6 +2986,14 @@
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ExReId" ColumnName="ExReId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="SelectedAnswer" ColumnName="SelectedAnswer" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="NotVisited" ColumnName="NotVisited" />
+                <ScalarProperty Name="AnsMarkForReview" ColumnName="AnsMarkForReview" />
+                <ScalarProperty Name="QsNo" ColumnName="QsNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

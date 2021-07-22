@@ -121,3 +121,8 @@ body.loaded > div.preloader {
             margin-top: 10px;
         }
 }
+
+
+.editeditDiv {
+    max-width: 100px;
+}

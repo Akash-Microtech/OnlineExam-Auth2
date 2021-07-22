@@ -5,6 +5,7 @@ using OnlineExam.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -1605,7 +1606,97 @@ namespace OnlineExam.Controllers
             return RedirectToAction("QsAs");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> QsAsDetails(QsAsViewModel dtpQAView, HttpPostedFileBase fileQus)
+        {
+            if (dtpQAView.Questions != null || fileQus != null || dtpQAView.Photo != null)
+            {
+                var allowedExtensions = new[] { ".Jpg", ".png", ".jpg", "jpeg" };
+                var uploadPath = "";
+                var oldPath = "";
+                string alpha = "Question_";
+                Random random = new Random();
+                int unique = random.Next(10000, 99999);
+                int y = DateTime.Now.Year;
+                int m = DateTime.Now.Month;
+                var upFileName = alpha + y + m + unique;
 
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
+                    ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
+                    ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == dtpQAView.ClassId), "Id", "Name", dtpQAView.CourseId);
+                    ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
+                    ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == dtpQAView.SubjectId), "Id", "Name", dtpQAView.ChapterId);
 
+                    ViewBag.ErrorMessage = "Please fill in all the required fields";
+                    return View(dtpQAView);
+                }
+
+                if (dtpQAView.Id != null)
+                {
+                    if (fileQus != null)
+                    {
+                        oldPath = dtpQAView.Photo;
+                        var FileExt = Path.GetExtension(fileQus.FileName);
+                        if (allowedExtensions.Contains(FileExt))
+                        {
+                            string dtpRegId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UniqueID;
+                            string myfile = dtpRegId + "_" + upFileName + FileExt;
+                            uploadPath = Path.Combine(Server.MapPath("~/Uploads/QuestionDtp/"), myfile);
+                            dtpQAView.Photo = "../../Uploads/QuestionDtp/" + myfile;
+                        }
+                    }
+
+                    DataEntry_QuestionBank data = db.DataEntry_QuestionBank.Find(dtpQAView.Id);
+                    if (data != null)
+                    {
+                        data.Questions = dtpQAView.Questions;
+                        data.Option1 = dtpQAView.Option1;
+                        data.Option2 = dtpQAView.Option2;
+                        data.Option3 = dtpQAView.Option3;
+                        data.Option4 = dtpQAView.Option4;
+                        data.PrevQnYear = dtpQAView.PrevQnYear;
+                        data.CorrectAns = dtpQAView.CorrectAns;
+                        data.Mark = dtpQAView.Mark;
+                        data.ModifiedDateTime = DateTime.Now;
+                        data.ModifiedBy = dtpQAView.CuserId;
+                        data.PgmId = dtpQAView.PgmId;
+                        data.ClassId = dtpQAView.ClassId;
+                        data.CourseId = dtpQAView.CourseId;
+                        data.SubjectId = dtpQAView.SubjectId;
+                        data.ChapterId = dtpQAView.ChapterId;
+                        data.Photo = dtpQAView.Photo;
+                        db.Entry(data).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+
+                        if (fileQus != null)
+                        {
+                            fileQus.SaveAs(uploadPath);
+
+                            string path = Server.MapPath(oldPath);
+                            FileInfo file = new FileInfo(path);
+                            if (file.Exists)//check file exsit or not
+                            {
+                                file.Delete();
+                            }
+                        }
+
+                        TempData["StatusMessage"] = "Questions Answers Edited Succesfully.";
+                        return RedirectToAction("QaAsList", new { Id = data.CreatedBy });
+                    }
+                }               
+            }
+
+            ViewBag.PgmId = new SelectList(db.Programmes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.PgmId);
+            ViewBag.ClassId = new SelectList(db.Classes.Where(p => p.IsDeleted == 0), "Id", "Name", dtpQAView.ClassId);
+            ViewBag.CourseId = new SelectList(db.Courses.Where(c => c.IsDeleted == 0 && c.ClassId == dtpQAView.ClassId), "Id", "Name", dtpQAView.CourseId);
+            ViewBag.SubjectId = new SelectList(db.Subjects.Where(s => s.IsDeleted == 0), "Id", "Name", dtpQAView.SubjectId);
+            ViewBag.ChapterId = new SelectList(db.Chapters.Where(p => p.IsDeleted == 0 && p.SubId == dtpQAView.SubjectId), "Id", "Name", dtpQAView.ChapterId);
+
+            ViewBag.ErrorMessage = "Please fill in all the required fields";
+            return View(dtpQAView);
+        }
     }
 }

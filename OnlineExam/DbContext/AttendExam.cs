@@ -21,5 +21,10 @@ namespace OnlineExam.DbContext
         public string OptMark { get; set; }
         public int IsDeletedEr { get; set; }
         public System.DateTime CreatedDateAe { get; set; }
+        public int TQ { get; set; }
+        public int TA { get; set; }
+        public int CA { get; set; }
+        public int IA { get; set; }
+        public int ES { get; set; }
     }
 }

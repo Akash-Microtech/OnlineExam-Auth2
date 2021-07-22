@@ -957,6 +957,7 @@
     <Compile Include="ViewModel\DtpAccountViewModel.cs" />
     <Compile Include="ViewModel\ExamCreateViewModel.cs" />
     <Compile Include="ViewModel\ExamEditQsAsViewModel.cs" />
+    <Compile Include="ViewModel\ExamResultViewModel.cs" />
     <Compile Include="ViewModel\ExamViewModel.cs" />
     <Compile Include="ViewModel\GetStudentExam.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
@@ -1057,6 +1058,7 @@
     <Content Include="Views\Admin\QsAs.cshtml" />
     <Content Include="Views\Admin\QaAsList.cshtml" />
     <Content Include="Views\Admin\QsAsDetails.cshtml" />
+    <Content Include="Views\Student\Result.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

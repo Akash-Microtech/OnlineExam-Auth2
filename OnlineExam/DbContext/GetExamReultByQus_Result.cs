@@ -36,5 +36,13 @@ namespace OnlineExam.DbContext
         public int CourseId { get; set; }
         public int ClassId { get; set; }
         public string Photo { get; set; }
+        public int ExReId { get; set; }
+        public int StudentId { get; set; }
+        public int QuestionId { get; set; }
+        public int SelectedAnswer { get; set; }
+        public int CorrectAnswer { get; set; }
+        public int NotVisited { get; set; }
+        public int AnsMarkForReview { get; set; }
+        public int QsNo { get; set; }
     }
 }

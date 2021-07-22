@@ -536,7 +536,7 @@
 
 
 
-<table id="tblexamresult" class="table mb-0" style="display:none;">
+<table id="tblexamresult" style="display:none;">
     <tbody>
         @{int i = 1; }
 
@@ -581,6 +581,20 @@
                 <td>@c</td>
             </tr>
         }
+    </tbody>
+</table>
+
+<table id="tblexamresult2" style="display:none;">
+    <tbody>
+        <tr>
+            <td id="rTotalQuestion">0</td>
+            <td id="rTotalAttempted">0</td>
+            <td id="rCorrectAnswers">0</td>
+            <td id="rIncorrectAnswers">0</td>
+            <td id="rScore">0</td>
+            <td>@Model.GetExam.Id</td>
+            <td>@Model.StudentId</td>
+        </tr>
     </tbody>
 </table>
 
@@ -755,6 +769,13 @@
                 $("#lblRTotalCorrect").text(TotalCorrect),
                 $("#lblRTotalWrong").text(TotalWrong),
                 $("#lblRScore").text(score),
+
+                $("#rTotalQuestion").text(TotalQuestion),
+                $("#rTotalAttempted").text(TotalAttempted),
+                $("#rCorrectAnswers").text(TotalCorrect),
+                $("#rIncorrectAnswers").text(TotalWrong),
+                $("#rScore").text(score),
+
                 $("#theadres").DataTable({
                     paging: !0,
                     sorting: !1
@@ -931,8 +952,7 @@
                         $(".exam-part-2").hide(),
 
                         $("#divdrplngcng").hide(),
-                        $(".exam-summery").hide(),
-                        SubmitResult()
+                        $(".exam-summery").hide()
                 }
                 )),
                 $("#btnNoSubmitConfirm").on("click", (function (e) {
@@ -973,12 +993,14 @@
                     e.preventDefault(),
                         CheckResult(),
 
-
+                        $(".exam-thankyou").hide(),
                         $(".exam-part-3").show(),
                         $(".exam-result").show(),
                         $(".exam-thankyou").hide(),
 
-                        $("#divdrplngcng").hide()
+                        $("#divdrplngcng").hide(),
+                        SubmitResult2(),
+                        SubmitResult()
                 }
                 )),
                 $("#btnRBack").on("click", (function (e) {
@@ -1046,6 +1068,7 @@
         }
 
         function SubmitResult() {
+
             var datarr = {};
             var data1 = new Array();
             $("#tblexamresult TBODY TR").each(function () {
@@ -1066,11 +1089,42 @@
 
             datarr.examResults = data1;
 
-            //Send the JSON array to Controller using AJAX.
             $.ajax({
                 type: "POST",
                 url: "../../api/Exam/Result",
                 data: JSON.stringify(datarr),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                }
+            });
+
+        }
+
+        function SubmitResult2() {
+            $(".exam-thankyou").hide();
+            var datarr2 = {};
+            var rdata1 = new Array();
+            $("#tblexamresult2 TBODY TR").each(function () {
+                var row = $(this);
+                var rdata2 = {};
+                rdata2.TQ = row.find("TD").eq(0).html();
+                rdata2.TA = row.find("TD").eq(1).html();
+                rdata2.CA = row.find("TD").eq(2).html();
+                rdata2.IC = row.find("TD").eq(3).html();
+                rdata2.ES = row.find("TD").eq(4).html();
+                rdata2.ExamId = row.find("TD").eq(5).html();
+                rdata2.StudentId = row.find("TD").eq(6).html();
+                rdata1.push(rdata2);
+            });
+
+
+            datarr2.Attends = rdata1;
+
+            $.ajax({
+                type: "POST",
+                url: "../../api/Exam/ResultAttend",
+                data: JSON.stringify(datarr2),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

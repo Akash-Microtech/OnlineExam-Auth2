@@ -165,7 +165,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row align-items-center my-4">
+                                    <div class="row align-items-center my-4 selectQus">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">Questions</label>
@@ -482,6 +482,8 @@
 
             if (id != '') {
                 GetEditQsAs();
+
+                $('.selectQus').hide();
             }
         });
 
@@ -508,7 +510,9 @@
                             if (full.Photo != null) {
                                 return "<img style='max-width:700px;' src= " + full.Photo + " />";
                             } else {
-                                return full.Questions;
+
+                                var word = full.Questions;     
+                                return word.slice(0, 100);
                             }
                         }
                     },
@@ -567,7 +571,8 @@
                             if (full.Photo != null) {
                                 return "<img style='max-width:700px;' src= " + full.Photo + " />";
                             } else {
-                                return full.Questions;
+                                var word = full.Questions;
+                                return word.slice(0, 100);
                             }
                         }
                     },
@@ -630,7 +635,8 @@
                             if (full.Photo != null) {
                                 return "<img style='max-width:700px;' src= " + full.Photo + " />";
                             } else {
-                                return full.Questions;
+                                var word = full.Questions;
+                                return word.slice(0, 100);
                             }
                         }
                     },
@@ -688,8 +694,7 @@
                     $('#QnIds').val(qnidtextbox + qn.QnId + '|');
                     qnidtextbox = $('#QnIds').val();
                 }
-
-                $('#selectedqns').DataTable();
+                
             });
 
             var qnIds = $('#QnIds').val();
@@ -698,6 +703,8 @@
 
                 $('#selectedArea').show();
                 $('#qsasArea').hide();
+
+                $('#selectedqns').DataTable();
             }
             else {
                 Swal.fire(

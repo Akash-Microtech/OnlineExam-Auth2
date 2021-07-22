@@ -271,12 +271,35 @@ namespace OnlineExam.Controllers
 
         public ActionResult Results()
         {
-            return View();
+            int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+
+            ExamResultViewModel result = new ExamResultViewModel() 
+            { 
+                AllExam = db.GetAllAttentedExamByStudentId(id).Where(d => d.IsActive == 1 && d.IsDeleted == 0).ToList(),
+                StudentId = id
+            };
+
+            return View(result);
         }
 
-        public ActionResult Result()
+        public ActionResult Result(int? ExamId, int? id)
         {
-            return View();
+            if(ExamId != null && id != null)
+            {
+                GetAllExamById_Result data = db.GetAllExamById(ExamId).FirstOrDefault();
+                ExamResultViewModel result = new ExamResultViewModel()
+                {
+                    StudentId = id,
+                    ExDetails = data,
+                    AttendDetails = db.AttendExams.Where(a => a.ExamId == ExamId && a.StudentId == id).FirstOrDefault(),
+                    ExResult = db.GetExamReultByQus(ExamId, id, data.QsAsFrom).ToList()
+                };
+
+                return View(result);
+            }
+
+            TempData["ErrorMessage"] = "The Exam you are looking for could not be found.";
+            return RedirectToAction("Support");
         }
 
         public ActionResult Support()

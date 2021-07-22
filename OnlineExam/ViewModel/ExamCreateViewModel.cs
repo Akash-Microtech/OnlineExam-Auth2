@@ -41,7 +41,7 @@ namespace OnlineExam.ViewModel
         [Required]
         [Display(Name = "Total Mark")]
         public int TotalMark { get; set; }
-        [Required]
+
         [Display(Name = "Question")]
         public string QnIds { get; set; }
         [Required]

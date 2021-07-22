@@ -1,4 +1,5 @@
-﻿
+﻿@model OnlineExam.ViewModel.ExamResultViewModel
+
 @{
     ViewBag.Title = "Results";
 }
@@ -10,17 +11,17 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <span class="surtitle">Student account</span>
-                        <h1 class="h3 mb-0">Exams</h1>
+                        <h1 class="h3 mb-0">Exam Results</h1>
                     </div>
                 </div>
                 <div class="row align-items-center mt-4">
                     <div class="col">
                         <ul class="nav nav-tabs overflow-x">
                             <li class="nav-item">
-                                <a href="~/Student/Exams" class="nav-link active">Exam List</a>
+                                <a href="~/Student/Exams" class="nav-link">Exam List</a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/Student/Results" class="nav-link">Exam Results</a>
+                                <a href="~/Student/Results" class="nav-link active">Exam Results</a>
                             </li>
                         </ul>
                     </div>
@@ -59,8 +60,8 @@
                                             </span>
                                         </div>
                                         <div class="">
-                                            <h3 class="h5 mb-0">All Exams</h3>
-                                            <p class="text-muted mb-0">Ongoing Exam</p>
+                                            <h3 class="h5 mb-0">All Exam Results</h3>
+                                            <p class="text-muted mb-0">Attended Exam Results</p>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +89,7 @@
                                     </thead>
                                     <tbody id="tbAccounts">
                                         @{ int i = 1; }
-                                        @foreach (var item in Model)
+                                        @foreach (var item in Model.AllExam)
                                         {
                                             var todate = item.ToDate.ToString();
                                             string[] enddate = todate.Split(' ');
@@ -112,7 +113,7 @@
                                                 <td>@item.ExamTime hr</td>
                                                 <td>@item.TotalMark</td>
                                                 <td class="text-right">
-                                                    <a href="Result?examId=@item.Id&id=@item.StudentId" class="btn btn-soft-info btn-sm">Result</a>
+                                                    <a href="Result?examId=@item.Id&id=@Model.StudentId" class="btn btn-soft-info btn-sm">Result</a>
                                                 </td>
                                             </tr>
 

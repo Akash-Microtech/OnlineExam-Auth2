@@ -70,12 +70,13 @@
                                                     @{
                                                         if (item.Questions != null)
                                                         {
-                                                            result = item.Questions.Substring(0, 45);
+                                                            string title = item.Questions;
+                                                            var qs = title.Length <= 45 ? title : title.Substring(0, 45);
 
                                                             <div class="media align-items-center">
                                                                 <div class="media-body">
                                                                     @*<a href="#" class="name h6 mb-0 text-sm">@item.StudentName</a>*@
-                                                                    <small class="d-block font-weight-bold">@result</small>
+                                                                    <small class="d-block font-weight-bold">@qs</small>
                                                                 </div>
                                                             </div>
                                                         }
