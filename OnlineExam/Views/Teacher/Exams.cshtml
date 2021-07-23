@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineExam.DbContext.GetAllExam_Result>
+﻿@model IEnumerable<OnlineExam.DbContext.GetAllExamByTeacherId_Result>
 
 @{
     ViewBag.Title = "Exams";
@@ -88,8 +88,8 @@
                                             <th scope="col" class="text-left">Class</th>
                                             <th scope="col" class="text-left">Course</th>
                                             <th scope="col" class="text-left">Subject</th>
-                                            <th scope="col" class="text-left">Status</th>
-                                            <th scope="col" class="text-right">Action</th>
+                                            <th scope="col" data-orderable="false" class="text-center">Status</th>
+                                            <th scope="col" data-orderable="false" class="text-right">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbAccounts">
@@ -105,7 +105,7 @@
                                                 <td>@item.PName</td>
                                                 <td>@item.ClassName</td>
                                                 <td>@item.SubjectName</td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if (item.IsActive == 1)
                                                     {
                                                         <div class="dropdown">

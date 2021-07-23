@@ -671,7 +671,7 @@
                 CheckQueAttemptStatus()
         }
         function CoundownTimer(e) {
-            var t = 60 * 1;
+            var t = 60 * e;
             myInterval = setInterval((function () {
                 myTimeSpan = 1e3 * t,
                     $(".timer-title").text(GetTime(myTimeSpan)),

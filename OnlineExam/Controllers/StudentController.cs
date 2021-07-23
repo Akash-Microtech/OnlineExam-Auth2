@@ -38,15 +38,12 @@ namespace OnlineExam.Controllers
                 }
             }
 
-            int attendCut = db.AttendExams.Where(a => a.StudentId == id && a.IsAttented == 1).Count();
-            int courseCut = db.GetCourseDetailsByUserId(id, 1).Count();
-
             StudentDashboardViewModel studentDashboard = new StudentDashboardViewModel()
             {
                 GetExamByUserId = exams,
                 StudentId = id,
-                AttendExamCount = attendCut,
-                CourseCount = courseCut
+                AttendExamCount = db.AttendExams.Where(a => a.StudentId == id && a.IsAttented == 1).Count(),
+                CourseCount = db.GetCourseDetailsByUserId(id, 1).Count()
             };
 
             return View(studentDashboard);

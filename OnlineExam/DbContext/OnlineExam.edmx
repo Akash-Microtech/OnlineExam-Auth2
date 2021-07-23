@@ -548,6 +548,9 @@
         <Function Name="GetAllExamById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAllExamByTeacherId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAllGroupLisByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
@@ -1238,6 +1241,9 @@
           <FunctionImport Name="GetAllExamById" ReturnType="Collection(Exam_DBModel.GetAllExamById_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllExamByTeacherId" ReturnType="Collection(Exam_DBModel.GetAllExamByTeacherId_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetAllGroupLisByUserId" ReturnType="Collection(Exam_DBModel.GetAllGroupLisByUserId_Result)">
             <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1448,6 +1454,35 @@
           <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="GetAllExamById_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="ClassId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetAllExamByTeacherId_Result">
+          <Property Type="Int32" Name="gsId" Nullable="false" />
+          <Property Type="Int32" Name="gId" Nullable="false" />
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="Int32" Name="ExGroupId" Nullable="false" />
@@ -2589,6 +2624,39 @@
           <FunctionImportMapping FunctionImportName="GetAllExamById" FunctionName="Exam_DBModel.Store.GetAllExamById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Exam_DBModel.GetAllExamById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExGroupId" ColumnName="ExGroupId" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
+                <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllExamByTeacherId" FunctionName="Exam_DBModel.Store.GetAllExamByTeacherId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetAllExamByTeacherId_Result">
+                <ScalarProperty Name="gsId" ColumnName="gsId" />
+                <ScalarProperty Name="gId" ColumnName="gId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ExGroupId" ColumnName="ExGroupId" />

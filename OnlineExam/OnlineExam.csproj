@@ -813,6 +813,9 @@
     <Compile Include="DbContext\GetAllExamById_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetAllExamByTeacherId_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetAllExam_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>

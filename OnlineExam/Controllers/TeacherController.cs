@@ -27,14 +27,17 @@ namespace OnlineExam.Controllers
         {
             int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
             DateTime today = DateTime.Now.Date;
-            var data = db.GetExamByUserId(id, today).ToList();
 
-            StudentDashboardViewModel studentDashboard = new StudentDashboardViewModel()
+            TeacherDashboardViewModel teacherDashboard = new TeacherDashboardViewModel()
             {
-                GetExamByUserId = data
+                GetExam = db.GetExamByTeacherId(id, today).Where(e=>e.IsActive == 1).ToList(),
+                TeacherId = id,
+                ContactedExamCount = db.GetAllExamByTeacherId(id).Count(),
+                CourseCount = db.GetCourseDetailsByUserId(id, 0).Count(),
+                StudentCount = db.GetGroupUserByTeacherId(id).Count()
             };
 
-            return View(studentDashboard);
+            return View(teacherDashboard);
         }
 
         public ActionResult QaAsList()
@@ -297,7 +300,7 @@ namespace OnlineExam.Controllers
             }
 
             int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
-            var list = db.GetAllExam().Where(e => e.IsDeleted == 0).ToList();
+            List<GetAllExamByTeacherId_Result> list = db.GetAllExamByTeacherId(id).ToList();
             return View(list);
         }
 

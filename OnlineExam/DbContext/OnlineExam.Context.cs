@@ -94,6 +94,15 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllExamById_Result>("GetAllExamById", idParameter);
         }
     
+        public virtual ObjectResult<GetAllExamByTeacherId_Result> GetAllExamByTeacherId(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllExamByTeacherId_Result>("GetAllExamByTeacherId", userIdParameter);
+        }
+    
         public virtual ObjectResult<GetAllGroupLisByUserId_Result> GetAllGroupLisByUserId(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
