@@ -23,6 +23,11 @@ namespace OnlineExam.Controllers
             return RedirectToAction("Dashboard");
         }
 
+        public new ActionResult Profile()
+        {
+            return View();
+        }
+
         public ActionResult Dashboard()
         {
             int id = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;

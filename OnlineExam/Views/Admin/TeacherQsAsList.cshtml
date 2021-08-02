@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineExam.DbContext.GetAllDtpQusAnsByUserId_Result>
+﻿@model IEnumerable<OnlineExam.DbContext.GetAllTeacherQusAnsByUserId_Result>
 
 @{
     ViewBag.Title = "QaAs List";
@@ -111,7 +111,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="actions ml-3">
-                                                        <a href="~/Admin/QsAsDetails/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                        <a href="~/Admin/QsAsDetailsTeacher/@item.Id" class="action-item mr-2" data-toggle="tooltip" title="" data-original-title="Edit">
                                                             <i data-feather="edit-2"></i>
                                                         </a>
                                                         <a href="javascript:void(0)" class="action-item text-danger mr-2" data-toggle="tooltip" title="" data-original-title="Move to trash" onclick="userdelete('@item.Id', '@result');">
@@ -144,7 +144,7 @@
                     <strong>Are you sure ?</strong> Do you want to active QsAs- <strong><span id="activeName"></span></strong>
                 </p>
                 <!-- Buttons -->
-                @using (Html.BeginForm("ActiveQsAs", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("ActiveQsAsTeacher", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">close</a>
@@ -165,7 +165,7 @@
                     <strong>Are you sure ?</strong> Do you want to Inactive QsAs- <strong><span id="inactiveName"></span></strong>
                 </p>
                 <!-- Buttons -->
-                @using (Html.BeginForm("InactiveQsAs", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("InactiveQsAsTeacher", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">close</a>
@@ -199,7 +199,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                @using (Html.BeginForm("DeleteQsASDtp", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("DeleteQsASTeacher", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteQsAsId" name="deleteQsAsId" />

@@ -39,6 +39,11 @@ namespace OnlineExam.Controllers
             return View();
         }
 
+        public new ActionResult Profile()
+        {
+            return View();
+        }
+
         public ActionResult QaAsList()
         {
             if (TempData["StatusMessage"] != null)

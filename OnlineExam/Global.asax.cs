@@ -23,12 +23,25 @@ namespace OnlineExam
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
         }
 
-        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        protected FormsAuthenticationTicket GetAuthTicket()
         {
             HttpCookie authCookie = Request.Cookies["Cookie1"];
+            if (authCookie == null) return null;
+            try
+            {
+                return FormsAuthentication.Decrypt(authCookie.Value);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Can't decrypt cookie! {0}", exception);
+            }
+        }
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            var authCookie = GetAuthTicket();
             if (authCookie != null)
             {
-                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                FormsAuthenticationTicket authTicket = authCookie;
 
                 var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
 

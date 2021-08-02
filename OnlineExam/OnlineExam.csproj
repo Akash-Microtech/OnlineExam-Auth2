@@ -1062,6 +1062,12 @@
     <Content Include="Views\Admin\QaAsList.cshtml" />
     <Content Include="Views\Admin\QsAsDetails.cshtml" />
     <Content Include="Views\Student\Result.cshtml" />
+    <Content Include="Views\Teacher\Profile.cshtml" />
+    <Content Include="Views\Student\Profile.cshtml" />
+    <Content Include="Views\DTP\Profile.cshtml" />
+    <Content Include="Views\Admin\QsAsTeacher.cshtml" />
+    <Content Include="Views\Admin\TeacherQsAsList.cshtml" />
+    <Content Include="Views\Admin\QsAsDetailsTeacher.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

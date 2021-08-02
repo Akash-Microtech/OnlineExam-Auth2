@@ -93,9 +93,24 @@
                                                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-auto px-2">
-                                                    <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Add Programme">
-                                                        <i data-feather="plus"></i>
-                                                    </button>
+
+                                                    @if (Model.Id != null)
+                                                    {
+                                                        <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Update Programme">
+                                                            <i data-feather="upload"></i>
+                                                        </button>
+
+                                                        <a href="Chapters" class="btn btn-danger px-3" data-toggle="tooltip" data-placement="top" title="Cancel">
+                                                            <i data-feather="x"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-secondary px-3" data-toggle="tooltip" data-placement="top" title="Add Programme">
+                                                            <i data-feather="plus"></i>
+                                                        </button>
+                                                    }
+
                                                 </div>
                                             </div>
                                         </form>

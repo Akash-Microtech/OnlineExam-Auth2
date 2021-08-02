@@ -126,3 +126,11 @@ body.loaded > div.preloader {
 .editeditDiv {
     max-width: 100px;
 }
+
+.arrowUp {
+    background-color: #00000078;
+}
+
+.arrowDown {
+    background-color: #00000078;
+}
