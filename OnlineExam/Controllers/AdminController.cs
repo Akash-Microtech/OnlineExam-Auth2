@@ -28,7 +28,16 @@ namespace OnlineExam.Controllers
         public ActionResult Dashboard()
         {
             DateTime today = DateTime.Now.Date;
-            return View();
+
+            AdminDashboardViewModel adminDashboard = new AdminDashboardViewModel()
+            {
+                GetExam = db.GetExamByDate(today).Where(e => e.IsActive == 1).ToList(),
+                TotalExam = db.Exams.Where(e=>e.IsActive == 1).Count(),
+                TotalBatch = db.Groups.Where(g=>g.IsDeleted == 0).Count(),
+                TotalStudents = db.Users.Where(u=>u.RoleId == 3 && u.IsActive == 1).Count()
+            };
+
+            return View(adminDashboard);
         }
 
         public new ActionResult Profile()
@@ -195,6 +204,7 @@ namespace OnlineExam.Controllers
                         data.FirstName = model.FirstName;
                         data.LastName = model.LastName;
                         data.Email = model.Email;
+                        data.MobileNo = model.MobileNo;
                         data.UserName = model.UserName;
                         data.Password = model.Password;
                         data.RoleId = model.RoleId;
@@ -1951,6 +1961,18 @@ namespace OnlineExam.Controllers
 
             ViewBag.ErrorMessage = "Please fill in all the required fields";
             return View(dtpQAView);
+        }
+
+        public ActionResult ExamDetails(int? examId)
+        {
+            if (examId != null)
+            {
+                var data = db.GetAllExamById(examId).FirstOrDefault();
+                return View(data);
+            }
+
+            TempData["ErrorMessage"] = "The Exam you are looking for could not be found.";
+            return RedirectToAction("dashboard");
         }
     }
 }

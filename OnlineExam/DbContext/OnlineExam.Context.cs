@@ -191,6 +191,15 @@ namespace OnlineExam.DbContext
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCourseDetailsByUserId_Result>("GetCourseDetailsByUserId", idParameter, fromParameter);
         }
     
+        public virtual ObjectResult<GetExamByDate_Result> GetExamByDate(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamByDate_Result>("GetExamByDate", dateParameter);
+        }
+    
         public virtual ObjectResult<GetExamByTeacherId_Result> GetExamByTeacherId(Nullable<int> userId, Nullable<System.DateTime> date)
         {
             var userIdParameter = userId.HasValue ?
@@ -215,15 +224,6 @@ namespace OnlineExam.DbContext
                 new ObjectParameter("Date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamByUserId_Result>("GetExamByUserId", userIdParameter, dateParameter);
-        }
-    
-        public virtual int GetExamIdWiseQuestions(Nullable<int> iD)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetExamIdWiseQuestions", iDParameter);
         }
     
         public virtual ObjectResult<GetExamReultByQus_Result> GetExamReultByQus(Nullable<int> examId, Nullable<int> studentId, Nullable<int> from)

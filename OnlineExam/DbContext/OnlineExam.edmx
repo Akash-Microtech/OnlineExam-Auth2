@@ -448,7 +448,7 @@
           <Property Name="EmailVerify" Type="int" Nullable="false" />
           <Property Name="Picture" Type="varchar(max)" />
         </EntityType>
-        <Association Name="FK__SubProgra__PgmId__30C33EC3">
+        <Association Name="FK__SubProgra__PgmId__114A936A">
           <End Role="Programmes" Type="Self.Programmes" Multiplicity="1" />
           <End Role="SubPrograms" Type="Self.SubPrograms" Multiplicity="*" />
           <ReferentialConstraint>
@@ -577,6 +577,9 @@
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="From" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetExamByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="GetExamByTeacherId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="Date" Type="datetime" Mode="In" />
@@ -584,9 +587,6 @@
         <Function Name="GetExamByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="Date" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="GetExamIdWiseQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetExamReultByQus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ExamId" Type="int" Mode="In" />
@@ -635,7 +635,7 @@
           <EntitySet Name="Teachers_Registration" EntityType="Self.Teachers_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
+          <AssociationSet Name="FK__SubProgra__PgmId__114A936A" Association="Self.FK__SubProgra__PgmId__114A936A">
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
           </AssociationSet>
@@ -879,7 +879,7 @@
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="SubPrograms" Relationship="Self.FK__SubProgra__PgmId__30C33EC3" FromRole="Programmes" ToRole="SubPrograms" />
+          <NavigationProperty Name="SubPrograms" Relationship="Self.FK__SubProgra__PgmId__114A936A" FromRole="Programmes" ToRole="SubPrograms" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1033,7 +1033,7 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="PgmId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Programme" Relationship="Self.FK__SubProgra__PgmId__30C33EC3" FromRole="SubPrograms" ToRole="Programmes" />
+          <NavigationProperty Name="Programme" Relationship="Self.FK__SubProgra__PgmId__114A936A" FromRole="SubPrograms" ToRole="Programmes" />
         </EntityType>
         <EntityType Name="Teachers_QuestionBank">
           <Key>
@@ -1164,7 +1164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SubProgra__PgmId__30C33EC3">
+        <Association Name="FK__SubProgra__PgmId__114A936A">
           <End Role="Programmes" Type="Self.Programme" Multiplicity="1" />
           <End Role="SubPrograms" Type="Self.SubProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1221,7 +1221,7 @@
             <End Role="Group" EntitySet="Groups" />
             <End Role="Group1" EntitySet="Groups" />
           </AssociationSet>
-          <AssociationSet Name="FK__SubProgra__PgmId__30C33EC3" Association="Self.FK__SubProgra__PgmId__30C33EC3">
+          <AssociationSet Name="FK__SubProgra__PgmId__114A936A" Association="Self.FK__SubProgra__PgmId__114A936A">
             <End Role="Programmes" EntitySet="Programmes" />
             <End Role="SubPrograms" EntitySet="SubPrograms" />
           </AssociationSet>
@@ -1270,6 +1270,9 @@
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="From" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetExamByDate" ReturnType="Collection(Exam_DBModel.GetExamByDate_Result)">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="GetExamByTeacherId" ReturnType="Collection(Exam_DBModel.GetExamByTeacherId_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="Date" Mode="In" Type="DateTime" />
@@ -1277,9 +1280,6 @@
           <FunctionImport Name="GetExamByUserId" ReturnType="Collection(Exam_DBModel.GetExamByUserId_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="Date" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="GetExamIdWiseQuestions">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetExamReultByQus" ReturnType="Collection(Exam_DBModel.GetExamReultByQus_Result)">
             <Parameter Name="ExamId" Mode="In" Type="Int32" />
@@ -1752,6 +1752,35 @@
           <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="IsDeleted" Nullable="false" />
           <Property Type="Int32" Name="ClassId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetExamByDate_Result">
+          <Property Type="Int32" Name="gsId" Nullable="false" />
+          <Property Type="Int32" Name="gId" Nullable="false" />
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="ExGroupId" Nullable="false" />
+          <Property Type="Int32" Name="PgmId" Nullable="false" />
+          <Property Type="Int32" Name="ClassId" Nullable="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ExamTime" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TotalMark" Nullable="false" />
+          <Property Type="Int32" Name="QsAsFrom" Nullable="false" />
+          <Property Type="String" Name="PName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="GetExamByTeacherId_Result">
           <Property Type="Int32" Name="gsId" Nullable="false" />
@@ -2961,6 +2990,39 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetExamByDate" FunctionName="Exam_DBModel.Store.GetExamByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Exam_DBModel.GetExamByDate_Result">
+                <ScalarProperty Name="gsId" ColumnName="gsId" />
+                <ScalarProperty Name="gId" ColumnName="gId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExGroupId" ColumnName="ExGroupId" />
+                <ScalarProperty Name="PgmId" ColumnName="PgmId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="DeletedDateTime" ColumnName="DeletedDateTime" />
+                <ScalarProperty Name="ExamTime" ColumnName="ExamTime" />
+                <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="QsAsFrom" ColumnName="QsAsFrom" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetExamByTeacherId" FunctionName="Exam_DBModel.Store.GetExamByTeacherId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Exam_DBModel.GetExamByTeacherId_Result">
@@ -3027,7 +3089,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetExamIdWiseQuestions" FunctionName="Exam_DBModel.Store.GetExamIdWiseQuestions" />
           <FunctionImportMapping FunctionImportName="GetExamReultByQus" FunctionName="Exam_DBModel.Store.GetExamReultByQus">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Exam_DBModel.GetExamReultByQus_Result">

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="396b95dc7f0a492e937d537b98c74609" Name="Diagram1">
+      <Diagram DiagramId="d08f6946a8964d5a897abb220c98ce49" Name="Diagram1">
         <EntityTypeShape EntityType="Exam_DBModel.AttendExam" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Chapter" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="Exam_DBModel.Class" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
@@ -33,7 +33,7 @@
         <AssociationConnector Association="Exam_DBModel.FK_Courses_Class" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Exam_QnTable_Exam" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.FK_Group_Group" ManuallyRouted="false" />
-        <AssociationConnector Association="Exam_DBModel.FK__SubProgra__PgmId__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="Exam_DBModel.FK__SubProgra__PgmId__114A936A" ManuallyRouted="false" />
         <AssociationConnector Association="Exam_DBModel.UserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

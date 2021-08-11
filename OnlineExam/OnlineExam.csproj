@@ -843,6 +843,9 @@
     <Compile Include="DbContext\GetCourseDetailsByUserId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\GetExamByDate_Result.cs">
+      <DependentUpon>OnlineExam.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\GetExamByTeacherId_Result.cs">
       <DependentUpon>OnlineExam.tt</DependentUpon>
     </Compile>
@@ -954,6 +957,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AdminDashboardViewModel.cs" />
     <Compile Include="ViewModel\AttendExamViewModel.cs" />
     <Compile Include="ViewModel\ChapterViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
@@ -1068,6 +1072,7 @@
     <Content Include="Views\Admin\QsAsTeacher.cshtml" />
     <Content Include="Views\Admin\TeacherQsAsList.cshtml" />
     <Content Include="Views\Admin\QsAsDetailsTeacher.cshtml" />
+    <Content Include="Views\Admin\ExamDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
